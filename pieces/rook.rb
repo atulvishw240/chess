@@ -5,19 +5,22 @@ class Rook < Piece
   include Utils
 
   def move
-    
+    file = self.file
+    rank = self.rank
+    moves = all_possible_moves(file, rank)
   end
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
-  # private
+  private
 
-  def all_possible_moves
+  def all_possible_moves(file, rank)
     positions = []
-    file = self.file
-    rank = self.rank
 
     vertical_positions = vertical_moves(file, rank)
+    horizontal_positions = horizontal_moves(file, rank)
+    positions.concat(vertical_positions)
+    positions.concat(horizontal_positions)
   end
 
   # VERTICAL MOVES
