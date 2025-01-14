@@ -1,5 +1,8 @@
+require_relative "mod_utils"
 # BOARD
 class Board
+  include Utils
+
   RESET_TERMINAL = "\e[0m".freeze
   WHITE = "\e[47m".freeze
   BRIGHT_CYAN = "\e[106m".freeze
@@ -27,7 +30,7 @@ class Board
   end
 
   def update_board(file, rank, piece)
-    row_index = files_to_int(file)
+    row_index = file_to_int(file)
     col_index = rank.to_i
 
     board[row_index][col_index] = piece
@@ -52,11 +55,6 @@ class Board
   def print_cyan_square(row_index, col_index)
     element = board[row_index][col_index]
     print BRIGHT_CYAN + element + RESET_TERMINAL
-  end
-
-  def files_to_int(file)
-    array = ["", "a", "b", "c", "d", "e", "f", "g", "h"]
-    array.index(file)
   end
 
   def print_files
