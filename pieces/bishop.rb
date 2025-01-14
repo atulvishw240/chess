@@ -10,7 +10,7 @@ class Bishop < Piece
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
-  # private
+  private
 
   def all_possible_moves(file, rank)
     positions = []
