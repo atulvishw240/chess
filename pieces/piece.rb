@@ -1,6 +1,6 @@
 # Piece
 class Piece
-  attr_accessor :player, :position
+  attr_accessor :player, :file, :rank
   attr_reader :unicode
 
   def initialize(unicode)
