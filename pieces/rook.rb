@@ -50,19 +50,35 @@ class Rook < Piece
   end
 
   # HORIZONTAL MOVES
-  # def horizontal_moves(rank, file)
-  #   left = left_moves(rank, file)
-  #   right = right_moves(rank, file)
-  #   posssible_moves = left.concat(right)
-  # end
+  def horizontal_moves(file, rank)
+    moves = []
+    left = left_moves(file, rank)
+    right = right_moves(file, rank)
+    moves.concat(left)
+    moves.concat(right)
+  end
 
-  # def left_moves(rank, file)
-  #   index = file_to_int(file)
-  #   until index.zero?
-  #     index -= 1
-  #   end
-  # end
+  def left_moves(file, rank)
+    moves = []
+    index = file_to_int(file)
+    until index == 1
+      index -= 1
+      file = int_to_file(index)
+      moves << [file, rank]
+    end
+
+    moves
+  end
+
+  def right_moves(file, rank)
+    moves = []
+    index = file_to_int(file)
+    until index == 8
+      index += 1
+      file = int_to_file(index)
+      moves << [file, rank]
+    end
+
+    moves
+  end
 end
-
-rook = Rook.new("dkdkks")
-p rook.vertical_moves("c", 1)
