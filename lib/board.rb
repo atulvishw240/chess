@@ -15,6 +15,7 @@ class Board
     board.each_with_index do |row, row_index|
       rank = 8 - row_index
       print DARK_YELLOW + rank.to_s + inline_space(1) + RESET_TERMINAL
+
       row.each_index do |col_index|
         print_chess_square(row_index, col_index)
       end
@@ -46,6 +47,11 @@ class Board
     print BRIGHT_CYAN + element + RESET_TERMINAL
   end
 
+  def files_to_int(file)
+    array = ["", "a", "b", "c", "d", "e", "f", "g", "h"]
+    array.index(file)
+  end
+
   def print_files
     files = "a b c d e f g h"
     puts DARK_YELLOW + inline_space(2) + files + RESET_TERMINAL
@@ -64,6 +70,3 @@ class Board
     row_index + col_index
   end
 end
-
-board = Board.new
-board.print_board
