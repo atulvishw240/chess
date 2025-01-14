@@ -26,6 +26,13 @@ class Board
     print_files
   end
 
+  def update_board(file, rank, piece)
+    row_index = files_to_int(file)
+    col_index = rank.to_i
+
+    board[row_index][col_index] = piece
+  end
+
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
   private
 
