@@ -11,15 +11,16 @@ class Board
   attr_accessor :board
 
   def initialize
-    @board = Array.new(8) { Array.new(8, "  ") }
+    # Ignore 0 based index for simplicity
+    @board = Array.new(9) { Array.new(9, "  ") }
   end
 
   def print_board
-    board.each_with_index do |row, row_index|
+    board[1..8].each_with_index do |row, row_index|
       rank = 8 - row_index
       print DARK_YELLOW + rank.to_s + inline_space(1) + RESET_TERMINAL
 
-      row.each_index do |col_index|
+      row[1..8].each_index do |col_index|
         print_chess_square(row_index, col_index)
       end
 
