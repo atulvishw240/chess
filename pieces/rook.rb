@@ -12,7 +12,7 @@ class Rook < Piece
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
-  private
+  # private
 
   def all_possible_moves(file, rank)
     positions = []
@@ -22,6 +22,8 @@ class Rook < Piece
     positions.concat(vertical_positions)
     positions.concat(horizontal_positions)
   end
+
+  private # Temporary, once we complete our move functionality we'll comment out the above 'private'
 
   # VERTICAL MOVES
   def vertical_moves(file, rank)
@@ -85,3 +87,10 @@ class Rook < Piece
     moves
   end
 end
+
+rook = Rook.new("Rook")
+p rook.all_possible_moves("a", 1)
+p rook.all_possible_moves("d", 1)
+p rook.all_possible_moves("d", 8)
+p rook.all_possible_moves("d", 5)
+p rook.all_possible_moves("a", 8)
