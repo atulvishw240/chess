@@ -5,8 +5,9 @@ class Board
 
   RESET_TERMINAL = "\e[0m".freeze
   WHITE = "\e[47m".freeze
-  BRIGHT_CYAN = "\e[106m".freeze
-  DARK_YELLOW = "\e[1m\e[33m".freeze
+  # BRIGHT_CYAN = "\e[106m".freeze
+  BRIGHT_CYAN = "\e[48;5;62m".freeze
+  DARK_YELLOW = "\e[1;33m".freeze
 
   attr_accessor :board
 

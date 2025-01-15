@@ -6,4 +6,8 @@ class Player
     @name = name
     @color = color
   end
+
+  def select_move
+    
+  end
 end
