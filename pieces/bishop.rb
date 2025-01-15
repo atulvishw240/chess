@@ -74,3 +74,10 @@ class Bishop < Piece
     moves
   end
 end
+
+bishop = Bishop.new("Bishop")
+p bishop.all_possible_moves("a", 1)
+p bishop.all_possible_moves("d", 1)
+p bishop.all_possible_moves("d", 8)
+p bishop.all_possible_moves("d", 5)
+p bishop.all_possible_moves("e", 4)
