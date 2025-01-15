@@ -47,7 +47,7 @@ module Utils
   def horizontal_moves_right(file, rank, stop = 8)
     moves = []
     index = file_to_int(file)
-    until index == 8
+    until index == stop
       index += 1
       file = int_to_file(index)
       moves << [file, rank]
