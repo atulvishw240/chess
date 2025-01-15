@@ -1,13 +1,9 @@
 require_relative "piece"
 require_relative "../lib/mod_utils"
-require_relative "../lib/mod_horizontal"
-require_relative "../lib/mod_vertical"
 
 # KNIGHT
 class Knight < Piece
   include Utils
-  include Horizontal
-  include Vertical
 
   def move
   end
