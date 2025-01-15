@@ -10,9 +10,9 @@ class Knight < Piece
   include Vertical
 
   def move
-    
   end
 
+  # A knight make four T's (upper, lower, right, left)
   def all_possible_moves(file, rank)
     positions = []
     coords = possible_coordinates_from_origin
@@ -20,9 +20,10 @@ class Knight < Piece
     coords.each do |coord|
       x_coord = rank
       y_coord = file_to_int(file)
-
       x_coord += coord[0]
       y_coord += coord[1]
+
+      next unless valid_move?(x_coord, y_coord)
 
       y_coord = int_to_file(y_coord)
       positions << [y_coord, x_coord]
@@ -40,7 +41,11 @@ class Knight < Piece
     left = [[1, -2], [-1, -2]]
     upper.concat(lower).concat(right).concat(left)
   end
-end
 
-knight = Knight.new("Knight")
-p knight.all_possible_moves("f", 3)
+  def valid_move?(x_coord, y_coord)
+    x_valid = x_coord.between?(1, 8)
+    y_valid = y_coord.between?(1, 8)
+
+    x_valid && y_valid
+  end
+end
