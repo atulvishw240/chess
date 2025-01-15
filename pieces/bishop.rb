@@ -10,8 +10,6 @@ class Bishop < Piece
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
-  private
-
   def all_possible_moves(file, rank)
     positions = []
     upper_right = upper_right_moves(file, rank)
@@ -19,8 +17,10 @@ class Bishop < Piece
     lower_right = lower_right_moves(file, rank)
     lower_left = lower_left_moves(file, rank)
     positions.concat(upper_right).concat(upper_left)
-             .concat(lower_right).concat(lower_left)
+    .concat(lower_right).concat(lower_left)
   end
+
+  private
 
   def upper_right_moves(file, rank)
     moves = []
