@@ -12,72 +12,11 @@ class Bishop < Piece
 
   def all_possible_moves(file, rank)
     positions = []
-    upper_right = upper_right_moves(file, rank)
-    upper_left = upper_left_moves(file, rank)
-    lower_right = lower_right_moves(file, rank)
-    lower_left = lower_left_moves(file, rank)
+    upper_right = upper_moves_right(file, rank)
+    upper_left = upper_moves_left(file, rank)
+    lower_right = lower_moves_right(file, rank)
+    lower_left = lower_moves_left(file, rank)
     positions.concat(upper_right).concat(upper_left)
-    .concat(lower_right).concat(lower_left)
-  end
-
-  private
-
-  def upper_right_moves(file, rank)
-    moves = []
-    col_index = file_to_int(file)
-    until rank == 8 || col_index == 8
-      rank += 1
-      col_index += 1
-      file = int_to_file(col_index)
-      moves << [file, rank]
-    end
-
-    moves
-  end
-
-  def upper_left_moves(file, rank)
-    moves = []
-    col_index = file_to_int(file)
-    until rank == 8 || col_index == 1
-      rank += 1
-      col_index -= 1
-      file = int_to_file(col_index)
-      moves << [file, rank]
-    end
-
-    moves
-  end
-
-  def lower_right_moves(file, rank)
-    moves = []
-    col_index = file_to_int(file)
-    until rank == 1 || col_index == 8
-      rank -= 1
-      col_index += 1
-      file = int_to_file(col_index)
-      moves << [file, rank]
-    end
-
-    moves
-  end
-
-  def lower_left_moves(file, rank)
-    moves = []
-    col_index = file_to_int(file)
-    until rank == 1 || col_index == 1
-      rank -= 1
-      col_index -= 1
-      file = int_to_file(col_index)
-      moves << [file, rank]
-    end
-
-    moves
+             .concat(lower_right).concat(lower_left)
   end
 end
-
-bishop = Bishop.new("Bishop")
-p bishop.all_possible_moves("a", 1)
-p bishop.all_possible_moves("d", 1)
-p bishop.all_possible_moves("d", 8)
-p bishop.all_possible_moves("d", 5)
-p bishop.all_possible_moves("e", 4)
