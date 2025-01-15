@@ -13,5 +13,12 @@ describe Knight do
       moves = @knight.all_possible_moves("f", 3)
       expect(moves).to eq(possible_moves)
     end
+
+    it "returns all possible moves from d4" do
+      possible_moves = [["e", 6], ["c", 6], ["e", 2], ["c", 2], ["f", 5], ["f", 3], ["b", 5], ["b", 3]]
+
+      moves = @knight.all_possible_moves("d", 4)
+      expect(moves).to eq(possible_moves)
+    end
   end
 end
