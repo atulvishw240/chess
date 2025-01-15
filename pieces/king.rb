@@ -1,8 +1,15 @@
 require_relative "piece"
-require_relative "../lib/mod_utils"
+require_relative "../lib/mod_horizontal"
+require_relative "../lib/mod_vertical"
+require_relative "../lib/mod_diagonal"
+require_relative "../lib/mod_rev_diagonal"
+
 # KING
 class King < Piece
-  include Utils
+  include Horizontal
+  include Vertical
+  include Diagonal
+  include ReverseDiagonal
 
   def move
     

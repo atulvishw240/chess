@@ -1,5 +1,9 @@
+require_relative "mod_utils"
+
 # REVERSE DIAGONAL MOVES
-class ReverseDiagonal
+module ReverseDiagonal
+  include Utils
+
   def upper_moves_right(file, rank, stop_row = 8, stop_col = 8)
     moves = []
     col_index = file_to_int(file)

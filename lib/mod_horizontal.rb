@@ -1,5 +1,9 @@
+require_relative "mod_utils"
+
 # HORIZONTAL MOVES
 module Horizontal
+  include Utils
+
   def horizontal_moves_left(file, rank, stop = 1)
     moves = []
     index = file_to_int(file)

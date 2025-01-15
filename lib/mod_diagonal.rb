@@ -1,5 +1,9 @@
+require_relative "mod_utils"
+
 # DIAGONAL MOVES
 module Diagonal
+  include Utils
+
   def upper_moves_left(file, rank, stop_row = 8, stop_col = 1)
     moves = []
     col_index = file_to_int(file)

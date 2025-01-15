@@ -1,8 +1,11 @@
 require_relative "piece"
-require_relative "../lib/mod_utils"
+require_relative "../lib/mod_horizontal"
+require_relative "../lib/mod_vertical"
+
 # ROOK
 class Rook < Piece
-  include Utils
+  include Horizontal
+  include Vertical
 
   def move
     file = self.file
@@ -25,7 +28,6 @@ class Rook < Piece
 
   private # Temporary, once we complete our move functionality we'll comment out the above 'private'
 
-  # VERTICAL MOVES
   def vertical_moves(file, rank)
     moves = []
     forward = vertical_moves_forward(file, rank)
@@ -34,7 +36,6 @@ class Rook < Piece
     moves.concat(backward)
   end
 
-  # HORIZONTAL MOVES
   def horizontal_moves(file, rank)
     moves = []
     left = horizontal_moves_left(file, rank)
