@@ -4,7 +4,6 @@ describe Rook do
 
   before(:each) do
     @rook = Rook.new("Rook")
-    @board = Array.new(9) { Array.new(9) }
   end
 
   describe "#all_possible_moves" do

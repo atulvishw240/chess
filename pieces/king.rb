@@ -25,7 +25,7 @@ class King < Piece
          .concat(right(file, rank))
          .concat(left(file, rank))
          .concat(upper_right(file, rank))
-         .concat(upper_left(file,rank))
+         .concat(upper_left(file, rank))
          .concat(lower_right(file, rank))
          .concat(lower_left(file, rank))
   end
