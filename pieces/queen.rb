@@ -31,6 +31,3 @@ class Queen < Piece
          .concat(diagonal).concat(rev_diagonal)
   end
 end
-
-queen = Queen.new("Queen")
-p queen.all_possible_moves("e", 4)
