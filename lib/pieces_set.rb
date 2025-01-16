@@ -10,14 +10,14 @@ class SetOfPieces
   attr_accessor :pieces
 
   def initialize(player, color)
-    create_pieces(player, color)
     @pieces = []
+    create_pieces(player, color)
   end
 
   def create_pieces(player, color)
     pawns(color)
-    king_and_queen(color)
     rook_knight_and_bishop(color)
+    king_and_queen(color)
     pieces_belong_to_player(player)
   end
 
@@ -42,6 +42,8 @@ class SetOfPieces
       pieces << @rook
       pieces << @knight
       pieces << @bishop
+
+      counter += 1
     end
   end
 

@@ -3,27 +3,33 @@ require_relative "mod_utils"
 class Board
   include Utils
 
-  RESET_TERMINAL = "\e[0m".freeze
-  BLACK_FOREGROUND = "\e[30m".freeze
-  WHITE_BACKGROUND = "\e[47m".freeze
-  BLUE_BACKGROUND = "\e[48;5;62m".freeze
+  RESET_TERMINAL = " \e[0m".freeze
   DARK_YELLOW_FOREGROUND = "\e[1;33m".freeze
+  BLACK_FOREGROUND = "\e[30m".freeze
+  WHITE_FOREGROUND = "\e[37m".freeze
+  WHITE_BACKGROUND = "\e[47m".freeze
+  BLUE_BACKGROUND = "\e[48;5;27m".freeze
 
   attr_accessor :board, :white_pieces, :black_pieces
 
   def initialize(white_pieces, black_pieces)
     # Ignore 0 based index for simplicity
-    @board = Array.new(9) { Array.new(9, "  ") }
+    @board = Array.new(9) { Array.new(9, " ") }
     @white_pieces = white_pieces
     @black_pieces = black_pieces
   end
 
   def print_board
-    board[1..8].each_with_index do |row, row_index|
-      rank = 8 - row_index
+    board[1][1] = black_pieces.pieces[11]
+    board.each_with_index do |row, row_index|
+      next if row_index.zero?
+
+      rank = 9 - row_index
       print DARK_YELLOW_FOREGROUND + rank.to_s + inline_space(1) + RESET_TERMINAL
 
-      row[1..8].each_index do |col_index|
+      row.each_index do |col_index|
+        next if col_index.zero?
+
         print_chess_square(row_index, col_index)
       end
 
@@ -45,25 +51,40 @@ class Board
 
   def print_chess_square(row_index, col_index)
     if sum(row_index, col_index).even?
-      print_cyan_square(row_index, col_index)
+      print_blue_square(row_index, col_index)
     else
       print_white_square(row_index, col_index)
     end
   end
 
+  def sum(row_index, col_index)
+    row_index + col_index
+  end
+
   def print_white_square(row_index, col_index)
-    element = board[row_index][col_index]
+    element = element_to_s(row_index, col_index)
     print WHITE_BACKGROUND + element + RESET_TERMINAL
   end
 
-  def print_cyan_square(row_index, col_index)
-    element = board[row_index][col_index]
+  def print_blue_square(row_index, col_index)
+    element = element_to_s(row_index, col_index)
     print BLUE_BACKGROUND + element + RESET_TERMINAL
+  end
+
+  def element_to_s(row_index, col_index)
+    element = board[row_index][col_index]
+    return element.unicode if a_piece?(element)
+
+    element
+  end
+
+  def a_piece?(element)
+    element.class < Piece
   end
 
   def print_files
     files = "a b c d e f g h"
-    puts DARK_YELLOW_FOREGROUND + inline_space(2) + files + RESET_TERMINAL
+    puts DARK_YELLOW_FOREGROUND + inline_space(3) + files + RESET_TERMINAL
   end
 
   def inline_space(number)
@@ -73,9 +94,5 @@ class Board
     end
 
     spaces
-  end
-
-  def sum(row_index, col_index)
-    row_index + col_index
   end
 end
