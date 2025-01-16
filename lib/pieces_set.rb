@@ -7,17 +7,19 @@ require_relative "../pieces/king"
 
 # A PIECES SET TO PLAY A GAME
 class SetOfPieces
-  attr_accessor :pieces
+  attr_accessor :set
 
   def initialize(player, color)
-    @pieces = []
+    @set = []
     create_pieces(player, color)
   end
 
   def create_pieces(player, color)
+    rook(color)
+    knight(color)
+    bishop(color)
+    queen_and_king(color)
     pawns(color)
-    rook_knight_and_bishop(color)
-    king_and_queen(color)
     pieces_belong_to_player(player)
   end
 
@@ -27,36 +29,51 @@ class SetOfPieces
     counter = 0
     until counter == 8
       @pawn = Pawn.new("#{color}♟")
-      pieces << @pawn
+      set << @pawn
       counter += 1
     end
   end
 
-  def rook_knight_and_bishop(color)
+  def rook(color)
     counter = 0
     until counter == 2
       @rook = Rook.new("#{color}♜")
-      @knight = Knight.new("#{color}♞")
-      @bishop = Bishop.new("#{color}♝")
-
-      pieces << @rook
-      pieces << @knight
-      pieces << @bishop
+      set << @rook
 
       counter += 1
     end
   end
 
-  def king_and_queen(color)
-    @queen = Queen.new("#{color}♛")
-    @king = King.new("#{color}♚")
+  def knight(color)
+    counter = 0
+    until counter == 2
+      @knight = Knight.new("#{color}♞")
+      set << @knight
 
-    pieces << @king
-    pieces << @queen
+      counter += 1
+    end
+  end
+
+  def bishop(color)
+    counter = 0
+    until counter == 2
+      @bishop = Bishop.new("#{color}♝")
+      set << @bishop
+
+      counter += 1
+    end
+  end
+
+  def queen_and_king(color)
+    @king = King.new("#{color}♚")
+    @queen = Queen.new("#{color}♛")
+
+    set << @queen
+    set << @king
   end
 
   def pieces_belong_to_player(player)
-    pieces.each do |piece|
+    set.each do |piece|
       piece.player = player
     end
   end

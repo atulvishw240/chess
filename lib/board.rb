@@ -20,12 +20,10 @@ class Board
   end
 
   def print_board
-    board[1][1] = black_pieces.pieces[11]
     board.each_with_index do |row, row_index|
       next if row_index.zero?
 
-      rank = 9 - row_index
-      print DARK_YELLOW_FOREGROUND + rank.to_s + inline_space(1) + RESET_TERMINAL
+      print_ranks(row_index)
 
       row.each_index do |col_index|
         next if col_index.zero?
@@ -80,6 +78,11 @@ class Board
 
   def a_piece?(element)
     element.class < Piece
+  end
+
+  def print_ranks(row_index)
+    rank = 9 - row_index
+    print DARK_YELLOW_FOREGROUND + rank.to_s + inline_space(1) + RESET_TERMINAL
   end
 
   def print_files
