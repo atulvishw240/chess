@@ -8,7 +8,7 @@ class Board
   BLACK_FOREGROUND = "\e[30m".freeze
   WHITE_FOREGROUND = "\e[37m".freeze
   WHITE_BACKGROUND = "\e[47m".freeze
-  BLUE_BACKGROUND = "\e[48;5;27m".freeze
+  CYAN_BACKGROUND = "\e[48;5;45m".freeze
 
   attr_accessor :board, :white_pieces, :black_pieces
 
@@ -17,7 +17,7 @@ class Board
     @board = Array.new(9) { Array.new(9, " ") }
   end
 
-  def print_board
+  def display
     board.each_with_index do |row, row_index|
       next if row_index.zero?
 
@@ -35,11 +35,8 @@ class Board
     print_files
   end
 
-  def update_board(file, rank, piece)
-    row_index = file_to_int(file)
-    col_index = rank.to_i
-
-    board[row_index][col_index] = piece
+  def update(rank, file, piece)
+    board[rank][file] = piece
   end
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
@@ -47,9 +44,9 @@ class Board
 
   def print_chess_square(row_index, col_index)
     if sum(row_index, col_index).even?
-      print_blue_square(row_index, col_index)
-    else
       print_white_square(row_index, col_index)
+    else
+      print_blue_square(row_index, col_index)
     end
   end
 
@@ -64,7 +61,7 @@ class Board
 
   def print_blue_square(row_index, col_index)
     element = element_to_s(row_index, col_index)
-    print BLUE_BACKGROUND + element + RESET_TERMINAL
+    print CYAN_BACKGROUND + element + RESET_TERMINAL
   end
 
   def element_to_s(row_index, col_index)
