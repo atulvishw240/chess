@@ -12,11 +12,9 @@ class Board
 
   attr_accessor :board, :white_pieces, :black_pieces
 
-  def initialize(white_pieces, black_pieces)
+  def initialize
     # Ignore 0 based index for simplicity
     @board = Array.new(9) { Array.new(9, " ") }
-    @white_pieces = white_pieces
-    @black_pieces = black_pieces
   end
 
   def print_board
