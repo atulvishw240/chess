@@ -18,68 +18,66 @@ class King < Piece
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
   # private
-  def all_possible_moves(file, rank)
+  def all_possible_moves(row_index, col_index)
     moves = []
-    moves.concat(front(file, rank))
-         .concat(back(file, rank))
-         .concat(right(file, rank))
-         .concat(left(file, rank))
-         .concat(upper_right(file, rank))
-         .concat(upper_left(file, rank))
-         .concat(lower_right(file, rank))
-         .concat(lower_left(file, rank))
+    moves.concat(front(row_index, col_index))
+         .concat(back(row_index, col_index))
+         .concat(right(row_index, col_index))
+         .concat(left(row_index, col_index))
+         .concat(upper_right(row_index, col_index))
+         .concat(upper_left(row_index, col_index))
+         .concat(lower_right(row_index, col_index))
+         .concat(lower_left(row_index, col_index))
   end
 
   private
 
 
-  def front(file, rank)
-    return [] if rank == 8
+  def front(row_index, col_index)
+    return [] if row_index == 8
 
-    vertical_moves_forward(file, rank, rank + 1)
+    vertical_moves_forward(row_index, col_index, row_index + 1)
   end
 
-  def back(file, rank)
-    return [] if rank == 1
+  def back(row_index, col_index)
+    return [] if row_index == 1
 
-    vertical_moves_backward(file, rank, rank - 1)
+    vertical_moves_backward(row_index, col_index, row_index - 1)
   end
 
-  def left(file, rank)
-    col_index = file_to_int(file)
+  def left(row_index, col_index)
     return [] if col_index == 1
 
-    horizontal_moves_left(file, rank, col_index - 1)
+    horizontal_moves_left(row_index, col_index, col_index - 1)
   end
 
-  def right(file, rank)
-    col_index = file_to_int(file)
+  def right(row_index, col_index)
     return [] if col_index == 8
 
-    horizontal_moves_right(file, rank, col_index + 1)
+    horizontal_moves_right(row_index, col_index, col_index + 1)
   end
 
-  def upper_right(file, rank)
-    return [] if rank == 8
+  def upper_right(row_index, col_index)
+    return [] if row_index == 8
 
-    upper_moves_right(file, rank, rank + 1)
+    upper_moves_right(row_index, col_index, row_index + 1)
   end
 
-  def upper_left(file, rank)
-    return [] if rank == 8
+  def upper_left(row_index, col_index)
+    return [] if row_index == 8
 
-    upper_moves_left(file, rank, rank + 1)
+    upper_moves_left(row_index, col_index, row_index + 1)
   end
 
-  def lower_right(file, rank)
-    return [] if rank == 1
+  def lower_right(row_index, col_index)
+    return [] if row_index == 1
 
-    lower_moves_right(file, rank, rank - 1)
+    lower_moves_right(row_index, col_index, row_index - 1)
   end
 
-  def lower_left(file, rank)
-    return [] if rank == 1
+  def lower_left(row_index, col_index)
+    return [] if row_index == 1
 
-    lower_moves_left(file, rank, rank - 1)
+    lower_moves_left(row_index, col_index, row_index - 1)
   end
 end

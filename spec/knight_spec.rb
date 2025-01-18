@@ -7,31 +7,31 @@ describe Knight do
   end
 
   describe "#all_possible_moves" do
-    it "returns all possible moves from f3" do
-      possible_moves = [["g", 5], ["e", 5], ["g", 1], ["e", 1], ["h", 4], ["h", 2], ["d", 4], ["d", 2]]
+    it "returns all possible moves from [3, 6]" do
+      possible_moves = [[5, 7], [5, 5], [1, 7], [1, 5], [4, 8], [2, 8], [4, 4], [2, 4]]
 
-      moves = @knight.all_possible_moves("f", 3)
+      moves = @knight.all_possible_moves(3, 6)
       expect(moves).to eq(possible_moves)
     end
 
-    it "returns all possible moves from d4" do
-      possible_moves = [["e", 6], ["c", 6], ["e", 2], ["c", 2], ["f", 5], ["f", 3], ["b", 5], ["b", 3]]
+    it "returns all possible moves from [4, 4]" do
+      possible_moves = [[6, 5], [6, 3], [2, 5], [2, 3], [5, 6], [3, 6], [5, 2], [3, 2]]
 
-      moves = @knight.all_possible_moves("d", 4)
+      moves = @knight.all_possible_moves(4, 4)
       expect(moves).to eq(possible_moves)
     end
 
-    it "returns all possible moves for b5" do
-      possible_moves = [["c", 7], ["a", 7], ["c", 3], ["a", 3], ["d", 6], ["d", 4]]
+    it "returns all possible moves for [5, 2]" do
+      possible_moves = [[7, 3], [7, 1], [3, 3], [3, 1], [6, 4], [4, 4]]
 
-      moves = @knight.all_possible_moves("b", 5)
+      moves = @knight.all_possible_moves(5, 2)
       expect(moves).to eq(possible_moves)
     end
 
-    it "returns all possible moves for a7" do
-      possible_moves = [["b", 5], ["c", 8], ["c", 6]]
+    it "returns all possible moves for [7, 1]" do
+      possible_moves = [[5, 2], [8, 3], [6, 3]]
 
-      moves = @knight.all_possible_moves("a", 7)
+      moves = @knight.all_possible_moves(7, 1)
       expect(moves).to eq(possible_moves)
     end
   end

@@ -8,38 +8,38 @@ class Rook < Piece
   include Vertical
 
   def move
-    file = self.file
-    rank = self.rank
-    moves = all_possible_moves(file, rank)
+    row_index = rank
+    col_index = file
+    moves = all_possible_moves(row_index, col_index)
   end
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
   # private
 
-  def all_possible_moves(file, rank)
+  def all_possible_moves(row_index, col_index)
     positions = []
 
-    vertical_positions = vertical_moves(file, rank)
-    horizontal_positions = horizontal_moves(file, rank)
+    vertical_positions = vertical_moves(row_index, col_index)
+    horizontal_positions = horizontal_moves(row_index, col_index)
     positions.concat(vertical_positions)
     positions.concat(horizontal_positions)
   end
 
   private # Temporary, once we complete our move functionality we'll comment out the above 'private'
 
-  def vertical_moves(file, rank)
+  def vertical_moves(row_index, col_index)
     moves = []
-    forward = vertical_moves_forward(file, rank)
-    backward = vertical_moves_backward(file, rank)
+    forward = vertical_moves_forward(row_index, col_index)
+    backward = vertical_moves_backward(row_index, col_index)
     moves.concat(forward)
     moves.concat(backward)
   end
 
-  def horizontal_moves(file, rank)
+  def horizontal_moves(row_index, col_index)
     moves = []
-    left = horizontal_moves_left(file, rank)
-    right = horizontal_moves_right(file, rank)
+    left = horizontal_moves_left(row_index, col_index)
+    right = horizontal_moves_right(row_index, col_index)
     moves.concat(left)
     moves.concat(right)
   end

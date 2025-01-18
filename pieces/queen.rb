@@ -17,15 +17,15 @@ class Queen < Piece
     
   end
 
-  def all_possible_moves(file, rank)
-    front = vertical_moves_forward(file, rank)
-    back = vertical_moves_backward(file, rank)
-    right = horizontal_moves_right(file, rank)
-    left = horizontal_moves_left(file, rank)
-    diagonal = upper_moves_left(file, rank)
-               .concat(lower_moves_right(file, rank))
-    rev_diagonal = upper_moves_right(file, rank)
-                   .concat(lower_moves_left(file, rank))
+  def all_possible_moves(row_index, col_index)
+    front = vertical_moves_forward(row_index, col_index)
+    back = vertical_moves_backward(row_index, col_index)
+    right = horizontal_moves_right(row_index, col_index)
+    left = horizontal_moves_left(row_index, col_index)
+    diagonal = upper_moves_left(row_index, col_index)
+               .concat(lower_moves_right(row_index, col_index))
+    rev_diagonal = upper_moves_right(row_index, col_index)
+                   .concat(lower_moves_left(row_index, col_index))
 
     front.concat(back).concat(right).concat(left)
          .concat(diagonal).concat(rev_diagonal)

@@ -1,38 +1,37 @@
 require_relative "../pieces/bishop"
 
 describe Bishop do
-
   before(:each) do
     @bishop = Bishop.new("Bishop")
   end
 
   describe "#all_possible_moves" do
     it "returns all possible moves from a1" do
-      possible_moves = [["b", 2], ["c", 3], ["d", 4], ["e", 5], ["f", 6], ["g", 7], ["h", 8]]
-      moves = @bishop.all_possible_moves("a", 1)
+      possible_moves = [[2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8]]
+      moves = @bishop.all_possible_moves(1, 1)
 
       expect(moves).to eq(possible_moves)
     end
 
     it "returns all possible moves from d1" do
-      possible_moves = [["e", 2], ["f", 3], ["g", 4], ["h", 5], ["c", 2], ["b", 3], ["a", 4]]
-      moves = @bishop.all_possible_moves("d", 1)
+      possible_moves = [[2, 5], [3, 6], [4, 7], [5, 8], [2, 3], [3, 2], [4, 1]]
+      moves = @bishop.all_possible_moves(1, 4)
 
       expect(moves).to eq(possible_moves)
     end
 
     it "returns all possible moves from d8" do
-      possible_moves = [["e", 7], ["f", 6], ["g", 5], ["h", 4], ["c", 7], ["b", 6], ["a", 5]]
+      possible_moves = [[7, 5], [6, 6], [5, 7], [4, 8], [7, 3], [6, 2], [5, 1]]
 
-      moves = @bishop.all_possible_moves("d", 8)
+      moves = @bishop.all_possible_moves(8, 4)
       expect(moves).to eq(possible_moves)
     end
 
     it "returns all possible moves from e4" do
-      possible_moves = [["f", 5], ["g", 6], ["h", 7], ["d", 5], ["c", 6], ["b", 7], ["a", 8], ["f", 3], ["g", 2],
-                        ["h", 1], ["d", 3], ["c", 2], ["b", 1]]
+      possible_moves = [[5, 6], [6, 7], [7, 8], [5, 4], [6, 3], [7, 2], [8, 1], [3, 6],
+                        [2, 7], [1, 8], [3, 4], [2, 3], [1, 2]]
 
-      moves = @bishop.all_possible_moves("e", 4)
+      moves = @bishop.all_possible_moves(4, 5)
       expect(moves).to eq(possible_moves)
     end
   end

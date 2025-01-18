@@ -9,27 +9,26 @@ class Knight < Piece
   end
 
   # A knight make four T's (upper, lower, right, left)
-  def all_possible_moves(file, rank)
+  def all_possible_moves(row_index, col_index)
     positions = []
     coords = possible_coordinates_from_origin
 
     coords.each do |coord|
-      x_coord = rank
-      y_coord = file_to_int(file)
+      x_coord = row_index
+      y_coord = col_index
       x_coord += coord[0]
       y_coord += coord[1]
 
       next unless valid_move?(x_coord, y_coord)
 
-      y_coord = int_to_file(y_coord)
-      positions << [y_coord, x_coord]
+      positions << [x_coord, y_coord]
     end
 
     positions
   end
 
   # Assuming knight to be at coordinats (0, 0)
-  # [rank-coordinate, file_coordinate]
+  # [row_index-coordinate, file_coordinate]
   def possible_coordinates_from_origin
     upper = [[2, 1], [2, -1]]
     lower = [[-2, 1], [-2, -1]]

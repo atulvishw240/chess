@@ -7,13 +7,13 @@ describe Queen do
   end
 
   describe "#all_possible_moves" do
-    it "returns all possible moves from e4" do
-      possible_moves = [["e", 5], ["e", 6], ["e", 7], ["e", 8], ["e", 3], ["e", 2], ["e", 1], # vertical
-                        ["f", 4], ["g", 4], ["h", 4], ["d", 4], ["c", 4], ["b", 4], ["a", 4], # horizontal
-                        ["d", 5], ["c", 6], ["b", 7], ["a", 8], ["f", 3], ["g", 2], ["h", 1], # diagonal
-                        ["f", 5], ["g", 6], ["h", 7], ["d", 3], ["c", 2], ["b", 1]] # reverse diagonal
+    it "returns all possible moves from [4, 5]" do
+      possible_moves = [[5, 5], [6, 5], [7, 5], [8, 5], [3, 5], [2, 5], [1, 5], # vertical
+                        [4, 6], [4, 7], [4, 8], [4, 4], [4, 3], [4, 2], [4, 1], # horizontal
+                        [5, 4], [6, 3], [7, 2], [8, 1], [3, 6], [2, 7], [1, 8], # diagonal
+                        [5, 6], [6, 7], [7, 8], [3, 4], [2, 3], [1, 2]] # reverse diagonal
 
-      moves = @queen.all_possible_moves("e", 4)
+      moves = @queen.all_possible_moves(4, 5)
       expect(moves).to eq(possible_moves)
     end
   end
