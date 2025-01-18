@@ -4,27 +4,23 @@ require_relative "mod_utils"
 module ReverseDiagonal
   include Utils
 
-  def upper_moves_right(file, rank, stop_row = 8, stop_col = 8)
+  def upper_moves_right(row_index, col_index, stop_row = 8, stop_col = 8)
     moves = []
-    col_index = file_to_int(file)
-    until rank == stop_row || col_index == stop_col
-      rank += 1
+    until row_index == stop_row || col_index == stop_col
+      row_index += 1
       col_index += 1
-      file = int_to_file(col_index)
-      moves << [file, rank]
+      moves << [row_index, col_index]
     end
 
     moves
   end
 
-  def lower_moves_left(file, rank, stop_row = 1, stop_col = 1)
+  def lower_moves_left(row_index, col_index, stop_row = 1, stop_col = 1)
     moves = []
-    col_index = file_to_int(file)
-    until rank == stop_row || col_index == stop_col
-      rank -= 1
+    until row_index == stop_row || col_index == stop_col
+      row_index -= 1
       col_index -= 1
-      file = int_to_file(col_index)
-      moves << [file, rank]
+      moves << [row_index, col_index]
     end
 
     moves

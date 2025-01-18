@@ -3,21 +3,21 @@ require_relative "mod_utils"
 module Vertical
   include Utils
 
-  def vertical_moves_forward(file, rank, stop = 8)
+  def vertical_moves_forward(row_index, col_index, stop = 8)
     moves = []
-    until rank == stop
-      rank += 1
-      moves << [file, rank]
+    until row_index == stop
+      row_index += 1
+      moves << [row_index, col_index]
     end
 
     moves
   end
 
-  def vertical_moves_backward(file, rank, stop = 1)
+  def vertical_moves_backward(row_index, col_index, stop = 1)
     moves = []
-    until rank == stop
-      rank -= 1
-      moves << [file, rank]
+    until row_index == stop
+      row_index -= 1
+      moves << [row_index, col_index]
     end
 
     moves

@@ -4,25 +4,21 @@ require_relative "mod_utils"
 module Horizontal
   include Utils
 
-  def horizontal_moves_left(file, rank, stop = 1)
+  def horizontal_moves_left(row_index, col_index, stop = 1)
     moves = []
-    index = file_to_int(file)
-    until index == stop
-      index -= 1
-      file = int_to_file(index)
-      moves << [file, rank]
+    until col_index == stop
+      col_index -= 1
+      moves << [row_index, col_index]
     end
 
     moves
   end
 
-  def horizontal_moves_right(file, rank, stop = 8)
+  def horizontal_moves_right(row_index, col_index, stop = 8)
     moves = []
-    index = file_to_int(file)
-    until index == stop
-      index += 1
-      file = int_to_file(index)
-      moves << [file, rank]
+    until col_index == stop
+      col_index += 1
+      moves << [row_index, col_index]
     end
 
     moves
