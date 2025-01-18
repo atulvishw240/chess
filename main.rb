@@ -15,6 +15,6 @@ rook = Rook.new("#{color}♜")
 game.board.update(4, 5, rook)
 game.board.display
 
-positions = rook.all_possible_moves(5, 4)
+positions = rook.all_possible_moves(4, 5)
 game.board.display_markers(positions)
 game.board.display

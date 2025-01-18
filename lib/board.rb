@@ -38,17 +38,17 @@ class Board
 
   def display_markers(positions)
     positions.each do |position|
-      file = file_to_int(position[0])
-      rank = position[1]
+      row_index = position[0]
+      col_index = position[1]
 
-      update(rank, file, MARKER)
+      update(row_index, col_index, MARKER)
     end
 
     display
   end
 
-  def update(rank, file, piece)
-    board[rank][file] = piece
+  def update(row_index, col_index, piece)
+    board[row_index][col_index] = piece
   end
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
