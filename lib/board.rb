@@ -1,4 +1,5 @@
 require_relative "mod_utils"
+require_relative "square"
 # BOARD
 class Board
   include Utils
@@ -15,7 +16,7 @@ class Board
 
   def initialize
     # Ignore 0 based index for simplicity
-    @board = Array.new(9) { Array.new(9, " ") }
+    @board = Array.new(9) { Array.new(9) { Square.new } }
   end
 
   def display
@@ -36,7 +37,16 @@ class Board
     print_files
   end
 
-  def display_markers(positions)
+  def update(row_index, col_index, piece_or_marker)
+    row_index = 9 - row_index # Because our 1st row of array is 8th rank
+    square = board[row_index][col_index]
+    square.element = piece_or_marker
+  end
+
+  #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
+  # private
+
+  def markers(positions)
     positions.each do |position|
       row_index = position[0]
       col_index = position[1]
@@ -45,33 +55,31 @@ class Board
     end
   end
 
-  def update(row_index, col_index, piece)
-    board[row_index][col_index] = piece
-  end
-
-  #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
-  private
-
   def print_chess_square(row_index, col_index)
-    element = element_to_s(row_index, col_index)
+    element = square_to_s(row_index, col_index)
     sum = sum(row_index, col_index)
     background = sum.even? ? WHITE_BACKGROUND : CYAN_BACKGROUND
-    print background + element + RESET_TERMINAL
+
+    assign_color(row_index, col_index, background)
+    square = board[row_index][col_index]
+    print square.color + element + RESET_TERMINAL
   end
 
-  def element_to_s(row_index, col_index)
-    element = board[row_index][col_index]
-    return element.unicode if a_piece?(element)
+  def square_to_s(row_index, col_index)
+    square = board[row_index][col_index]
+    piece = square.element
+    return piece.unicode if square.contains?(piece)
 
-    element
+    square.element
   end
 
   def sum(row_index, col_index)
     row_index + col_index
   end
 
-  def a_piece?(element)
-    element.class < Piece
+  def assign_color(row_index, col_index, background)
+    square = board[row_index][col_index]
+    square.color = background
   end
 
   def print_ranks(row_index)
