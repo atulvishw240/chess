@@ -43,8 +43,6 @@ class Board
 
       update(row_index, col_index, MARKER)
     end
-
-    display
   end
 
   def update(row_index, col_index, piece)
@@ -55,25 +53,10 @@ class Board
   private
 
   def print_chess_square(row_index, col_index)
-    if sum(row_index, col_index).even?
-      print_white_square(row_index, col_index)
-    else
-      print_blue_square(row_index, col_index)
-    end
-  end
-
-  def sum(row_index, col_index)
-    row_index + col_index
-  end
-
-  def print_white_square(row_index, col_index)
     element = element_to_s(row_index, col_index)
-    print WHITE_BACKGROUND + element + RESET_TERMINAL
-  end
-
-  def print_blue_square(row_index, col_index)
-    element = element_to_s(row_index, col_index)
-    print CYAN_BACKGROUND + element + RESET_TERMINAL
+    sum = sum(row_index, col_index)
+    background = sum.even? ? WHITE_BACKGROUND : CYAN_BACKGROUND
+    print background + element + RESET_TERMINAL
   end
 
   def element_to_s(row_index, col_index)
@@ -81,6 +64,10 @@ class Board
     return element.unicode if a_piece?(element)
 
     element
+  end
+
+  def sum(row_index, col_index)
+    row_index + col_index
   end
 
   def a_piece?(element)

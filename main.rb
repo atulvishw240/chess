@@ -12,9 +12,10 @@ game = Game.new(player1, player2)
 color = "\e[30m"
 rook = Rook.new("#{color}♜")
 
-game.board.update(4, 5, rook)
-game.board.display
+row_index = 3
+col_index = 8
+game.board.update(row_index, col_index, rook)
 
-positions = rook.all_possible_moves(4, 5)
+positions = rook.all_possible_moves(row_index, col_index)
 game.board.display_markers(positions)
 game.board.display
