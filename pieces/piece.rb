@@ -9,4 +9,5 @@ class Piece
 
   def move; end
   def capture; end
+  def all_possible_moves; end
 end

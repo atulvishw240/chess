@@ -1,6 +1,9 @@
+require_relative "mod_utils"
 require_relative "pieces_set"
 # GAME
 class Game
+  include Utils
+
   attr_accessor :current_player_id, :board
 
   def initialize(player1, player2)
@@ -34,12 +37,10 @@ class Game
     setup_pieces(black.pawns, 7)
     setup_pieces(brown.pieces, 1)
     setup_pieces(brown.pawns, 2)
-
-    board.display
   end
 
-  def setup_pieces(pieces, rank)
-    rank = 9 - rank
+  def setup_pieces(pieces, at_rank)
+    rank = 9 - at_rank
     pieces.each_with_index do |piece, index|
       file = index
       board.update(rank, file, piece)

@@ -9,6 +9,7 @@ class Board
   WHITE_FOREGROUND = "\e[37m".freeze
   WHITE_BACKGROUND = "\e[47m".freeze
   CYAN_BACKGROUND = "\e[48;5;45m".freeze
+  MARKER = "\e[90m\u{25CF}".freeze
 
   attr_accessor :board, :white_pieces, :black_pieces
 
@@ -33,6 +34,17 @@ class Board
     end
 
     print_files
+  end
+
+  def display_markers(positions)
+    positions.each do |position|
+      file = file_to_int(position[0])
+      rank = position[1]
+
+      update(rank, file, MARKER)
+    end
+
+    display
   end
 
   def update(rank, file, piece)
