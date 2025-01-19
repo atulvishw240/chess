@@ -10,7 +10,7 @@ class Square
     piece.nil?
   end
 
-  def contains?(piece)
+  def contains_piece?
     element.is_a?(Piece)
   end
 
@@ -19,8 +19,7 @@ class Square
   end
 
   def to_s
-    piece = element
-    return piece.unicode if contains?(piece)
+    return element.unicode if contains_piece?
 
     element
   end

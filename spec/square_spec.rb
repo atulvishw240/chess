@@ -8,16 +8,16 @@ describe Square do
     @rook = Rook.new("Rook")
   end
 
-  describe "#contains?" do
+  describe "#contains_piece?" do
     it "returns false when square doesn't contains a piece" do
-      result = @square.contains?(@rook)
+      result = @square.contains_piece?
 
       expect(result).to eq(false)
     end
 
     it "returns true when square contains a piece" do
       @square.element = @rook
-      result = @square.contains?(@rook)
+      result = @square.contains_piece?
 
       expect(result).to eq(true)
     end
