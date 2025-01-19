@@ -11,10 +11,11 @@ class Square
   end
 
   def contains?(piece)
-    piece.class < Piece
+    # piece.class < Piece
+    element == piece
   end
 
-  def assign_color(row_index, col_index, color)
+  def assign_color(color)
     self.color = color
   end
 end
