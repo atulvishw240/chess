@@ -56,21 +56,12 @@ class Board
   end
 
   def print_chess_square(row_index, col_index)
-    element = square_to_s(row_index, col_index)
+    square = get_square(row_index, col_index)
     sum = sum(row_index, col_index)
     background = sum.even? ? WHITE_BACKGROUND : CYAN_BACKGROUND
 
-    square = get_square(row_index, col_index)
-    square.assign_color(row_index, col_index, background)
-    print square.color + element + RESET_TERMINAL
-  end
-
-  def square_to_s(row_index, col_index)
-    square = get_square(row_index, col_index)
-    piece = square.element
-    return piece.unicode if square.contains?(piece)
-
-    square.element
+    square.assign_color(background)
+    print square.color + square.to_s + RESET_TERMINAL
   end
 
   def sum(row_index, col_index)
