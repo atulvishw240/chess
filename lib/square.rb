@@ -13,4 +13,8 @@ class Square
   def contains?(piece)
     piece.class < Piece
   end
+
+  def assign_color(row_index, col_index, color)
+    self.color = color
+  end
 end

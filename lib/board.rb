@@ -39,7 +39,7 @@ class Board
 
   def update(row_index, col_index, piece_or_marker)
     row_index = 9 - row_index # Because our 1st row of array is 8th rank
-    square = board[row_index][col_index]
+    square = get_square(row_index, col_index)
     square.element = piece_or_marker
   end
 
@@ -60,13 +60,13 @@ class Board
     sum = sum(row_index, col_index)
     background = sum.even? ? WHITE_BACKGROUND : CYAN_BACKGROUND
 
-    assign_color(row_index, col_index, background)
-    square = board[row_index][col_index]
+    square = get_square(row_index, col_index)
+    square.assign_color(row_index, col_index, background)
     print square.color + element + RESET_TERMINAL
   end
 
   def square_to_s(row_index, col_index)
-    square = board[row_index][col_index]
+    square = get_square(row_index, col_index)
     piece = square.element
     return piece.unicode if square.contains?(piece)
 
@@ -75,11 +75,6 @@ class Board
 
   def sum(row_index, col_index)
     row_index + col_index
-  end
-
-  def assign_color(row_index, col_index, background)
-    square = board[row_index][col_index]
-    square.color = background
   end
 
   def print_ranks(row_index)
@@ -99,5 +94,9 @@ class Board
     end
 
     spaces
+  end
+
+  def get_square(row_index, col_index)
+    board[row_index][col_index]
   end
 end
