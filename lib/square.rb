@@ -11,11 +11,17 @@ class Square
   end
 
   def contains?(piece)
-    # piece.class < Piece
-    element == piece
+    element.is_a?(Piece)
   end
 
   def assign_color(color)
     self.color = color
+  end
+
+  def to_s
+    piece = element
+    return piece.unicode if contains?(piece)
+
+    element
   end
 end

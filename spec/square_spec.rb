@@ -18,8 +18,23 @@ describe Square do
     it "returns true when square contains a piece" do
       @square.element = @rook
       result = @square.contains?(@rook)
-  
+
       expect(result).to eq(true)
+    end
+  end
+
+  describe "#to_s" do
+    it "returns empty string when square doesn't contain a piece" do
+      result = @square.to_s
+
+      expect(result).to eq(" ")
+    end
+
+    it "returns piece unicode as a string when square contains a piece" do
+      @square.element = @rook
+      result = @square.to_s
+
+      expect(result).to eq("Rook")
     end
   end
 end
