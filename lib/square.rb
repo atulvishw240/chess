@@ -7,7 +7,7 @@ class Square
   end
 
   def empty?
-    piece.nil?
+    element.nil?
   end
 
   def contains_piece?
