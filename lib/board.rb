@@ -58,10 +58,16 @@ class Board
   def print_chess_square(row_index, col_index)
     square = get_square(row_index, col_index)
     sum = sum(row_index, col_index)
-    background = sum.even? ? WHITE_BACKGROUND : CYAN_BACKGROUND
 
-    square.assign_color(background)
+    assign_color_to_square(square, sum)
     print square.color + square.to_s + RESET_TERMINAL
+  end
+
+  def assign_color_to_square(square, sum)
+    if square.color.nil?
+      background = sum.even? ? WHITE_BACKGROUND : CYAN_BACKGROUND
+      square.color = background
+    end
   end
 
   def sum(row_index, col_index)

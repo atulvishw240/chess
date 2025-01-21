@@ -14,10 +14,6 @@ class Square
     element.is_a?(Piece)
   end
 
-  def assign_color(color)
-    self.color = color
-  end
-
   def to_s
     return element.unicode if contains_piece?
 
