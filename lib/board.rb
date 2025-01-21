@@ -38,7 +38,6 @@ class Board
   end
 
   def update(row_index, col_index, piece_or_marker)
-    row_index = 9 - row_index # Because our 1st row of array is 8th rank
     square = get_square(row_index, col_index)
     square.element = piece_or_marker
   end
@@ -74,8 +73,7 @@ class Board
     row_index + col_index
   end
 
-  def print_ranks(row_index)
-    rank = 9 - row_index
+  def print_ranks(rank)
     print DARK_YELLOW_FOREGROUND + rank.to_s + inline_space(1) + RESET_TERMINAL
   end
 
