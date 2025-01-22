@@ -112,4 +112,15 @@ class Board
     piece.row_index = rank
     piece.col_index = file
   end
+
+  def display_markers(positions)
+    positions.each do |position|
+      row_index = position[0]
+      col_index = position[1]
+
+      update(row_index, col_index, MARKER)
+    end
+
+    display
+  end
 end

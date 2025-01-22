@@ -14,7 +14,6 @@ class Queen < Piece
   include ReverseDiagonal
 
   def move
-    
   end
 
   def all_possible_moves(row_index, col_index)
