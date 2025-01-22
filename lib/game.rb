@@ -26,8 +26,10 @@ class Game
 
   def play
     board.setup_board
-    piece = current_player.select_piece
-    p piece
+    at_position = current_player.select_piece
+    square = board.get_square(at_position[0], at_position[1])
+    piece = square.element
+    puts piece
   end
 
   # def play_as_white

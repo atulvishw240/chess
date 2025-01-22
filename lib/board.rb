@@ -100,9 +100,16 @@ class Board
   end
 
   def setup_pieces(pieces, rank)
-    pieces.each_with_index do |piece, index|
-      file = index
-      update(rank, file, piece)
+    pieces.each_with_index do |piece, file|
+      next if file.zero?
+
+      setup_piece(rank, file, piece)
     end
+  end
+
+  def setup_piece(rank, file, piece)
+    update(rank, file, piece)
+    piece.row_index = rank
+    piece.col_index = file
   end
 end
