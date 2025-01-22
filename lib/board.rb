@@ -95,6 +95,8 @@ class Board
     setup_pieces(black.pawns, 7)
     setup_pieces(purple.pieces, 1)
     setup_pieces(purple.pawns, 2)
+
+    display
   end
 
   def setup_pieces(pieces, rank)

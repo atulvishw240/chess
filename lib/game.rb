@@ -24,6 +24,12 @@ class Game
     @current_player_id = 1 - @current_player_id
   end
 
+  def play
+    board.setup_board
+    piece = current_player.select_piece
+    p piece
+  end
+
   # def play_as_white
   #   random = rand(0..1)
   #   self.current_player_id = random
