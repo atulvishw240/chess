@@ -4,7 +4,7 @@ require_relative "square"
 class Board
   include Utils
 
-  RESET_TERMINAL = " \e[0m".freeze
+  RESET_TERMINAL = "\e[0m".freeze
   DARK_YELLOW_FOREGROUND = "\e[1;33m".freeze
   BLACK_FOREGROUND = "\e[30m".freeze
   WHITE_FOREGROUND = "\e[37m".freeze
@@ -59,14 +59,14 @@ class Board
     sum = sum(row_index, col_index)
 
     assign_color_to_square(square, sum)
-    print square.color + square.to_s + RESET_TERMINAL
+    print "#{square.color} #{square} #{RESET_TERMINAL}"
   end
 
   def assign_color_to_square(square, sum)
-    if square.color.nil?
-      background = sum.even? ? WHITE_BACKGROUND : CYAN_BACKGROUND
-      square.color = background
-    end
+    return unless square.color.nil?
+
+    background = sum.even? ? WHITE_BACKGROUND : CYAN_BACKGROUND
+    square.color = background
   end
 
   def sum(row_index, col_index)
@@ -78,7 +78,7 @@ class Board
   end
 
   def print_files
-    files = "a b c d e f g h"
+    files = "a  b  c  d  e  f  g  h"
     puts DARK_YELLOW_FOREGROUND + inline_space(3) + files + RESET_TERMINAL
   end
 
