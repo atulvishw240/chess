@@ -9,7 +9,7 @@ class Game
   def initialize(player1, player2)
     @board = Board.new
     @players = [player1, player2]
-    @current_player_id = play_as_white
+    @current_player_id = 0
   end
 
   def current_player
@@ -24,8 +24,8 @@ class Game
     @current_player_id = 1 - @current_player_id
   end
 
-  def play_as_white
-    random = rand(0..1)
-    self.current_player_id = random
-  end
+  # def play_as_white
+  #   random = rand(0..1)
+  #   self.current_player_id = random
+  # end
 end
