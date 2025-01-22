@@ -28,22 +28,4 @@ class Game
     random = rand(0..1)
     self.current_player_id = random
   end
-
-  def setup_board
-    brown = SetOfPieces.new(current_player, "\e[38;5;160m")
-    black = SetOfPieces.new(opponent, "\e[30m")
-
-    setup_pieces(black.pieces, 8)
-    setup_pieces(black.pawns, 7)
-    setup_pieces(brown.pieces, 1)
-    setup_pieces(brown.pawns, 2)
-  end
-
-  def setup_pieces(pieces, at_rank)
-    rank = 9 - at_rank
-    pieces.each_with_index do |piece, index|
-      file = index
-      board.update(rank, file, piece)
-    end
-  end
 end

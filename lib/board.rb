@@ -1,5 +1,6 @@
 require_relative "mod_utils"
 require_relative "square"
+require_relative "pieces_set"
 # BOARD
 class Board
   include Utils
@@ -8,14 +9,17 @@ class Board
   DARK_YELLOW_FOREGROUND = "\e[1;33m".freeze
   BLACK_FOREGROUND = "\e[30m".freeze
   WHITE_FOREGROUND = "\e[37m".freeze
+  BROWN_FOREGROUND = "\e[38;5;160m".freeze
   WHITE_BACKGROUND = "\e[47m".freeze
   CYAN_BACKGROUND = "\e[48;5;45m".freeze
   MARKER = "\e[90m\u{25CF}".freeze
 
-  attr_accessor :board, :white_pieces, :black_pieces
+  attr_accessor :board, :black, :purple
 
   def initialize
     # Ignore 0 based index for simplicity
+    @black = SetOfPieces.new(BLACK_FOREGROUND)
+    @purple = SetOfPieces.new(BROWN_FOREGROUND)
     @board = Array.new(9) { Array.new(9) { Square.new } }
   end
 
@@ -45,15 +49,6 @@ class Board
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
   # private
 
-  def markers(positions)
-    positions.each do |position|
-      row_index = position[0]
-      col_index = position[1]
-
-      update(row_index, col_index, MARKER)
-    end
-  end
-
   def print_chess_square(row_index, col_index)
     square = get_square(row_index, col_index)
     sum = sum(row_index, col_index)
@@ -62,15 +57,19 @@ class Board
     print "#{square.color} #{square} #{RESET_TERMINAL}"
   end
 
+  def get_square(row_index, col_index)
+    board[row_index][col_index]
+  end
+
+  def sum(row_index, col_index)
+    row_index + col_index
+  end
+
   def assign_color_to_square(square, sum)
     return unless square.color.nil?
 
     background = sum.even? ? WHITE_BACKGROUND : CYAN_BACKGROUND
     square.color = background
-  end
-
-  def sum(row_index, col_index)
-    row_index + col_index
   end
 
   def print_ranks(rank)
@@ -91,7 +90,17 @@ class Board
     spaces
   end
 
-  def get_square(row_index, col_index)
-    board[row_index][col_index]
+  def setup_board
+    setup_pieces(black.pieces, 8)
+    setup_pieces(black.pawns, 7)
+    setup_pieces(purple.pieces, 1)
+    setup_pieces(purple.pawns, 2)
+  end
+
+  def setup_pieces(pieces, rank)
+    pieces.each_with_index do |piece, index|
+      file = index
+      update(rank, file, piece)
+    end
   end
 end

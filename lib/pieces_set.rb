@@ -9,13 +9,13 @@ require_relative "../pieces/king"
 class SetOfPieces
   attr_accessor :pieces, :pawns
 
-  def initialize(player, color)
+  def initialize(color)
     @pieces = [""]
     @pawns = [""]
-    create_pieces(player, color)
+    create_pieces(color)
   end
 
-  def create_pieces(player, color)
+  def create_pieces(color)
     create_rook(color)
     create_knight(color)
     create_bishop(color)
@@ -24,7 +24,6 @@ class SetOfPieces
     create_knight(color)
     create_rook(color)
     create_pawns(color)
-    pieces_belong_to_player(player)
   end
 
   private
@@ -59,13 +58,5 @@ class SetOfPieces
 
     pieces << @queen
     pieces << @king
-  end
-
-  def pieces_belong_to_player(player)
-    pieces.each do |piece|
-      next if piece.is_a?(String)
-
-      piece.player = player
-    end
   end
 end
