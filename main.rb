@@ -1,5 +1,4 @@
 require_relative "lib/player"
-require_relative "lib/pieces_set"
 require_relative "lib/board"
 require_relative "lib/game"
 require_relative "pieces/rook"
@@ -14,8 +13,8 @@ board = Board.new
 color = "\e[30m"
 rook = Rook.new("#{color}♜")
 
-row_index = 8
-col_index = 8
+row_index = 4
+col_index = 5
 
 board.update(row_index, col_index, rook)
 positions = rook.all_possible_moves(board, row_index, col_index)

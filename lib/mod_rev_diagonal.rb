@@ -1,9 +1,5 @@
-require_relative "mod_utils"
-
 # REVERSE DIAGONAL MOVES
 module ReverseDiagonal
-  include Utils
-
   def upper_moves_right(row_index, col_index, stop_row = 8, stop_col = 8)
     moves = []
     until row_index == stop_row || col_index == stop_col

@@ -1,9 +1,5 @@
-require_relative "mod_utils"
-
 # HORIZONTAL MOVES
 module Horizontal
-  include Utils
-
   def horizontal_moves_left(board, row_index, col_index, stop = 1)
     moves = []
     until col_index == stop

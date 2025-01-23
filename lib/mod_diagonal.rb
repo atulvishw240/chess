@@ -1,9 +1,5 @@
-require_relative "mod_utils"
-
 # DIAGONAL MOVES
 module Diagonal
-  include Utils
-
   def upper_moves_left(row_index, col_index, stop_row = 8, stop_col = 1)
     moves = []
     until row_index == stop_row || col_index == stop_col

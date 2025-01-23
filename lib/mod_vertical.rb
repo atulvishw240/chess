@@ -1,8 +1,5 @@
-require_relative "mod_utils"
 # VERTICAL MOVES
 module Vertical
-  include Utils
-
   def vertical_moves_forward(board, row_index, col_index, stop = 8)
     moves = []
     until row_index == stop

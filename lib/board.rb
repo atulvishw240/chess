@@ -1,25 +1,21 @@
-require_relative "mod_utils"
+require_relative "../pieces/pieces_set"
 require_relative "square"
-require_relative "pieces_set"
 # BOARD
 class Board
-  include Utils
-
   RESET_TERMINAL = "\e[0m".freeze
   DARK_YELLOW_FOREGROUND = "\e[1;33m".freeze
   BLACK_FOREGROUND = "\e[30m".freeze
-  WHITE_FOREGROUND = "\e[37m".freeze
   BROWN_FOREGROUND = "\e[38;5;160m".freeze
   WHITE_BACKGROUND = "\e[47m".freeze
   CYAN_BACKGROUND = "\e[48;5;45m".freeze
   MARKER = "\e[90m\u{25CF}".freeze
 
-  attr_accessor :board, :black, :purple
+  attr_accessor :board, :black, :brown
 
   def initialize
-    # Ignore 0 based index for simplicity
     @black = SetOfPieces.new(BLACK_FOREGROUND)
-    @purple = SetOfPieces.new(BROWN_FOREGROUND)
+    @brown = SetOfPieces.new(BROWN_FOREGROUND)
+    # Ignore 0 based index for simplicity
     @board = Array.new(9) { Array.new(9) { Square.new } }
   end
 
@@ -93,8 +89,8 @@ class Board
   def setup_board
     setup_pieces(black.pieces, 8)
     setup_pieces(black.pawns, 7)
-    setup_pieces(purple.pieces, 1)
-    setup_pieces(purple.pawns, 2)
+    setup_pieces(brown.pieces, 1)
+    setup_pieces(brown.pawns, 2)
 
     display
   end
