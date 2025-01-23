@@ -89,6 +89,7 @@ class Board
   def setup_board
     setup_pieces(black.pieces, 8)
     setup_pieces(black.pawns, 7)
+
     setup_pieces(brown.pieces, 1)
     setup_pieces(brown.pawns, 2)
 
@@ -97,9 +98,7 @@ class Board
 
   def setup_pieces(pieces, rank)
     pieces.each_with_index do |piece, file|
-      next if file.zero?
-
-      setup_piece(rank, file, piece)
+      setup_piece(rank, file + 1, piece)
     end
   end
 

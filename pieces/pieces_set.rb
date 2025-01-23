@@ -7,11 +7,10 @@ require_relative "../pieces/king"
 
 # A PIECES SET TO PLAY A GAME
 class SetOfPieces
-  attr_accessor :pieces, :pawns
+  attr_accessor :set
 
   def initialize(color)
-    @pieces = [""]
-    @pawns = [""]
+    @set = []
     create_pieces(color)
   end
 
@@ -26,37 +25,45 @@ class SetOfPieces
     create_pawns(color)
   end
 
+  def pieces
+    set[0..7]
+  end
+
+  def pawns
+    set[8..15]
+  end
+
   private
 
   def create_pawns(color)
     counter = 0
     until counter == 8
       @pawn = Pawn.new("#{color}♟")
-      pawns << @pawn
+      set << @pawn
       counter += 1
     end
   end
 
   def create_rook(color)
     @rook = Rook.new("#{color}♜")
-    pieces << @rook
+    set << @rook
   end
 
   def create_knight(color)
     @knight = Knight.new("#{color}♞")
-    pieces << @knight
+    set << @knight
   end
 
   def create_bishop(color)
     @bishop = Bishop.new("#{color}♝")
-    pieces << @bishop
+    set << @bishop
   end
 
   def create_queen_and_king(color)
     @king = King.new("#{color}♚")
     @queen = Queen.new("#{color}♛")
 
-    pieces << @queen
-    pieces << @king
+    set << @queen
+    set << @king
   end
 end

@@ -4,7 +4,7 @@ require_relative "mod_utils"
 class Player
   include Utils
 
-  attr_accessor :name, :pieces
+  attr_accessor :name
 
   def initialize(name)
     @name = name
@@ -20,6 +20,16 @@ class Player
     puts "\n"
     select_piece
   end
+
+  def pieces(set)
+    set.each_with_index do |piece, index|
+      next if index.zero?
+
+      piece.player = self
+    end
+  end
+
+  private
 
   def convert_to_indices(coordinates)
     row_index = coordinates[1].to_i

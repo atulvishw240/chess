@@ -13,6 +13,11 @@ class Game
   end
 
   def play
+    board.setup_board
+    current_player.pieces(board.black.set)
+    opponent.pieces(board.brown.set)
+    coordinate = current_player.select_piece
+    p coordinate
   end
 
   def current_player
