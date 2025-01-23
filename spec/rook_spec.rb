@@ -54,4 +54,19 @@ describe Rook do
       expect(moves).to eq(possible_moves)
     end
   end
+
+  describe "#all_possible_moves for possible captures" do
+    it "returns all possible moves for [4, 5] and a capture at [7, 5]" do
+      color = "\e[38;5;160m"
+      rook2 = Rook.new("#{color}♜")
+      @board.update(4, 5, @rook)
+      @board.update(7, 5, rook2)
+
+      possible_moves = [[5, 5], [6, 5], [7, 5], [3, 5], [2, 5], [1, 5], [4, 4], [4, 3], [4, 2],
+                        [4, 1], [4, 6], [4, 7], [4, 8]]
+
+      moves = @rook.all_possible_moves(@board, 4, 5)
+      expect(moves).to eq(possible_moves)
+    end
+  end
 end
