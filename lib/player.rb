@@ -1,4 +1,4 @@
-require_relative "mod_utils"
+require_relative "modules/mod_utils"
 
 # PLAYER
 class Player

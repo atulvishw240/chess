@@ -1,8 +1,8 @@
 require_relative "piece"
-require_relative "../lib/mod_horizontal"
-require_relative "../lib/mod_vertical"
-require_relative "../lib/mod_diagonal"
-require_relative "../lib/mod_rev_diagonal"
+require_relative "../lib/modules/mod_horizontal"
+require_relative "../lib/modules/mod_vertical"
+require_relative "../lib/modules/mod_diagonal"
+require_relative "../lib/modules/mod_rev_diagonal"
 
 # KING
 class King < Piece
@@ -12,7 +12,6 @@ class King < Piece
   include ReverseDiagonal
 
   def move
-    
   end
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
@@ -31,7 +30,6 @@ class King < Piece
   end
 
   private
-
 
   def front(row_index, col_index)
     return [] if row_index == 8

@@ -1,5 +1,5 @@
-require_relative "mod_utils"
-require_relative "../pieces/pieces_set"
+require_relative "modules/mod_utils"
+require_relative "pieces_set"
 # GAME
 class Game
   include Utils
@@ -16,8 +16,6 @@ class Game
     board.setup_board
     current_player.pieces(board.black.set)
     opponent.pieces(board.brown.set)
-    coordinate = current_player.select_piece
-    p coordinate
   end
 
   def current_player

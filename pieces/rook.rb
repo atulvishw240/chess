@@ -1,6 +1,6 @@
 require_relative "piece"
-require_relative "../lib/mod_horizontal"
-require_relative "../lib/mod_vertical"
+require_relative "../lib/modules/mod_horizontal"
+require_relative "../lib//modules/mod_vertical"
 
 # ROOK
 class Rook < Piece

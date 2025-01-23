@@ -1,5 +1,5 @@
 require_relative "piece"
-require_relative "../lib/mod_utils"
+require_relative "../lib/modules/mod_utils"
 
 # KNIGHT
 class Knight < Piece

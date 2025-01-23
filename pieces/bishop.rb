@@ -1,7 +1,7 @@
 require_relative "piece"
 # require_relative "../lib/mod_utils"
-require_relative "../lib/mod_diagonal"
-require_relative "../lib/mod_rev_diagonal"
+require_relative "../lib/modules/mod_diagonal"
+require_relative "../lib//modules/mod_rev_diagonal"
 
 # BISHOP
 class Bishop < Piece
@@ -9,7 +9,6 @@ class Bishop < Piece
   include ReverseDiagonal
 
   def move
-    
   end
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------

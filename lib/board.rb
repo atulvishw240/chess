@@ -1,4 +1,4 @@
-require_relative "../pieces/pieces_set"
+require_relative "pieces_set"
 require_relative "square"
 # BOARD
 class Board

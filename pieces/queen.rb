@@ -1,9 +1,9 @@
 require_relative "../pieces/piece"
-require_relative "../lib/mod_utils"
-require_relative "../lib/mod_horizontal"
-require_relative "../lib/mod_vertical"
-require_relative "../lib/mod_diagonal"
-require_relative "../lib/mod_rev_diagonal"
+require_relative "../lib/modules/mod_utils"
+require_relative "../lib/modules/mod_horizontal"
+require_relative "../lib/modules/mod_vertical"
+require_relative "../lib/modules/mod_diagonal"
+require_relative "../lib/modules/mod_rev_diagonal"
 
 # QUEEN
 class Queen < Piece
