@@ -18,12 +18,12 @@ class Bishop < Piece
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
-  def all_possible_moves(row_index, col_index)
+  def all_possible_moves(board, row_index, col_index)
     positions = []
-    upper_right = upper_moves_right(row_index, col_index)
-    upper_left = upper_moves_left(row_index, col_index)
-    lower_right = lower_moves_right(row_index, col_index)
-    lower_left = lower_moves_left(row_index, col_index)
+    upper_right = upper_moves_right(board, row_index, col_index)
+    upper_left = upper_moves_left(board, row_index, col_index)
+    lower_right = lower_moves_right(board, row_index, col_index)
+    lower_left = lower_moves_left(board, row_index, col_index)
 
     positions.concat(upper_right).concat(upper_left)
              .concat(lower_right).concat(lower_left)

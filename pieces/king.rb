@@ -22,65 +22,65 @@ class King < Piece
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
   # private
-  def all_possible_moves(row_index, col_index)
+  def all_possible_moves(board, row_index, col_index)
     moves = []
-    moves.concat(front(row_index, col_index))
-         .concat(back(row_index, col_index))
-         .concat(right(row_index, col_index))
-         .concat(left(row_index, col_index))
-         .concat(upper_right(row_index, col_index))
-         .concat(upper_left(row_index, col_index))
-         .concat(lower_right(row_index, col_index))
-         .concat(lower_left(row_index, col_index))
+    moves.concat(front(board, row_index, col_index))
+         .concat(back(board, row_index, col_index))
+         .concat(right(board, row_index, col_index))
+         .concat(left(board, row_index, col_index))
+         .concat(upper_right(board, row_index, col_index))
+         .concat(upper_left(board, row_index, col_index))
+         .concat(lower_right(board, row_index, col_index))
+         .concat(lower_left(board, row_index, col_index))
   end
 
   private
 
-  def front(row_index, col_index)
+  def front(board, row_index, col_index)
     return [] if row_index == 8
 
-    vertical_moves_forward(row_index, col_index, row_index + 1)
+    vertical_moves_forward(board, row_index, col_index, row_index + 1)
   end
 
-  def back(row_index, col_index)
+  def back(board, row_index, col_index)
     return [] if row_index == 1
 
-    vertical_moves_backward(row_index, col_index, row_index - 1)
+    vertical_moves_backward(board, row_index, col_index, row_index - 1)
   end
 
-  def left(row_index, col_index)
+  def left(board, row_index, col_index)
     return [] if col_index == 1
 
-    horizontal_moves_left(row_index, col_index, col_index - 1)
+    horizontal_moves_left(board, row_index, col_index, col_index - 1)
   end
 
-  def right(row_index, col_index)
+  def right(board, row_index, col_index)
     return [] if col_index == 8
 
-    horizontal_moves_right(row_index, col_index, col_index + 1)
+    horizontal_moves_right(board, row_index, col_index, col_index + 1)
   end
 
-  def upper_right(row_index, col_index)
+  def upper_right(board, row_index, col_index)
     return [] if row_index == 8
 
-    upper_moves_right(row_index, col_index, row_index + 1)
+    upper_moves_right(board, row_index, col_index, row_index + 1)
   end
 
-  def upper_left(row_index, col_index)
+  def upper_left(board, row_index, col_index)
     return [] if row_index == 8
 
-    upper_moves_left(row_index, col_index, row_index + 1)
+    upper_moves_left(board, row_index, col_index, row_index + 1)
   end
 
-  def lower_right(row_index, col_index)
+  def lower_right(board, row_index, col_index)
     return [] if row_index == 1
 
-    lower_moves_right(row_index, col_index, row_index - 1)
+    lower_moves_right(board, row_index, col_index, row_index - 1)
   end
 
-  def lower_left(row_index, col_index)
+  def lower_left(board, row_index, col_index)
     return [] if row_index == 1
 
-    lower_moves_left(row_index, col_index, row_index - 1)
+    lower_moves_left(board, row_index, col_index, row_index - 1)
   end
 end

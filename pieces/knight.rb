@@ -32,7 +32,7 @@ class Knight < Piece
     positions
   end
 
-  # Assuming knight to be at coordinats (0, 0)
+  # Assuming knight to be at coordinates (0, 0)
   # [row_index-coordinate, file_coordinate]
   def possible_coordinates_from_origin
     upper = [[2, 1], [2, -1]]

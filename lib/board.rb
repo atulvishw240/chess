@@ -122,7 +122,7 @@ class Board
   end
 
   def belongs_to_board(pieces)
-    pieces.each do |piece|
+    pieces.set.each do |piece|
       piece.board = self
     end
   end

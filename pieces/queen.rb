@@ -21,15 +21,16 @@ class Queen < Piece
   def move
   end
 
-  def all_possible_moves(row_index, col_index)
-    front = vertical_moves_forward(row_index, col_index)
-    back = vertical_moves_backward(row_index, col_index)
-    right = horizontal_moves_right(row_index, col_index)
-    left = horizontal_moves_left(row_index, col_index)
-    diagonal = upper_moves_left(row_index, col_index)
-               .concat(lower_moves_right(row_index, col_index))
-    rev_diagonal = upper_moves_right(row_index, col_index)
-                   .concat(lower_moves_left(row_index, col_index))
+  def all_possible_moves(board, row_index, col_index)
+    front = vertical_moves_forward(board, row_index, col_index)
+    back = vertical_moves_backward(board, row_index, col_index)
+    right = horizontal_moves_right(board, row_index, col_index)
+    left = horizontal_moves_left(board, row_index, col_index)
+
+    diagonal = upper_moves_left(board, row_index, col_index)
+               .concat(lower_moves_right(board, row_index, col_index))
+    rev_diagonal = upper_moves_right(board, row_index, col_index)
+                   .concat(lower_moves_left(board, row_index, col_index))
 
     front.concat(back).concat(right).concat(left)
          .concat(diagonal).concat(rev_diagonal)

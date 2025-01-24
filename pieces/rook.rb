@@ -13,9 +13,10 @@ class Rook < Piece
   end
 
   def move
-    row_index = rank
-    col_index = file
-    moves = all_possible_moves(row_index, col_index)
+    row_index = self.row_index
+    col_index = self.col_index
+    board = self.board
+    moves = all_possible_moves(board, row_index, col_index)
   end
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
