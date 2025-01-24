@@ -10,12 +10,10 @@ class Board
   attr_accessor :board, :black, :brown
 
   def initialize
-    @black = SetOfPieces.new(BLACK_FOREGROUND)
-    @brown = SetOfPieces.new(BROWN_FOREGROUND)
-    belongs_to_board(@black)
-    belongs_to_board(@brown)
     # Ignore 0 based index for simplicity
     @board = Array.new(9) { Array.new(9) { Square.new } }
+    @black = SetOfPieces.new(BLACK_FOREGROUND)
+    @brown = SetOfPieces.new(BROWN_FOREGROUND)
   end
 
   def display
@@ -113,12 +111,6 @@ class Board
 
       square = get_square(row_index, col_index)
       square.color = PURPLE_BACKGROUND
-    end
-  end
-
-  def belongs_to_board(pieces)
-    pieces.set.each do |piece|
-      piece.board = self
     end
   end
 end

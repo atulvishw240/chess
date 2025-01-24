@@ -1,6 +1,6 @@
 # Piece
 class Piece
-  attr_accessor :board, :color, :row_index, :col_index
+  attr_accessor :color, :row_index, :col_index
   attr_reader :unicode
 
   def initialize(color)
@@ -11,13 +11,13 @@ class Piece
   def capture; end
   def all_possible_moves; end
 
-  def all_possible_captures(moves)
+  def all_possible_captures(board, moves)
     moves.select do |move|
-      capture?(move)
+      capture?(board, move)
     end
   end
 
-  def capture?(move)
+  def capture?(board, move)
     row_index = move[0]
     col_index = move[1]
     square = board.get_square(row_index, col_index)

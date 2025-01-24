@@ -38,32 +38,32 @@ class SetOfPieces
   def create_pawns(color)
     counter = 0
     until counter == 8
-      @pawn = Pawn.new(color)
-      set << @pawn
+      pawn = Pawn.new(color)
+      set << pawn
       counter += 1
     end
   end
 
   def create_rook(color)
-    @rook = Rook.new(color)
-    set << @rook
+    rook = Rook.new(color)
+    set << rook
   end
 
   def create_knight(color)
-    @knight = Knight.new(color)
-    set << @knight
+    knight = Knight.new(color)
+    set << knight
   end
 
   def create_bishop(color)
-    @bishop = Bishop.new(color)
-    set << @bishop
+    bishop = Bishop.new(color)
+    set << bishop
   end
 
   def create_queen_and_king(color)
-    @king = King.new(color)
-    @queen = Queen.new(color)
+    king = King.new(color)
+    queen = Queen.new(color)
 
-    set << @queen
-    set << @king
+    set << queen
+    set << king
   end
 end
