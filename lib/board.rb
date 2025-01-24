@@ -1,18 +1,11 @@
 require_relative "modules/mod_utils"
+require_relative "modules/mod_colorable"
 require_relative "pieces_set"
 require_relative "square"
 # BOARD
 class Board
   include Utils
-
-  RESET_TERMINAL = "\e[0m".freeze
-  DARK_YELLOW_FOREGROUND = "\e[1;33m".freeze
-  BLACK_FOREGROUND = "\e[30m".freeze
-  BROWN_FOREGROUND = "\e[38;5;160m".freeze
-  WHITE_BACKGROUND = "\e[47m".freeze
-  CYAN_BACKGROUND = "\e[48;5;45m".freeze
-  PURPLE_BACKGROUND = "\e[48;5;141m".freeze
-  MARKER = "\e[90m\u{25CF}".freeze
+  include Colorable
 
   attr_accessor :board, :black, :brown
 
