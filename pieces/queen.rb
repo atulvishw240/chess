@@ -13,6 +13,11 @@ class Queen < Piece
   include Diagonal
   include ReverseDiagonal
 
+  def initialize(color)
+    @unicode = "\u{265B}"
+    super
+  end
+
   def move
   end
 

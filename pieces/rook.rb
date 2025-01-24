@@ -7,6 +7,11 @@ class Rook < Piece
   include Horizontal
   include Vertical
 
+  def initialize(color)
+    @unicode = "\u{265C}"
+    super
+  end
+
   def move
     row_index = rank
     col_index = file

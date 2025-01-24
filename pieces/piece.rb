@@ -1,10 +1,10 @@
 # Piece
 class Piece
-  attr_accessor :player, :row_index, :col_index
+  attr_accessor :color, :row_index, :col_index
   attr_reader :unicode
 
-  def initialize(unicode)
-    @unicode = unicode
+  def initialize(color)
+    @color = color
   end
 
   def move; end

@@ -5,6 +5,11 @@ require_relative "../lib/modules/mod_utils"
 class Knight < Piece
   include Utils
 
+  def initialize(color)
+    @unicode = "\u{265E}"
+    super
+  end
+
   def move
   end
 

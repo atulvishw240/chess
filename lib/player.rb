@@ -4,7 +4,7 @@ require_relative "modules/mod_utils"
 class Player
   include Utils
 
-  attr_accessor :name
+  attr_accessor :name, :pieces
 
   def initialize(name)
     @name = name
@@ -19,14 +19,6 @@ class Player
     puts "Error, Try again!!"
     puts "\n"
     select_piece
-  end
-
-  def pieces(set)
-    set.each_with_index do |piece, index|
-      next if index.zero?
-
-      piece.player = self
-    end
   end
 
   private

@@ -13,14 +13,21 @@ class Game
   end
 
   def play
-    # 1.Set up the Board
-    # 2.Assign pieces set to players
-    # 3.Player1 will get first turn
-    #   3.1 Player1 will select a piece
-    #   3.2 He'll be displayed all possible moves for that particular piece
-    #   3.3 He'll then select one of the possible move
-    #   3.4 The piece will then move to the position selected by player
-    # 4.It's Player2 turn (He'll do the same)
+    board.setup_board
+    current_player.pieces = board.black
+    opponent.pieces = board.brown
+
+    selection = current_player.select_piece
+    row_index = selection[0]
+    col_index = selection[1]
+
+    square = board.get_square(row_index, col_index)
+    piece = square.element
+
+    possible_moves = piece.all_possible_moves(board, row_index, col_index)
+    p possible_moves
+
+    board.display_markers(possible_moves)
   end
 
   def current_player

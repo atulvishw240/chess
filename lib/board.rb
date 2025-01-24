@@ -88,10 +88,10 @@ class Board
 
   def setup_board
     setup_pieces(black.pieces, 8)
-    setup_pieces(black.pawns, 7)
+    # setup_pieces(black.pawns, 7)
 
     setup_pieces(brown.pieces, 1)
-    setup_pieces(brown.pawns, 2)
+    # setup_pieces(brown.pawns, 2)
 
     display
   end

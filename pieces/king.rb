@@ -11,6 +11,11 @@ class King < Piece
   include Diagonal
   include ReverseDiagonal
 
+  def initialize(color)
+    @unicode = "\u{265A}"
+    super
+  end
+
   def move
   end
 
