@@ -14,7 +14,7 @@ class Knight < Piece
   end
 
   # A knight make four T's (upper, lower, right, left)
-  def all_possible_moves(row_index, col_index)
+  def all_possible_moves(board, row_index, col_index)
     positions = []
     coords = possible_coordinates_from_origin
 

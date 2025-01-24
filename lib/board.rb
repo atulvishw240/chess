@@ -1,13 +1,17 @@
+require_relative "modules/mod_utils"
 require_relative "pieces_set"
 require_relative "square"
 # BOARD
 class Board
+  include Utils
+
   RESET_TERMINAL = "\e[0m".freeze
   DARK_YELLOW_FOREGROUND = "\e[1;33m".freeze
   BLACK_FOREGROUND = "\e[30m".freeze
   BROWN_FOREGROUND = "\e[38;5;160m".freeze
   WHITE_BACKGROUND = "\e[47m".freeze
   CYAN_BACKGROUND = "\e[48;5;45m".freeze
+  PURPLE_BACKGROUND = "\e[48;5;141m".freeze
   MARKER = "\e[90m\u{25CF}".freeze
 
   attr_accessor :board, :black, :brown
@@ -59,10 +63,6 @@ class Board
     board[row_index][col_index]
   end
 
-  def sum(row_index, col_index)
-    row_index + col_index
-  end
-
   def assign_color_to_square(square, sum)
     return unless square.color.nil?
 
@@ -77,15 +77,6 @@ class Board
   def print_files
     files = "a  b  c  d  e  f  g  h"
     puts DARK_YELLOW_FOREGROUND + inline_space(3) + files + RESET_TERMINAL
-  end
-
-  def inline_space(number)
-    spaces = ""
-    number.times do
-      spaces += " "
-    end
-
-    spaces
   end
 
   def setup_board
@@ -115,10 +106,21 @@ class Board
       row_index = position[0]
       col_index = position[1]
 
-      update(row_index, col_index, MARKER)
+      square = get_square(row_index, col_index)
+      update(row_index, col_index, MARKER) unless square.contains_piece?
     end
 
     display
+  end
+
+  def display_captures(positions)
+    positions.each do |position|
+      row_index = position[0]
+      col_index = position[1]
+
+      square = get_square(row_index, col_index)
+      square.color = PURPLE_BACKGROUND
+    end
   end
 
   def belongs_to_board(pieces)

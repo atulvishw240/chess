@@ -28,6 +28,10 @@ class Game
     p possible_moves
 
     board.display_markers(possible_moves)
+    possible_captures = piece.all_possible_captures(possible_moves)
+    p possible_captures
+    board.display_captures(possible_captures)
+    board.display
   end
 
   def current_player

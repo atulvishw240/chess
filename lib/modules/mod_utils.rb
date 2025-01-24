@@ -9,4 +9,17 @@ module Utils
   def int_to_file(integer)
     FILES[integer]
   end
+
+  def sum(num1, num2)
+    num1 + num2
+  end
+
+  def inline_space(number)
+    spaces = ""
+    number.times do
+      spaces += " "
+    end
+
+    spaces
+  end
 end
