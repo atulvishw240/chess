@@ -15,6 +15,8 @@ class Board
   def initialize
     @black = SetOfPieces.new(BLACK_FOREGROUND)
     @brown = SetOfPieces.new(BROWN_FOREGROUND)
+    belongs_to_board(@black)
+    belongs_to_board(@brown)
     # Ignore 0 based index for simplicity
     @board = Array.new(9) { Array.new(9) { Square.new } }
   end
@@ -117,5 +119,11 @@ class Board
     end
 
     display
+  end
+
+  def belongs_to_board(pieces)
+    pieces.each do |piece|
+      piece.board = self
+    end
   end
 end

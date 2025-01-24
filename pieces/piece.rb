@@ -1,6 +1,6 @@
 # Piece
 class Piece
-  attr_accessor :color, :row_index, :col_index
+  attr_accessor :board, :color, :row_index, :col_index
   attr_reader :unicode
 
   def initialize(color)
