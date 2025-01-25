@@ -14,28 +14,40 @@ class Player
     puts "Enter the coordinates of a piece in the format [e4 i.e. file followed by rank & without space]: "
     coordinates = gets.chomp.chars
 
-    return convert_to_indices(coordinates) if valid?(coordinates)
+    return coordinates if valid_coordinates?(coordinates)
 
-    puts "Error, Try again!!"
-    puts "\n"
+    display_error_message
     select_piece
   end
 
-  private
+  def select_move(possible_moves)
+    puts "Enter the coordinates where you would like to move your selected piece to [Like d6]: "
+    move = gets.chomp.chars
 
-  def convert_to_indices(coordinates)
-    row_index = coordinates[1].to_i
-    col_index = file_to_int(coordinates[0])
+    return move if valid_move?(move, possible_moves)
 
-    [row_index, col_index]
+    display_error_message
+    select_move
   end
 
-  def valid?(coordinates)
+  #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
+  private
+
+  def valid_coordinates?(coordinates)
     return false unless coordinates.length == 2
 
     file = coordinates[0]
     rank = coordinates[1].to_i
 
     true if file.between?("a", "h") && rank.between?(1, 8)
+  end
+
+  def valid_move?(move, possible_moves)
+    possible_moves.include?(move)
+  end
+
+  def display_error_message
+    puts "Entered Invalid coordinates, Please Try again!!"
+    puts "\n"
   end
 end

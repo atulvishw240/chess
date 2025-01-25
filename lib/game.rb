@@ -1,5 +1,5 @@
 require_relative "modules/mod_utils"
-require_relative "pieces_set"
+
 # GAME
 class Game
   include Utils
