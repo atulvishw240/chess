@@ -1,4 +1,4 @@
-require_relative "piece"
+require_relative "../lib/piece"
 # require_relative "../lib/mod_utils"
 require_relative "../lib/modules/mod_diagonal"
 require_relative "../lib//modules/mod_rev_diagonal"

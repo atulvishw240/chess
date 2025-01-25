@@ -14,6 +14,7 @@ class Board
     @board = Array.new(9) { Array.new(9) { Square.new } }
     @black = SetOfPieces.new(BLACK_FOREGROUND)
     @brown = SetOfPieces.new(BROWN_FOREGROUND)
+    setup
   end
 
   def display
@@ -34,24 +35,23 @@ class Board
     print_files
   end
 
-  def update(row_index, col_index, piece_or_marker)
+  def update(row_index, col_index, update_with)
     square = get_square(row_index, col_index)
-    square.element = piece_or_marker
-  end
-
-  #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
-  # private
-
-  def print_chess_square(row_index, col_index)
-    square = get_square(row_index, col_index)
-    sum = sum(row_index, col_index)
-
-    assign_color_to_square(square, sum)
-    print "#{square.color} #{square} #{RESET_TERMINAL}"
+    square.element = update_with
   end
 
   def get_square(row_index, col_index)
     board[row_index][col_index]
+  end
+
+  #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
+  private
+
+  def print_chess_square(row_index, col_index)
+    square = get_square(row_index, col_index)
+    sum = sum(row_index, col_index)
+    assign_color_to_square(square, sum)
+    print "#{square.color} #{square} #{RESET_TERMINAL}"
   end
 
   def assign_color_to_square(square, sum)
@@ -70,7 +70,10 @@ class Board
     puts DARK_YELLOW_FOREGROUND + inline_space(3) + files + RESET_TERMINAL
   end
 
-  def setup_board
+  # IS SE UPAR SAB SAHI HAI
+  # ISKE NEECHE SE DEKHO
+
+  def setup
     setup_pieces(black.pieces, 8)
     # setup_pieces(black.pawns, 7)
 

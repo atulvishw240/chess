@@ -1,4 +1,4 @@
-require_relative "piece"
+require_relative "../lib/piece"
 require_relative "../lib/modules/mod_utils"
 
 # KNIGHT

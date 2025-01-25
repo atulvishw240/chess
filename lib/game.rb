@@ -13,7 +13,6 @@ class Game
   end
 
   def play
-    board.setup_board
     current_player.pieces = board.black
     opponent.pieces = board.brown
 

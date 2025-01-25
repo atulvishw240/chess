@@ -1,4 +1,4 @@
-require_relative "piece"
+require_relative "../lib/piece"
 # PAWN
 class Pawn < Piece
   def initialize(color)
