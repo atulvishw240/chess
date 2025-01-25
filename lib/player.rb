@@ -4,7 +4,7 @@ require_relative "modules/mod_utils"
 class Player
   include Utils
 
-  attr_accessor :name, :pieces
+  attr_accessor :name, :color
 
   def initialize(name)
     @name = name
