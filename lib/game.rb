@@ -13,9 +13,6 @@ class Game
   end
 
   def play
-    current_player.pieces = board.black
-    opponent.pieces = board.brown
-
     selection = current_player.select_piece
     row_index = selection[0]
     col_index = selection[1]
@@ -24,12 +21,13 @@ class Game
     piece = square.element
 
     possible_moves = piece.all_possible_moves(board, row_index, col_index)
-    p possible_moves
+    p "Possible moves: #{possible_moves}"
 
-    board.display_markers(possible_moves)
+    board.markers = possible_moves
     possible_captures = piece.all_possible_captures(board, possible_moves)
-    p possible_captures
-    board.display_captures(possible_captures)
+    puts "Possible captures: #{possible_captures}"
+
+    board.captures = possible_captures
     board.display
   end
 

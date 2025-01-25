@@ -1,6 +1,6 @@
 # Piece
 class Piece
-  attr_accessor :color, :row_index, :col_index
+  attr_accessor :color, :row, :col
   attr_reader :unicode
 
   def initialize(color)
@@ -10,6 +10,11 @@ class Piece
   def move; end
   def capture; end
   def all_possible_moves; end
+
+  def update_position(row_index, col_index)
+    self.row = row_index
+    self.col = col_index
+  end
 
   def all_possible_captures(board, moves)
     moves.select do |move|
