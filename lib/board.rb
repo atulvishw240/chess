@@ -21,10 +21,9 @@ class Board
   end
 
   def display
-    update_board_with_pieces(black.pieces)
-    update_board_with_pieces(brown.pieces)
-    update_board_with_markers
-    update_board_with_captures
+    update_state(black.set, brown.set)
+    update_with_markers
+    update_with_captures
 
     print_board
   end
@@ -41,17 +40,36 @@ class Board
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
   private
 
-  def update_board_with_pieces(pieces)
+  def setup
+    assign_start_positions(black.set[0..7], 8)
+    assign_start_positions(black.set[8..15], 7)
+
+    assign_start_positions(brown.set[0..7], 1)
+    assign_start_positions(brown.set[8..15], 2)
+  end
+
+  def assign_start_positions(pieces, row_index)
+    pieces.each_with_index do |piece, col_index|
+      # col_index + 1 to offset our index to 1th index based Board
+      piece.update_position(row_index, col_index + 1)
+    end
+  end
+
+  def update_state(black, brown)
+    update_with_pieces(black)
+    update_with_pieces(brown)
+  end
+
+  def update_with_pieces(pieces)
     pieces.each do |piece|
       row_index = piece.row
       col_index = piece.col
 
-      square = get_square(row_index, col_index)
-      square.element = piece
+      update(row_index, col_index, piece)
     end
   end
 
-  def update_board_with_markers
+  def update_with_markers
     return if markers.empty?
 
     markers.each do |position|
@@ -63,7 +81,7 @@ class Board
     end
   end
 
-  def update_board_with_captures
+  def update_with_captures
     return if captures.empty?
 
     captures.each do |position|
@@ -93,10 +111,15 @@ class Board
     print_files
   end
 
+  def print_ranks(rank)
+    print DARK_YELLOW_FOREGROUND + rank.to_s + inline_space(1) + RESET_TERMINAL
+  end
+
   def print_chess_square(row_index, col_index)
     square = get_square(row_index, col_index)
     sum = sum(row_index, col_index)
     assign_color_to_square(square, sum)
+
     print "#{square.color} #{square} #{RESET_TERMINAL}"
   end
 
@@ -107,32 +130,8 @@ class Board
     square.color = background
   end
 
-  def print_ranks(rank)
-    print DARK_YELLOW_FOREGROUND + rank.to_s + inline_space(1) + RESET_TERMINAL
-  end
-
   def print_files
     files = "a  b  c  d  e  f  g  h"
     puts DARK_YELLOW_FOREGROUND + inline_space(3) + files + RESET_TERMINAL
-  end
-
-  def setup
-    assign_positions_to_pieces(black.pieces, 8)
-    update_board_with_pieces(black.pieces)
-    # assign_positions_to_pieces(black.pawns, 7)
-
-    assign_positions_to_pieces(brown.pieces, 1)
-    update_board_with_pieces(brown.pieces)
-    assign_positions_to_pieces(brown.pawns, 7)
-    update_board_with_pieces(brown.pawns)
-
-    display
-  end
-
-  def assign_positions_to_pieces(pieces, row_index)
-    pieces.each_with_index do |piece, col_index|
-      # col_index + 1 to offset our index to 1th index based Board
-      piece.update_position(row_index, col_index + 1)
-    end
   end
 end
