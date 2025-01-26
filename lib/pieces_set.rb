@@ -25,14 +25,6 @@ class SetOfPieces
     create_pawns(color)
   end
 
-  def pieces
-    set[0..7]
-  end
-
-  def pawns
-    set[8..15]
-  end
-
   private
 
   def create_pawns(color)
