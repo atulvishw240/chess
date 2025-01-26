@@ -25,6 +25,15 @@ class SetOfPieces
     create_pawns(color)
   end
 
+  def delete_piece_at(row_index, col_index)
+    set.each do |piece|
+      row = piece.row
+      col = piece.col
+
+      set.delete(piece) if row_index == row && col_index == col
+    end
+  end
+
   private
 
   def create_pawns(color)
