@@ -13,22 +13,15 @@ class Game
   end
 
   def play
-    selection = current_player.select_piece
-    row_index = selection[0]
-    col_index = selection[1]
-
-    square = board.get_square(row_index, col_index)
-    piece = square.element
-
-    possible_moves = piece.all_possible_moves(board, row_index, col_index)
-    p "Possible moves: #{possible_moves}"
-
-    board.markers = possible_moves
-    possible_captures = piece.all_possible_captures(board, possible_moves)
-    puts "Possible captures: #{possible_captures}"
-
-    board.captures = possible_captures
-    board.display
+    # 1. Assign pieces to Players (Black or Brown)
+    # 2. Display Board
+    # 3. Brown Player will always make a first move
+    # 4. Player selects a piece
+    # 5. Player decides the coordinates for this selected piece (capture or simple move)
+    # 6. If entered coordinates has a capture then remove the captured piece from the opponent's
+    # set of pieces. Update your piece position.
+    # 7. For simple move coordinates just update your piece coordinates.
+    # 8. Alternate turns between Black and Brown unless game ends in draw or someone eventually wins.
   end
 
   def current_player
