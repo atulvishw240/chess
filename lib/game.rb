@@ -45,11 +45,13 @@ class Game
     board.display
   end
 
-  def assign_pieces_and_display_board
+  def assign_color_to_players
     current_player.color = BROWN_FOREGROUND
     opponent.color = BLACK_FOREGROUND
+  end
 
-    board.display
+  def capture_at?(move)
+    board.captures.include?(move)
   end
 
   def current_player

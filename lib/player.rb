@@ -10,27 +10,26 @@ class Player
     @name = name
   end
 
-  def select_piece
+  def select_piece(options)
     puts "Enter the coordinates of a piece in the format [e4 i.e. file followed by rank & without space]: "
-    coordinates = gets.chomp.chars
+    input = gets.chomp.chars
+    coordinates = convert_to_indices(input) if valid_coordinates?(input)
 
-    return convert_to_indices(coordinates) if valid_coordinates?(coordinates)
+    return coordinates if options.include?(coordinates)
 
     display_error_message
     select_piece
   end
 
-  def select_move(possible_moves)
-    puts "Enter the coordinates where you would like to move your selected piece to [Like d6]: "
-    move = gets.chomp.chars
+  def make_move(moves, captures)
+    puts "Enter the coordinates, where you would like your piece to move [Like d6]: "
+    input = gets.chomp.chars
+    move = convert_to_indices(input) if valid_coordinates?(input)
 
-    if valid_coordinates?(move)
-      move = convert_to_indices(move)
-      return move if valid_move?(move, possible_moves)
-    end
+    return move if valid_move?(move, moves, captures)
 
     display_error_message
-    select_move(possible_moves)
+    select_move(moves, captures)
   end
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
@@ -45,8 +44,8 @@ class Player
     true if file.between?("a", "h") && rank.between?(1, 8)
   end
 
-  def valid_move?(move, possible_moves)
-    possible_moves.include?(move)
+  def valid_move?(move, moves, captures)
+    moves.include?(move) || captures.include?(move)
   end
 
   def display_error_message
