@@ -1,5 +1,9 @@
+require_relative "modules/mod_colorable"
+
 # Piece
 class Piece
+  include Colorable
+
   attr_accessor :color, :row, :col
   attr_reader :unicode
 
@@ -30,6 +34,33 @@ class Piece
   def all_possible_captures(board, moves)
     moves.select do |move|
       capture?(board, move)
+    end
+  end
+
+  def display_possible_actions(board, moves, captures)
+    display_markers(board, moves)
+    display_captures(board, captures)
+  end
+
+  #------------------------------ALL PRIVATE METHODS ARE BELOW---------------------------
+  private
+
+  def display_markers(board, moves)
+    moves.each do |move|
+      row_index = move[0]
+      col_index = move[1]
+
+      board.update(row_index, col_index, MARKER)
+    end
+  end
+
+  def display_captures(board, captures)
+    captures.each do |capture|
+      row_index = capture[0]
+      col_index = capture[1]
+
+      square = board.get_square(row_index, col_index)
+      square.color = PURPLE_BACKGROUND
     end
   end
 
