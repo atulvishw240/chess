@@ -22,8 +22,11 @@ class King < Piece
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
   # private
-  def all_possible_moves(board, row_index, col_index)
+  def all_possible_moves(board)
     moves = []
+    row_index = row
+    col_index = col
+
     moves.concat(front(board, row_index, col_index))
          .concat(back(board, row_index, col_index))
          .concat(right(board, row_index, col_index))

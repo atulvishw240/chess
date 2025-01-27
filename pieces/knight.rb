@@ -14,8 +14,11 @@ class Knight < Piece
   end
 
   # A knight make four T's (upper, lower, right, left)
-  def all_possible_moves(board, row_index, col_index)
+  def all_possible_moves(board)
     positions = []
+    row_index = row
+    col_index = col
+
     coords = possible_coordinates_from_origin
 
     coords.each do |coord|

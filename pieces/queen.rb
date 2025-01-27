@@ -21,7 +21,10 @@ class Queen < Piece
   def move
   end
 
-  def all_possible_moves(board, row_index, col_index)
+  def all_possible_moves(board)
+    row_index = row
+    col_index = col
+
     front = vertical_moves_forward(board, row_index, col_index)
     back = vertical_moves_backward(board, row_index, col_index)
     right = horizontal_moves_right(board, row_index, col_index)
