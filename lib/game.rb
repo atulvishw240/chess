@@ -27,6 +27,9 @@ class Game
     piece = square.element
     # 5. Player decides the coordinates for this selected piece (capture or simple move)
     possible_moves = piece.all_possible_moves(board, selection[0], selection[1])
+    board.markers = possible_moves
+    board.captures = piece.all_possible_captures(board, possible_moves)
+    board.display
     # 6. If entered coordinates has a capture then remove the captured piece from the opponent's
     # set of pieces. Update your piece position.
     # 7. For simple move coordinates just update your piece coordinates.

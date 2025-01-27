@@ -2,8 +2,9 @@ require_relative "modules/mod_utils"
 require_relative "modules/mod_colorable"
 require_relative "pieces_set"
 require_relative "square"
+
 # BOARD
-class Board
+class Board # rubocop:disable Metrics/ClassLength
   include Utils
   include Colorable
 
@@ -26,6 +27,7 @@ class Board
     update_with_captures
 
     print_board
+    clean_markers_and_captures
   end
 
   def update(row_index, col_index, update_with)
@@ -41,9 +43,11 @@ class Board
   private
 
   def setup
+    # BLACK PIECES
     assign_start_positions(black.set[0..7], 8)
     assign_start_positions(black.set[8..15], 4)
 
+    # BROWN PIECES
     assign_start_positions(brown.set[0..7], 1)
     assign_start_positions(brown.set[8..15], 3)
   end
@@ -133,5 +137,22 @@ class Board
   def print_files
     files = "a  b  c  d  e  f  g  h"
     puts DARK_YELLOW_FOREGROUND + inline_space(3) + files + RESET_TERMINAL
+  end
+
+  def clean_markers_and_captures
+    clean(markers)
+    clean(captures)
+
+    self.markers = []
+    self.captures = []
+  end
+
+  def clean(markers_or_captures)
+    markers_or_captures.each do |marker_or_capture|
+      row_index = marker_or_capture[0]
+      col_index = marker_or_capture[1]
+
+      update(row_index, col_index, " ")
+    end
   end
 end
