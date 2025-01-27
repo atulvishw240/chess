@@ -24,10 +24,13 @@ class Player
     puts "Enter the coordinates where you would like to move your selected piece to [Like d6]: "
     move = gets.chomp.chars
 
-    return convert_to_indices(move) if valid_move?(move, possible_moves)
+    if valid_coordinates?(move)
+      move = convert_to_indices(move)
+      return move if valid_move?(move, possible_moves)
+    end
 
     display_error_message
-    select_move
+    select_move(possible_moves)
   end
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
@@ -43,10 +46,11 @@ class Player
   end
 
   def valid_move?(move, possible_moves)
-    valid_coords = valid_coordinates?(move)
-    valid_move = possible_moves.include?(move)
+    # valid_coords = valid_coordinates?(move)
+    # valid_move = possible_moves.include?(move)
+    possible_moves.include?(move)
 
-    valid_coords && valid_move
+    # valid_coords && valid_move
   end
 
   def display_error_message

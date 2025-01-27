@@ -42,10 +42,10 @@ class Board
 
   def setup
     assign_start_positions(black.set[0..7], 8)
-    assign_start_positions(black.set[8..15], 7)
+    assign_start_positions(black.set[8..15], 4)
 
     assign_start_positions(brown.set[0..7], 1)
-    assign_start_positions(brown.set[8..15], 2)
+    assign_start_positions(brown.set[8..15], 3)
   end
 
   def assign_start_positions(pieces, row_index)
