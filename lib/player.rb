@@ -46,11 +46,7 @@ class Player
   end
 
   def valid_move?(move, possible_moves)
-    # valid_coords = valid_coordinates?(move)
-    # valid_move = possible_moves.include?(move)
     possible_moves.include?(move)
-
-    # valid_coords && valid_move
   end
 
   def display_error_message

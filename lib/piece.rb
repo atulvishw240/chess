@@ -8,7 +8,6 @@ class Piece
   end
 
   def move; end
-  def capture; end
   def all_possible_moves; end
 
   def update_position(row_index, col_index)
