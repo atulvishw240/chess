@@ -6,6 +6,10 @@ class Square
     @element = " "
   end
 
+  def empty?
+    element == " "
+  end
+
   def contains_piece?
     element.is_a?(Piece)
   end

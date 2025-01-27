@@ -8,7 +8,19 @@ class Piece
   end
 
   def move; end
-  def all_possible_moves; end
+  def all_possible_moves(board); end
+
+  # Exclude squares which has a piece from all_possible_moves
+  def useful_moves(board)
+    moves = all_possible_moves(board)
+    moves.select do |move|
+      row_index = move[0]
+      col_index = move[1]
+
+      square = board.get_square(row_index, col_index)
+      square.empty?
+    end
+  end
 
   def update_position(row_index, col_index)
     self.row = row_index
@@ -28,8 +40,7 @@ class Piece
 
     if square.contains_piece?
       piece = square.element
-      piece_color = piece.color
-      true unless piece_color == color
+      true unless piece.color == color
     else
       false
     end
