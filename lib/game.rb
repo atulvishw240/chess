@@ -32,10 +32,7 @@ class Game
     # 7. For simple move coordinates just update your piece coordinates.
     move = current_player.make_move(moves, captures)
 
-    row_index = move[0]
-    col_index = move[1]
-
-    piece.move(row_index, col_index)
+    piece.move(move)
     # 8. Alternate turns between Black and Brown unless game ends in draw or someone eventually wins.
 
     board.display

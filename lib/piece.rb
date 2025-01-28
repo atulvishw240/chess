@@ -25,7 +25,10 @@ class Piece
     end
   end
 
-  def move(row_index, col_index)
+  def move(coordinates)
+    row_index = coordinates[0]
+    col_index = coordinates[1]
+
     # Update where your piece was with " "
     square = board.get_square(row, col)
     square.element = " "
