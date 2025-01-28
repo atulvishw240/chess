@@ -4,13 +4,14 @@ require_relative "modules/mod_utils"
 class Player
   include Utils
 
-  attr_accessor :name, :color
+  attr_accessor :name, :set_of_pieces
 
   def initialize(name)
     @name = name
   end
 
-  def select_piece(options)
+  def select_piece
+    options = options_for_selection
     puts "Enter the coordinates of a piece in the format [e4 i.e. file followed by rank & without space]: "
     input = gets.chomp.chars
     coordinates = convert_to_indices(input) if valid_coordinates?(input)
@@ -34,6 +35,18 @@ class Player
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
   private
+
+  def options_for_selection
+    selections = []
+    set_of_pieces.set.each do |piece|
+      row_index = piece.row
+      col_index = piece.col
+
+      selections << [row_index, col_index]
+    end
+
+    selections
+  end
 
   def valid_coordinates?(coordinates)
     return false unless coordinates.length == 2
