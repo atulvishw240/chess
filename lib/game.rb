@@ -26,9 +26,9 @@ class Game
     moves = piece.useful_moves(board)
     captures = piece.all_possible_captures(board, possible_moves)
 
-    piece.display_possible_actions(board, moves, captures)
+    piece.display_markers_and_captures(board, moves, captures)
     board.display
-    piece.clean_markers_and_captures(board, moves, captures)
+    piece.clear_markers_and_captures(board, moves, captures)
     # 6. If entered coordinates has a capture then remove the captured piece from the opponent's
     # set of pieces. Update your piece position.
     # 7. For simple move coordinates just update your piece coordinates.

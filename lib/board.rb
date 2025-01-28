@@ -4,11 +4,11 @@ require_relative "pieces_set"
 require_relative "square"
 
 # BOARD
-class Board # rubocop:disable Metrics/ClassLength
+class Board
   include Utils
   include Colorable
 
-  attr_accessor :board, :black, :brown, :markers, :captures
+  attr_accessor :board, :black, :brown
 
   def initialize
     # Ignore 0 based index for simplicity
@@ -16,18 +16,12 @@ class Board # rubocop:disable Metrics/ClassLength
     @black = SetOfPieces.new(BLACK_FOREGROUND)
     @brown = SetOfPieces.new(BROWN_FOREGROUND)
 
-    @markers = []
-    @captures = []
     setup
   end
 
   def display
     update_state(black.set, brown.set)
-    update_with_markers
-    update_with_captures
-
     print_board
-    clean_markers_and_captures
   end
 
   def update(row_index, col_index, update_with)
@@ -73,30 +67,6 @@ class Board # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def update_with_markers
-    return if markers.empty?
-
-    markers.each do |position|
-      row_index = position[0]
-      col_index = position[1]
-
-      square = get_square(row_index, col_index)
-      update(row_index, col_index, MARKER) unless square.contains_piece?
-    end
-  end
-
-  def update_with_captures
-    return if captures.empty?
-
-    captures.each do |position|
-      row_index = position[0]
-      col_index = position[1]
-
-      square = get_square(row_index, col_index)
-      square.color = PURPLE_BACKGROUND
-    end
-  end
-
   def print_board
     board.each_with_index do |row, row_index|
       next if row_index.zero?
@@ -137,22 +107,5 @@ class Board # rubocop:disable Metrics/ClassLength
   def print_files
     files = "a  b  c  d  e  f  g  h"
     puts DARK_YELLOW_FOREGROUND + inline_space(3) + files + RESET_TERMINAL
-  end
-
-  def clean_markers_and_captures
-    clean(markers)
-    clean(captures)
-
-    self.markers = []
-    self.captures = []
-  end
-
-  def clean(markers_or_captures)
-    markers_or_captures.each do |marker_or_capture|
-      row_index = marker_or_capture[0]
-      col_index = marker_or_capture[1]
-
-      update(row_index, col_index, " ")
-    end
   end
 end
