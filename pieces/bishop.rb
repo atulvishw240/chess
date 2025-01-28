@@ -13,9 +13,6 @@ class Bishop < Piece
     super
   end
 
-  def move
-  end
-
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
   def all_possible_moves

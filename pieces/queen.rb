@@ -18,9 +18,6 @@ class Queen < Piece
     super
   end
 
-  def move
-  end
-
   def all_possible_moves
     row_index = row
     col_index = col

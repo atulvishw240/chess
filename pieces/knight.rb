@@ -10,9 +10,6 @@ class Knight < Piece
     super
   end
 
-  def move
-  end
-
   # A knight make four T's (upper, lower, right, left)
   def all_possible_moves
     positions = []

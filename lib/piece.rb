@@ -11,7 +11,6 @@ class Piece
     @color = color
   end
 
-  def move; end
   def all_possible_moves; end
 
   # Exclude squares which has a piece from all_possible_moves
@@ -24,6 +23,15 @@ class Piece
       square = board.get_square(row_index, col_index)
       square.empty?
     end
+  end
+
+  def move(row_index, col_index)
+    # Update where your piece was with " "
+    square = board.get_square(row, col)
+    square.element = " "
+
+    # Update your piece new coordinates
+    update_position(row_index, col_index)
   end
 
   def update_position(row_index, col_index)
@@ -40,15 +48,26 @@ class Piece
   def display_markers_and_captures(moves, captures)
     display_markers(moves)
     display_captures(captures)
-  end
+    board.display
 
-  def clear_markers_and_captures(moves, captures)
-    clean_markers(moves)
-    clean_captures(captures)
+    clear_markers_and_captures(moves, captures)
   end
 
   #------------------------------ALL PRIVATE METHODS ARE BELOW---------------------------
   private
+
+  def capture?(move)
+    row_index = move[0]
+    col_index = move[1]
+    square = board.get_square(row_index, col_index)
+
+    if square.contains_piece?
+      piece = square.element
+      true unless piece.color == color
+    else
+      false
+    end
+  end
 
   def display_markers(moves)
     moves.each do |move|
@@ -69,17 +88,9 @@ class Piece
     end
   end
 
-  def capture?(move)
-    row_index = move[0]
-    col_index = move[1]
-    square = board.get_square(row_index, col_index)
-
-    if square.contains_piece?
-      piece = square.element
-      true unless piece.color == color
-    else
-      false
-    end
+  def clear_markers_and_captures(moves, captures)
+    clean_markers(moves)
+    clean_captures(captures)
   end
 
   def clean_markers(markers)

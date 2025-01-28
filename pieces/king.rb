@@ -16,9 +16,6 @@ class King < Piece
     super
   end
 
-  def move
-  end
-
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
   # private

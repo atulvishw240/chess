@@ -27,8 +27,6 @@ class Game
     captures = piece.all_possible_captures(possible_moves)
 
     piece.display_markers_and_captures(moves, captures)
-    board.display
-    piece.clear_markers_and_captures(moves, captures)
     # 6. If entered coordinates has a capture then remove the captured piece from the opponent's
     # set of pieces. Update your piece position.
     # 7. For simple move coordinates just update your piece coordinates.
@@ -37,8 +35,7 @@ class Game
     row_index = move[0]
     col_index = move[1]
 
-    square.element = " "
-    piece.update_position(row_index, col_index)
+    piece.move(row_index, col_index)
     # 8. Alternate turns between Black and Brown unless game ends in draw or someone eventually wins.
 
     board.display
