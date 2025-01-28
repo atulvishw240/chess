@@ -4,7 +4,7 @@ require_relative "modules/mod_colorable"
 class Piece
   include Colorable
 
-  attr_accessor :color, :row, :col
+  attr_accessor :color, :row, :col, :board
   attr_reader :unicode
 
   def initialize(color)
@@ -12,11 +12,11 @@ class Piece
   end
 
   def move; end
-  def all_possible_moves(board); end
+  def all_possible_moves; end
 
   # Exclude squares which has a piece from all_possible_moves
-  def useful_moves(board)
-    moves = all_possible_moves(board)
+  def useful_moves
+    moves = all_possible_moves
     moves.select do |move|
       row_index = move[0]
       col_index = move[1]
@@ -31,26 +31,26 @@ class Piece
     self.col = col_index
   end
 
-  def all_possible_captures(board, moves)
+  def all_possible_captures(moves)
     moves.select do |move|
-      capture?(board, move)
+      capture?(move)
     end
   end
 
-  def display_markers_and_captures(board, moves, captures)
-    display_markers(board, moves)
-    display_captures(board, captures)
+  def display_markers_and_captures(moves, captures)
+    display_markers(moves)
+    display_captures(captures)
   end
 
-  def clear_markers_and_captures(board, moves, captures)
-    clean_markers(board, moves)
-    clean_captures(board, captures)
+  def clear_markers_and_captures(moves, captures)
+    clean_markers(moves)
+    clean_captures(captures)
   end
 
   #------------------------------ALL PRIVATE METHODS ARE BELOW---------------------------
   private
 
-  def display_markers(board, moves)
+  def display_markers(moves)
     moves.each do |move|
       row_index = move[0]
       col_index = move[1]
@@ -59,7 +59,7 @@ class Piece
     end
   end
 
-  def display_captures(board, captures)
+  def display_captures(captures)
     captures.each do |capture|
       row_index = capture[0]
       col_index = capture[1]
@@ -69,7 +69,7 @@ class Piece
     end
   end
 
-  def capture?(board, move)
+  def capture?(move)
     row_index = move[0]
     col_index = move[1]
     square = board.get_square(row_index, col_index)
@@ -82,7 +82,7 @@ class Piece
     end
   end
 
-  def clean_markers(board, markers)
+  def clean_markers(markers)
     markers.each do |marker|
       row_index = marker[0]
       col_index = marker[1]
@@ -92,7 +92,7 @@ class Piece
     end
   end
 
-  def clean_captures(board, captures)
+  def clean_captures(captures)
     captures.each do |capture|
       row_index = capture[0]
       col_index = capture[1]

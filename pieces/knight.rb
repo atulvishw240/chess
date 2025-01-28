@@ -14,7 +14,7 @@ class Knight < Piece
   end
 
   # A knight make four T's (upper, lower, right, left)
-  def all_possible_moves(board)
+  def all_possible_moves
     positions = []
     row_index = row
     col_index = col

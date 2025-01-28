@@ -23,7 +23,7 @@ class Rook < Piece
 
   # private
 
-  def all_possible_moves(board)
+  def all_possible_moves
     positions = []
     row_index = row
     col_index = col

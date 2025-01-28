@@ -18,7 +18,7 @@ class Bishop < Piece
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
-  def all_possible_moves(board)
+  def all_possible_moves
     positions = []
     row_index = row
     col_index = col

@@ -22,13 +22,13 @@ class Game
     square = board.get_square(selection[0], selection[1])
     piece = square.element
     # 5. Player decides the coordinates for this selected piece (capture or simple move)
-    possible_moves = piece.all_possible_moves(board)
-    moves = piece.useful_moves(board)
-    captures = piece.all_possible_captures(board, possible_moves)
+    possible_moves = piece.all_possible_moves
+    moves = piece.useful_moves
+    captures = piece.all_possible_captures(possible_moves)
 
-    piece.display_markers_and_captures(board, moves, captures)
+    piece.display_markers_and_captures(moves, captures)
     board.display
-    piece.clear_markers_and_captures(board, moves, captures)
+    piece.clear_markers_and_captures(moves, captures)
     # 6. If entered coordinates has a capture then remove the captured piece from the opponent's
     # set of pieces. Update your piece position.
     # 7. For simple move coordinates just update your piece coordinates.

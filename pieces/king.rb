@@ -22,7 +22,7 @@ class King < Piece
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
 
   # private
-  def all_possible_moves(board)
+  def all_possible_moves
     moves = []
     row_index = row
     col_index = col

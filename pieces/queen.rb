@@ -21,7 +21,7 @@ class Queen < Piece
   def move
   end
 
-  def all_possible_moves(board)
+  def all_possible_moves
     row_index = row
     col_index = col
 

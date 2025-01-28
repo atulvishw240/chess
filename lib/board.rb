@@ -48,6 +48,7 @@ class Board
 
   def assign_start_positions(pieces, row_index)
     pieces.each_with_index do |piece, col_index|
+      piece.board = self
       # col_index + 1 to offset our index to 1th index based Board
       piece.update_position(row_index, col_index + 1)
     end
