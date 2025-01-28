@@ -34,6 +34,18 @@ class SetOfPieces
     end
   end
 
+  def coordinates_of_all_pieces
+    set_of_selections = []
+    set.each do |piece|
+      row_index = piece.row
+      col_index = piece.col
+
+      set_of_selections << [row_index, col_index]
+    end
+
+    set_of_selections
+  end
+
   private
 
   def create_pawns(color)

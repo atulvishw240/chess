@@ -49,7 +49,7 @@ class Board # rubocop:disable Metrics/ClassLength
 
     # BROWN PIECES
     assign_start_positions(brown.set[0..7], 1)
-    assign_start_positions(brown.set[8..15], 3)
+    assign_start_positions(brown.set[8..15], 5)
   end
 
   def assign_start_positions(pieces, row_index)

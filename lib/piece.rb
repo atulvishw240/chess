@@ -77,6 +77,33 @@ class Piece
     end
   end
 
+  public
+
+  def clean_markers_and_captures(board, moves, captures)
+    clean_markers(board, moves)
+    clean_captures(board, captures)
+  end
+
+  def clean_markers(board, markers)
+    markers.each do |marker|
+      row_index = marker[0]
+      col_index = marker[1]
+
+      square = board.get_square(row_index, col_index)
+      square.element = " "
+    end
+  end
+
+  def clean_captures(board, captures)
+    captures.each do |capture|
+      row_index = capture[0]
+      col_index = capture[1]
+
+      square = board.get_square(row_index, col_index)
+      square.color = nil
+    end
+  end
+
   def to_s
     "#{self.class} at row-index: #{row_index} and col-index: #{col_index}"
   end

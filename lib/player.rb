@@ -30,22 +30,14 @@ class Player
     return move if valid_move?(move, moves, captures)
 
     display_error_message
-    select_move(moves, captures)
+    make_move(moves, captures)
   end
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
   private
 
   def options_for_selection
-    selections = []
-    set_of_pieces.set.each do |piece|
-      row_index = piece.row
-      col_index = piece.col
-
-      selections << [row_index, col_index]
-    end
-
-    selections
+    set_of_pieces.coordinates_of_all_pieces
   end
 
   def valid_coordinates?(coordinates)

@@ -15,25 +15,24 @@ class Game
   end
 
   def play
-    # 1. Assign pieces to Players (Black or Brown)
-    current_player.color = BROWN_FOREGROUND
-    opponent.color = BLACK_FOREGROUND
-    # 2. Display Board
-    board.display
+    assign_pieces_set_to_players
     # 3. Brown Player will always make a first move
     selection = current_player.select_piece
     # 4. Player selects a piece
     square = board.get_square(selection[0], selection[1])
     piece = square.element
     # 5. Player decides the coordinates for this selected piece (capture or simple move)
-    possible_moves = piece.all_possible_moves(board, selection[0], selection[1])
-    board.markers = possible_moves
-    board.captures = piece.all_possible_captures(board, possible_moves)
+    possible_moves = piece.all_possible_moves(board)
+    moves = piece.useful_moves(board)
+    captures = piece.all_possible_captures(board, possible_moves)
+
+    piece.display_possible_actions(board, moves, captures)
     board.display
+    piece.clean_markers_and_captures(board, moves, captures)
     # 6. If entered coordinates has a capture then remove the captured piece from the opponent's
     # set of pieces. Update your piece position.
     # 7. For simple move coordinates just update your piece coordinates.
-    move = current_player.select_move(possible_moves)
+    move = current_player.make_move(moves, captures)
 
     row_index = move[0]
     col_index = move[1]
@@ -45,9 +44,11 @@ class Game
     board.display
   end
 
-  def assign_color_to_players
-    current_player.color = BROWN_FOREGROUND
-    opponent.color = BLACK_FOREGROUND
+  def assign_pieces_set_to_players
+    current_player.set_of_pieces = board.brown
+    opponent.set_of_pieces = board.black
+
+    board.display
   end
 
   def capture_at?(move)
