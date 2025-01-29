@@ -16,37 +16,44 @@ class Game
 
   def play
     assign_pieces_set_to_players
-    # 3. Brown Player will always make a first move
-    selection = current_player.select_piece
-    # 4. Player selects a piece
-    square = board.get_square(selection[0], selection[1])
-    piece = square.element
-    # 5. Player decides the coordinates for this selected piece (capture or simple move)
-    possible_moves = piece.all_possible_moves
-    moves = piece.useful_moves
-    captures = piece.all_possible_captures(possible_moves)
-
-    piece.display_markers_and_captures(moves, captures)
-    # 6. If entered coordinates has a capture then remove the captured piece from the opponent's
-    # set of pieces. Update your piece position.
-    # 7. For simple move coordinates just update your piece coordinates.
-    move = current_player.make_move(moves, captures)
-
-    piece.move(move)
-    # 8. Alternate turns between Black and Brown unless game ends in draw or someone eventually wins.
-
+    piece = let_player_select_a_piece
+    let_player_make_a_move(piece)
     board.display
   end
 
   def assign_pieces_set_to_players
     current_player.set_of_pieces = board.brown
     opponent.set_of_pieces = board.black
-
-    board.display
   end
 
-  def capture_at?(move)
-    board.captures.include?(move)
+  def let_player_select_a_piece
+    board.display
+
+    selection = current_player.select_piece
+    square = board.get_square(selection[0], selection[1])
+    piece = square.element
+  end
+
+  def let_player_make_a_move(piece)
+    # Display possible actions for a piece
+    possible_moves = piece.all_possible_moves
+    moves = piece.useful_moves
+    captures = piece.all_possible_captures(possible_moves)
+    piece.display_markers_and_captures(moves, captures)
+
+    # Ask player to select which action he wants to perform
+    move = current_player.make_move(moves, captures)
+    move_or_capture(piece, move, captures)
+  end
+
+  def move_or_capture(piece, move, captures)
+    if captures.include?(move)
+      row_index = move[0]
+      col_index = move[1]
+      opponent.set_of_pieces.delete_piece_at(row_index, col_index)
+    end
+
+    piece.move(move)
   end
 
   def current_player
