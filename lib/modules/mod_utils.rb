@@ -10,6 +10,10 @@ module Utils
     FILES[integer]
   end
 
+  def rank_to_row_index(rank)
+    9 - rank
+  end
+
   def sum(num1, num2)
     num1 + num2
   end
