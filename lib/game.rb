@@ -1,15 +1,11 @@
-require_relative "modules/mod_utils"
-require_relative "modules/mod_colorable"
+require_relative "board"
 
 # GAME
 class Game
-  include Utils
-  include Colorable
-
   attr_accessor :current_player_id, :board
 
-  def initialize(player1, player2)
-    @board = Board.new
+  def initialize(black, brown, player1, player2)
+    @board = Board.new(black, brown)
     @players = [player1, player2]
     @current_player_id = 0
   end

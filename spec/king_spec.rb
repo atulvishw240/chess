@@ -1,9 +1,12 @@
+require_relative "../lib/pieces_set"
 require_relative "../pieces/king"
 require_relative "../lib/board"
 
 describe King do
   before(:each) do
-    @board = Board.new
+    @black = SetOfPieces.new("\e[30m")
+    @brown = SetOfPieces.new("\e[38;5;160m")
+    @board = Board.new(@black, @brown)
     @king = King.new("King")
     @king.board = @board
   end

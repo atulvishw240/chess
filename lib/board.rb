@@ -10,11 +10,11 @@ class Board
 
   attr_accessor :board, :black, :brown
 
-  def initialize
+  def initialize(black, brown)
     # Ignore 0 based index for simplicity
     @board = Array.new(9) { Array.new(9) { Square.new } }
-    @black = SetOfPieces.new(BLACK_FOREGROUND)
-    @brown = SetOfPieces.new(BROWN_FOREGROUND)
+    @black = black
+    @brown = brown
 
     setup
   end
