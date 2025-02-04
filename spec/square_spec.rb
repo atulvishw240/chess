@@ -2,10 +2,9 @@ require_relative "../lib/square"
 require_relative "../pieces/rook"
 
 describe Square do
-
   before(:each) do
     @square = Square.new
-    @rook = Rook.new("Rook")
+    @rook = Rook.new("/e[47m")
   end
 
   describe "#contains_piece?" do
@@ -34,7 +33,7 @@ describe Square do
       @square.element = @rook
       result = @square.to_s
 
-      expect(result).to eq("Rook")
+      expect(result).to eq("/e[47m\u{265C}")
     end
   end
 end
