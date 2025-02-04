@@ -11,9 +11,9 @@ class Game
   end
 
   def play
-    # assign_pieces_set_to_players
-    # piece = let_player_select_a_piece
-    # let_player_make_a_move(piece)
+    assign_pieces_set_to_players
+    piece = let_player_select_a_piece
+    let_player_make_a_move(piece)
     board.display
   end
 

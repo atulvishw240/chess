@@ -1,13 +1,8 @@
 require_relative "../lib/piece"
 # require_relative "../lib/mod_utils"
-require_relative "../lib/modules/mod_diagonal"
-require_relative "../lib//modules/mod_rev_diagonal"
 
 # BISHOP
 class Bishop < Piece
-  include Diagonal
-  include ReverseDiagonal
-
   def initialize(color)
     @unicode = "\u{265D}"
     super

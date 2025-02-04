@@ -1,16 +1,7 @@
 require_relative "../lib/piece"
-require_relative "../lib/modules/mod_horizontal"
-require_relative "../lib/modules/mod_vertical"
-require_relative "../lib/modules/mod_diagonal"
-require_relative "../lib/modules/mod_rev_diagonal"
 
 # KING
 class King < Piece
-  include Horizontal
-  include Vertical
-  include Diagonal
-  include ReverseDiagonal
-
   def initialize(color)
     @unicode = "\u{265A}"
     super
