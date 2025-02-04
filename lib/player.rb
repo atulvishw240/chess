@@ -37,7 +37,7 @@ class Player
   private
 
   def options_for_selection
-    set_of_pieces.coordinates_of_all_pieces
+    set_of_pieces.all_possible_selections
   end
 
   def valid_coordinates?(coordinates)

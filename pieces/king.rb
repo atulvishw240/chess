@@ -7,71 +7,39 @@ class King < Piece
     super
   end
 
-  #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
-
-  # private
   def all_possible_moves
     moves = []
-    row_index = row
-    col_index = col
 
-    moves.concat(front(board, row_index, col_index))
-         .concat(back(board, row_index, col_index))
-         .concat(right(board, row_index, col_index))
-         .concat(left(board, row_index, col_index))
-         .concat(upper_right(board, row_index, col_index))
-         .concat(upper_left(board, row_index, col_index))
-         .concat(lower_right(board, row_index, col_index))
-         .concat(lower_left(board, row_index, col_index))
+    coords = possible_king_moves_from_origin
+    coords.each do |coord|
+      x_coord = coord[0]
+      y_coord = coord[1]
+
+      x_coord += position[0]
+      y_coord += position[1]
+
+      next unless valid_move?(x_coord, y_coord)
+
+      moves << [x_coord, y_coord]
+    end
+
+    moves
   end
 
-  private
+  # Considering king is at origin
+  def possible_king_moves_from_origin
+    front = [[1, -1], [1, 0], [1, 1]]
+    back = [[-1, -1], [-1, 0], [-1, 1]]
+    left = [[0, -1]]
+    right = [[0, 1]]
 
-  def front(board, row_index, col_index)
-    return [] if row_index == 8
-
-    vertical_moves_forward(board, row_index, col_index, row_index + 1)
+    front.concat(back).concat(right).concat(left)
   end
 
-  def back(board, row_index, col_index)
-    return [] if row_index == 1
+  def valid_move?(x_coord, y_coord)
+    x_valid = x_coord.between?(1, 8)
+    y_valid = y_coord.between?(1, 8)
 
-    vertical_moves_backward(board, row_index, col_index, row_index - 1)
-  end
-
-  def left(board, row_index, col_index)
-    return [] if col_index == 1
-
-    horizontal_moves_left(board, row_index, col_index, col_index - 1)
-  end
-
-  def right(board, row_index, col_index)
-    return [] if col_index == 8
-
-    horizontal_moves_right(board, row_index, col_index, col_index + 1)
-  end
-
-  def upper_right(board, row_index, col_index)
-    return [] if row_index == 8
-
-    upper_moves_right(board, row_index, col_index, row_index + 1)
-  end
-
-  def upper_left(board, row_index, col_index)
-    return [] if row_index == 8
-
-    upper_moves_left(board, row_index, col_index, row_index + 1)
-  end
-
-  def lower_right(board, row_index, col_index)
-    return [] if row_index == 1
-
-    lower_moves_right(board, row_index, col_index, row_index - 1)
-  end
-
-  def lower_left(board, row_index, col_index)
-    return [] if row_index == 1
-
-    lower_moves_left(board, row_index, col_index, row_index - 1)
+    x_valid && y_valid
   end
 end
