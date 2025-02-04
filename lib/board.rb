@@ -7,13 +7,11 @@ class Board
   include Utils
   include Colorable
 
-  attr_accessor :board, :black, :brown
+  attr_accessor :board
 
-  def initialize(black, brown)
+  def initialize
     # Ignore 0 based index for simplicity
     @board = Array.new(9) { Array.new(9) { Square.new } }
-    @black = black
-    @brown = brown
   end
 
   def display

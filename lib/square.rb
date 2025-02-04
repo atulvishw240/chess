@@ -1,3 +1,4 @@
+require_relative "piece"
 # SQUARE
 class Square
   attr_accessor :color, :element
