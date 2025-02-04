@@ -56,6 +56,10 @@ class Piece
     clear_markers_and_captures(moves, captures)
   end
 
+  def to_s
+    "#{color}#{unicode}"
+  end
+
   #------------------------------ALL PRIVATE METHODS ARE BELOW---------------------------
   private
 

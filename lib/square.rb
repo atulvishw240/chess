@@ -16,13 +16,7 @@ class Square
   end
 
   def to_s
-    if contains_piece?
-      unicode = element.unicode
-      color = element.color
-      value = "#{color}#{unicode}"
-
-      return value
-    end
+    return element.to_s if contains_piece?
 
     element
   end
