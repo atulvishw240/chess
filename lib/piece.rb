@@ -4,7 +4,7 @@ require_relative "modules/mod_colorable"
 class Piece
   include Colorable
 
-  attr_accessor :color, :row, :col, :board
+  attr_accessor :color, :position, :board
   attr_reader :unicode
 
   def initialize(color)
@@ -13,33 +13,23 @@ class Piece
 
   def all_possible_moves; end
 
-  # Exclude squares which has a piece from all_possible_moves
-  def useful_moves
-    moves = all_possible_moves
-    moves.select do |move|
-      row_index = move[0]
-      col_index = move[1]
-
-      square = board.get_square(row_index, col_index)
-      square.empty?
-    end
-  end
-
   def move(coordinates)
-    row_index = coordinates[0]
-    col_index = coordinates[1]
-
     # Update where your piece was with " "
-    square = board.get_square(row, col)
+    row_index = position[0]
+    col_index = position[1]
+    square = board.get_square(row_index, col_index)
     square.element = " "
 
     # Update your piece new coordinates
-    update_position(row_index, col_index)
+    update_position(coordinates)
   end
 
-  def update_position(row_index, col_index)
-    self.row = row_index
-    self.col = col_index
+  def update_position(position)
+    self.position = position
+  end
+
+  def capture(piece)
+    update_position(piece.position)
   end
 
   def all_possible_captures(moves)

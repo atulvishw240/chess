@@ -60,8 +60,3 @@ class Pawn < Piece
     move << [rank + 1, col - 1]
   end
 end
-
-pawn = Pawn.new("red")
-pawn.row = 2
-pawn.col = 2
-pawn.all_possible_moves
