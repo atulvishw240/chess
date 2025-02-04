@@ -12,36 +12,55 @@ class Rook < Piece
     super
   end
 
-  #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
-
-  # private
-
+  # Calculate all possible moves for Rook
   def all_possible_moves
-    positions = []
-    row_index = row
-    col_index = col
+    # 1. Calculate forward moves
+    # 2. Calculate backward moves
+    # 3. Calculate right moves
+    # 4. Calculate left moves
 
-    vertical_positions = vertical_moves(board, row_index, col_index)
-    horizontal_positions = horizontal_moves(board, row_index, col_index)
-    positions.concat(vertical_positions)
-    positions.concat(horizontal_positions)
-  end
-
-  private # Temporary, once we complete our move functionality we'll comment out the above 'private'
-
-  def vertical_moves(board, row_index, col_index)
     moves = []
-    forward = vertical_moves_forward(board, row_index, col_index)
-    backward = vertical_moves_backward(board, row_index, col_index)
-    moves.concat(forward)
-    moves.concat(backward)
-  end
 
-  def horizontal_moves(board, row_index, col_index)
-    moves = []
-    left = horizontal_moves_left(board, row_index, col_index)
-    right = horizontal_moves_right(board, row_index, col_index)
-    moves.concat(left)
-    moves.concat(right)
+    pos = position
+    row_index = pos[0]
+    col_index = pos[1]
+
+    # 1. Calculate forward moves, if rook is at [1, 1]
+    until row_index == 8
+      row_index += 1
+      moves << [row_index, col_index]
+    end
+
+    # 2. Calculate backward moves
+    pos = position
+    row_index = pos[0]
+    col_index = pos[1]
+
+    until row_index == 1
+      row_index -= 1
+      moves << [row_index, col_index]
+    end
+
+    # 3. Calculate right moves
+    pos = position
+    row_index = pos[0]
+    col_index = pos[1]
+
+    until col_index == 8
+      col_index += 1
+      moves << [row_index, col_index]
+    end
+
+    # 4. Calculate left moves
+    pos = position
+    row_index = pos[0]
+    col_index = pos[1]
+
+    until col_index == 1
+      col_index -= 1
+      moves << [row_index, col_index]
+    end
+
+    moves
   end
 end

@@ -5,15 +5,15 @@ class Game
   attr_accessor :current_player_id, :board
 
   def initialize(black, brown, player1, player2)
-    @board = Board.new(black, brown)
+    @board = Board.new
     @players = [player1, player2]
     @current_player_id = 0
   end
 
   def play
-    assign_pieces_set_to_players
-    piece = let_player_select_a_piece
-    let_player_make_a_move(piece)
+    # assign_pieces_set_to_players
+    # piece = let_player_select_a_piece
+    # let_player_make_a_move(piece)
     board.display
   end
 
