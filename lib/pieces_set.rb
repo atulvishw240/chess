@@ -25,6 +25,18 @@ class SetOfPieces
     create_pawns(color)
   end
 
+  def all_possible_selections
+    possible_selections = []
+    set.each do |piece|
+      row_index = piece.row
+      col_index = piece.col
+
+      possible_selections << [row_index, col_index]
+    end
+
+    possible_selections
+  end
+
   def delete_piece_at(row_index, col_index)
     set.each do |piece|
       row = piece.row
@@ -32,18 +44,6 @@ class SetOfPieces
 
       set.delete(piece) if row_index == row && col_index == col
     end
-  end
-
-  def coordinates_of_all_pieces
-    set_of_selections = []
-    set.each do |piece|
-      row_index = piece.row
-      col_index = piece.col
-
-      set_of_selections << [row_index, col_index]
-    end
-
-    set_of_selections
   end
 
   private
