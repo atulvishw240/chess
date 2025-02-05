@@ -1,21 +1,23 @@
 require_relative "board"
 require_relative "modules/mod_colorable"
+require_relative "board_setter"
 
 # GAME
 class Game
   include Colorable
 
-  attr_accessor :current_player_id, :board, :current_player_set
+  attr_accessor :current_player_id, :board, :current_player_set, :setter_or_refresher
 
-  def initialize(black, brown, player1, player2)
-    @board = Board.new
-    @players = [player1, player2]
-    @sets = [black, brown]
+  def initialize(board, players, sets)
+    @board = board
+    @players = players
+    @sets = sets
+    @setter_or_refresher = BoardSetter.new(board, sets)
 
     @current_player_id = 0
     @current_player_set = 0
 
-    setup_board(black, brown)
+    @setter_or_refresher.setup_board
   end
 
   def play
@@ -30,33 +32,11 @@ class Game
     moves = piece.all_possible_moves
     captures = piece.all_possible_captures(moves)
     piece.display_markers_and_captures(moves, captures)
-  end
+    move = current_player.make_move(moves, captures)
 
-  def setup_board(black, brown)
-    update_pieces_start_position(black.set[0..7])
-    update_pieces_start_position(brown.set[0..7])
-
-    update_board_with_pieces(black.set[0..7])
-    update_board_with_pieces(brown.set[0..7])
-  end
-
-  def update_pieces_start_position(pieces)
-    color = pieces[0].color
-    row_index = color == BLACK_FOREGROUND ? 1 : 8
-
-    pieces.each_with_index do |piece, col_index|
-      piece.position = [row_index, col_index + 1] # To offset against 1th index based Board
-    end
-  end
-
-  def update_board_with_pieces(pieces)
-    pieces.each do |piece|
-      row_index = piece.position[0]
-      col_index = piece.position[1]
-      piece.board = board
-
-      board.update(row_index, col_index, piece)
-    end
+    piece.move(move)
+    setter_or_refresher.refresh_board
+    board.display
   end
 
   def current_player
