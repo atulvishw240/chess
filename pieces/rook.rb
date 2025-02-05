@@ -8,67 +8,45 @@ class Rook < Piece
   end
 
   def all_possible_moves
-    front = forward_moves
-    back = backward_moves
-    right = right_moves
-    left = left_moves
-
-    front.concat(back).concat(right).concat(left)
+    horizontal_moves.concat(vertical_moves)
   end
 
-  def forward_moves
+  def horizontal_moves
     moves = []
 
-    row_index = position[0]
-    col_index = position[1]
+    [8, 1].each do |stop|
+      row_index = position[0]
+      col_index = position[1]
 
-    until row_index == 8
-      row_index += 1
-      moves << [row_index, col_index]
+      until row_index == stop
+        row_index = row_or_col(row_index, stop)
+        moves << [row_index, col_index]
+      end
     end
 
     moves
   end
 
-  def backward_moves
+  def vertical_moves
     moves = []
 
-    row_index = position[0]
-    col_index = position[1]
+    [8, 1].each do |stop|
+      row_index = position[0]
+      col_index = position[1]
 
-    until row_index == 1
-      row_index -= 1
-      moves << [row_index, col_index]
+      until col_index == stop
+        col_index = row_or_col(col_index, stop)
+        moves << [row_index, col_index]
+      end
     end
 
     moves
   end
 
-  def right_moves
-    moves = []
+  def row_or_col(index, stop)
+    index += 1 if stop == 8
+    index -= 1 if stop == 1
 
-    row_index = position[0]
-    col_index = position[1]
-
-    until col_index == 8
-      col_index += 1
-      moves << [row_index, col_index]
-    end
-
-    moves
-  end
-
-  def left_moves
-    moves = []
-
-    row_index = position[0]
-    col_index = position[1]
-
-    until col_index == 1
-      col_index -= 1
-      moves << [row_index, col_index]
-    end
-
-    moves
+    index
   end
 end
