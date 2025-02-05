@@ -18,6 +18,11 @@ class BoardSetter
     @sets[1]
   end
 
+  def refresh_board
+    update_board_with_pieces(black.set[0..7])
+    update_board_with_pieces(brown.set[0..7])
+  end
+
   def setup_board
     update_pieces_start_position(black.set[0..7])
     update_pieces_start_position(brown.set[0..7])
