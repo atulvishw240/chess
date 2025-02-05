@@ -35,10 +35,7 @@ class Board
   # Takes arguments : file => "a"
   #                   rank => 3
   #                   update_with => marker or piece
-  def update(file, rank, update_with)
-    row_index = rank_to_row_index(rank)
-    col_index = file_to_int(file)
-
+  def update(row_index, col_index, update_with)
     square = get_square(row_index, col_index)
     square.element = update_with
   end
