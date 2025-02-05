@@ -61,6 +61,7 @@ class Player
   def convert_to_indices(coordinates)
     col_index = file_to_int(coordinates[0])
     row_index = coordinates[1].to_i
+    row_index = 9 - row_index # To offset ranks starting from 8
 
     [row_index, col_index]
   end

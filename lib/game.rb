@@ -5,14 +5,26 @@ require_relative "modules/mod_colorable"
 class Game
   include Colorable
 
-  attr_accessor :current_player_id, :board
+  attr_accessor :current_player_id, :board, :current_player_set
 
   def initialize(black, brown, player1, player2)
     @board = Board.new
     @players = [player1, player2]
+    @sets = [black, brown]
+
     @current_player_id = 0
+    @current_player_set = 0
 
     setup_board(black, brown)
+  end
+
+  def play
+    current_player.set_of_pieces = current_set
+    opponent.set_of_pieces = opponent_set
+
+    board.display
+    select = current_player.select_piece
+    p select
   end
 
   def setup_board(black, brown)
@@ -51,5 +63,13 @@ class Game
 
   def switch_players!
     @current_player_id = 1 - @current_player_id
+  end
+
+  def current_set
+    @sets[current_player_id]
+  end
+
+  def opponent_set
+    @sets[1 - current_player_id]
   end
 end

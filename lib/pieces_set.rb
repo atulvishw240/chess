@@ -28,10 +28,8 @@ class SetOfPieces
   def all_possible_selections
     possible_selections = []
     set.each do |piece|
-      row_index = piece.row
-      col_index = piece.col
-
-      possible_selections << [row_index, col_index]
+      pos = piece.position
+      possible_selections << pos
     end
 
     possible_selections
