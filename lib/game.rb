@@ -24,7 +24,12 @@ class Game
 
     board.display
     select = current_player.select_piece
-    p select
+    square = board.get_square(select[0], select[1])
+
+    piece = square.element
+    moves = piece.all_possible_moves
+    captures = piece.all_possible_captures(moves)
+    piece.display_markers_and_captures(moves, captures)
   end
 
   def setup_board(black, brown)
@@ -48,6 +53,7 @@ class Game
     pieces.each do |piece|
       row_index = piece.position[0]
       col_index = piece.position[1]
+      piece.board = board
 
       board.update(row_index, col_index, piece)
     end
