@@ -15,21 +15,11 @@ class Piece
 
   def move(coordinates)
     # Update where your piece was with " "
-    row_index = position[0]
-    col_index = position[1]
-    square = board.get_square(row_index, col_index)
+    square = board.get_square(position[0], position[1])
     square.element = " "
 
     # Update your piece new coordinates
     update_position(coordinates)
-  end
-
-  def update_position(position)
-    self.position = position
-  end
-
-  def capture(piece)
-    update_position(piece.position)
   end
 
   def all_possible_captures(moves)
@@ -52,6 +42,10 @@ class Piece
 
   #------------------------------ALL PRIVATE METHODS ARE BELOW---------------------------
   private
+
+  def update_position(position)
+    self.position = position
+  end
 
   def capture?(move)
     row_index = move[0]

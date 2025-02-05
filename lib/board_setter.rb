@@ -10,25 +10,25 @@ class BoardSetter
     @sets = sets
   end
 
-  def black
+  def first
     @sets[0]
   end
 
-  def brown
+  def second
     @sets[1]
   end
 
   def refresh_board
-    update_board_with_pieces(black.set[0..7])
-    update_board_with_pieces(brown.set[0..7])
+    update_board_with_pieces(first.set[0..7])
+    update_board_with_pieces(second.set[0..7])
   end
 
   def setup_board
-    update_pieces_start_position(black.set[0..7])
-    update_pieces_start_position(brown.set[0..7])
+    update_pieces_start_position(first.set[0..7])
+    update_pieces_start_position(second.set[0..7])
 
-    update_board_with_pieces(black.set[0..7])
-    update_board_with_pieces(brown.set[0..7])
+    update_board_with_pieces(first.set[0..7])
+    update_board_with_pieces(second.set[0..7])
   end
 
   #-----------------------------ALL PRIVATE METHODS BELOW------------------------------------------
