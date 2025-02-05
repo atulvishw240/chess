@@ -11,4 +11,5 @@ black = SetOfPieces.new(BLACK_FOREGROUND)
 brown = SetOfPieces.new(BROWN_FOREGROUND)
 
 game = Game.new(black, brown, player1, player2)
+
 game.play

@@ -71,6 +71,10 @@ class Piece
       row_index = move[0]
       col_index = move[1]
 
+      # Don't display markers over potential captures
+      square = board.get_square(row_index, col_index)
+      next if square.contains_piece?
+
       board.update(row_index, col_index, MARKER)
     end
   end

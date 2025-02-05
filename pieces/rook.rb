@@ -11,7 +11,7 @@ class Rook < Piece
     horizontal_moves.concat(vertical_moves)
   end
 
-  def horizontal_moves
+  def horizontal_moves # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     moves = []
 
     [8, 1].each do |stop|
@@ -20,14 +20,27 @@ class Rook < Piece
 
       until row_index == stop
         row_index = row_or_col(row_index, stop)
-        moves << [row_index, col_index]
+        move = [row_index, col_index]
+
+        square = board.get_square(row_index, col_index)
+        if square.contains_piece?
+          piece = square.element
+          unless color == piece.color # It's your opponent's piece
+            moves << move
+            break
+          end
+
+          break
+        end
+
+        moves << move
       end
     end
 
     moves
   end
 
-  def vertical_moves
+  def vertical_moves # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     moves = []
 
     [8, 1].each do |stop|
@@ -36,7 +49,20 @@ class Rook < Piece
 
       until col_index == stop
         col_index = row_or_col(col_index, stop)
-        moves << [row_index, col_index]
+        move = [row_index, col_index]
+
+        square = board.get_square(row_index, col_index)
+        if square.contains_piece?
+          piece = square.element
+          unless color == piece.color # It's your opponent's piece
+            moves << move
+            break
+          end
+
+          break
+        end
+
+        moves << move
       end
     end
 
