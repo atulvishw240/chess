@@ -5,9 +5,12 @@ require_relative "../lib/board"
 describe Pawn do # rubocop:disable Metrics/BlockLength
   before(:each) do
     @board = Board.new
+    brown = "\e[38;5;160m"
     black = "\e[30m"
     @pawn = Pawn.new(black)
     @pawn.board = @board
+    @pawn2 = Pawn.new(brown)
+    @pawn2.board = @board
   end
 
   describe "#move" do
@@ -17,11 +20,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
     end
 
     it "BROWN: moves pawn 1 step forward" do
-      brown = "\e[38;5;160m"
-      @pawn2 = Pawn.new(brown)
       @pawn2.position = [7, 1]
-      @pawn2.board = @board
-
       expect(@pawn2.move).to eq([6, 1])
     end
 
@@ -44,9 +43,6 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
     end
 
     it "returns starting rank for BROWN piece" do
-      brown = "\e[38;5;160m"
-      @pawn2 = Pawn.new(brown)
-
       expect(@pawn2.start).to eq(7)
     end
   end
@@ -68,22 +64,12 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
     end
 
     it "BROWN: moves pawn 2 steps forward, if it's at start; from [7, 3] to [5, 3]" do
-      brown = "\e[38;5;160m"
-
-      @pawn2 = Pawn.new(brown)
       @pawn2.position = [7, 3]
-      @pawn2.board = @board
-
       expect(@pawn2.move_two_steps).to eq([5, 3])
     end
 
     it "BROWN: doesn't move if it isn't at start" do
-      brown = "\e[38;5;160m"
-
-      @pawn2 = Pawn.new(brown)
       @pawn2.position = [5, 3]
-      @pawn2.board = @board
-
       expect(@pawn2.move_two_steps).to eq([5, 3])
     end
   end
