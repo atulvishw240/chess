@@ -86,7 +86,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       square = @board.get_square(4, 2)
       square.element = @bishop
 
-      @black_pawn.position = [5, 1]
+      @black_pawn.position = [3, 1]
       expect(@black_pawn.capture).to eq([4, 2])
     end
 
@@ -96,7 +96,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       square = @board.get_square(5, 7)
       square.element = @bishop
 
-      @black_pawn.position = [6, 6]
+      @black_pawn.position = [4, 6]
       expect(@black_pawn.capture).to eq([5, 7])
     end
   end
