@@ -5,7 +5,9 @@ require_relative "../lib/board"
 describe Pawn do
   before(:each) do
     @board = Board.new
-    @pawn = Pawn.new("Pawn")
+    black = "\e[30m"
+    brown = "\e[38;5;160m"
+    @pawn = Pawn.new(black)
     @pawn.board = @board
   end
 
@@ -25,6 +27,12 @@ describe Pawn do
 
       @pawn.position = [3, 1]
       expect(@pawn.move).to eq([3, 1])
+    end
+  end
+
+  describe "#start" do
+    it "returns starting rank for BLACK piece" do
+      expect(@pawn.start).to eq(2)
     end
   end
 end

@@ -27,4 +27,8 @@ class Pawn < Piece
 
     self.position = move
   end
+
+  def start
+    2
+  end
 end
