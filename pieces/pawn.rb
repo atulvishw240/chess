@@ -22,19 +22,18 @@ class Pawn < Piece
   def move
     row_index = position[0]
     col_index = position[1]
+    move = move_black_or_brown(row_index, col_index)
 
-    if color == BLACK_FOREGROUND
-      row_index += 1
-    else
-      row_index -= 1
-    end
-
-    move = [row_index, col_index]
     square = board.get_square(move[0], move[1])
-
     return position if square.contains_piece?
 
     self.position = move
+  end
+
+  def move_black_or_brown(row_index, col_index)
+    return [row_index + 1, col_index] if color == BLACK_FOREGROUND
+
+    [row_index - 1, col_index]
   end
 
   def start
