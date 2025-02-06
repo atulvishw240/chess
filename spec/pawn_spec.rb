@@ -2,7 +2,7 @@ require_relative "../pieces/pawn"
 require_relative "../pieces/bishop"
 require_relative "../lib/board"
 
-describe Pawn do
+describe Pawn do # rubocop:disable Metrics/BlockLength
   before(:each) do
     @board = Board.new
     black = "\e[30m"
@@ -11,9 +11,18 @@ describe Pawn do
   end
 
   describe "#move" do
-    it "moves pawn 1 step forward" do
+    it "BLACK: moves pawn 1 step forward" do
       @pawn.position = [2, 1]
       expect(@pawn.move).to eq([3, 1])
+    end
+
+    it "BROWN: moves pawn 1 step forward" do
+      brown = "\e[38;5;160m"
+      @pawn2 = Pawn.new(brown)
+      @pawn2.position = [7, 1]
+      @pawn2.board = @board
+
+      expect(@pawn2.move).to eq([6, 1])
     end
 
     it "can't move when blocked by other piece (opponent or own)" do
