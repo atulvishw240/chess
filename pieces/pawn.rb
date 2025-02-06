@@ -20,6 +20,8 @@ class Pawn < Piece
 
   def move
     position[0] = position[0] + 1
+
+    position
   end
 end
 
