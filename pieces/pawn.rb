@@ -49,6 +49,6 @@ class Pawn < Piece
   end
 
   def capture
-    [4, 1]
+    [4, 2]
   end
 end

@@ -79,13 +79,23 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
   end
 
   describe "#capture" do
-    it "captures if there's an opponent piece at the diagonal" do
+    it "RIGHT CAPTURE: captures an opponent piece at [4, 2]" do
       # Create and place a bishop on [4, 1] square
-      @bishop.position = [4, 1]
+      @bishop.position = [4, 2]
       square = @board.get_square(4, 2)
       square.element = @bishop
 
       @pawn.position = [5, 1]
+      expect(@pawn.capture).to eq([4, 2])
+    end
+
+    it "LEFT CAPTURE: captures an opponent piece at [4, 1]" do
+      # Create and place a bishop on [4, 1] square
+      @bishop.position = [4, 1]
+      square = @board.get_square(4, 1)
+      square.element = @bishop
+
+      @pawn.position = [5, 2]
       expect(@pawn.capture).to eq([4, 1])
     end
   end
