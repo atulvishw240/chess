@@ -19,10 +19,3 @@ class Queen < Piece
     straight.concat(diagonal)
   end
 end
-
-board = Board.new
-queen = Queen.new("Q")
-queen.position = [4, 5]
-queen.board = board
-
-p queen.all_possible_moves

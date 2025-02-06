@@ -12,6 +12,8 @@ class Pawn < Piece
   end
 
   # PAWN MOVES
+  # For BLACK pawn moves : we'll have to do +1 to row_index
+  # For BROWN pawn moves: we'll have to do -1 from row_index
   # Pawn moves straight, only if they aren't blocked by other pieces.
   # It can move either 1 step or 2 steps depending on where it is on the board.
   #   1. If it's at start then it can move either 2 steps or 1 step.
