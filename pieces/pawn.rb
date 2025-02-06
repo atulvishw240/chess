@@ -42,7 +42,7 @@ class Pawn < Piece
 
   def move_two_steps
     row_index = position[0]
-    return unless row_index == start
+    return [] unless row_index == start
 
     move
     move
