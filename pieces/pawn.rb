@@ -31,4 +31,8 @@ class Pawn < Piece
   def start
     color == BLACK_FOREGROUND ? 2 : 7
   end
+
+  def move_two_steps
+    [4, 1]
+  end
 end
