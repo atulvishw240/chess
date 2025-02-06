@@ -16,9 +16,12 @@ describe Pawn do
     end
 
     it "can't move when blocked by other piece (opponent or own)" do
+      # Create and place a bishop on [4, 1] square
       @bishop = Bishop.new("B")
       @bishop.board = @board
       @bishop.position = [4, 1]
+      square = @board.get_square(4, 1)
+      square.element = @bishop
 
       @pawn.position = [3, 1]
       expect(@pawn.move).to eq([3, 1])

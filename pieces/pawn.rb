@@ -1,11 +1,10 @@
 require_relative "../lib/piece"
 require_relative "../lib/modules/mod_colorable"
 require_relative "../lib/board"
+require_relative "../pieces/bishop"
 # PAWN
 class Pawn < Piece
   include Colorable
-
-  attr_accessor :start
 
   def initialize(color)
     @unicode = "\u{265F}"
@@ -19,15 +18,13 @@ class Pawn < Piece
   #   2. If it's at any other place then it can move only 1 step.
 
   def move
-    position[0] = position[0] + 1
+    row_index = position[0]
+    col_index = position[1]
+    move = [row_index + 1, col_index]
+    square = board.get_square(move[0], move[1])
 
-    position
+    return position if square.contains_piece?
+
+    self.position = move
   end
 end
-
-pawn = Pawn.new("P")
-pawn.position = [1, 2]
-pawn.move
-pawn.move
-pawn.move
-p pawn.position
