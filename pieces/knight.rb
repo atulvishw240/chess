@@ -12,7 +12,7 @@ class Knight < Piece
 
   # A knight make four T's (upper, lower, right, left)
   def all_possible_moves
-    positions = []
+    moves = []
 
     coords = possible_coordinates_from_origin
 
@@ -24,10 +24,22 @@ class Knight < Piece
 
       next unless valid_move?(x_coord, y_coord)
 
-      positions << [x_coord, y_coord]
+      move = [x_coord, y_coord]
+      square = board.get_square(x_coord, y_coord)
+      if square.contains_piece?
+        piece = square.element
+        unless color == piece.color
+          moves << move
+          next
+        end
+
+        next # next because we aren't calculating moves in a continuous fashion.
+      end
+
+      moves << move
     end
 
-    positions
+    moves
   end
 
   # Assuming knight to be at coordinates (0, 0)

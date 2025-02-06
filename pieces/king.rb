@@ -20,7 +20,19 @@ class King < Piece
 
       next unless valid_move?(x_coord, y_coord)
 
-      moves << [x_coord, y_coord]
+      move = [x_coord, y_coord]
+      square = board.get_square(x_coord, y_coord)
+      if square.contains_piece?
+        piece = square.element
+        unless color == piece.color
+          moves << move
+          next
+        end
+
+        next
+      end
+
+      moves << move
     end
 
     moves

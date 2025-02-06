@@ -26,7 +26,20 @@ class Bishop < Piece
     until row_index == 1 || col_index == 1
       row_index -= 1
       col_index -= 1
-      moves << [row_index, col_index]
+      move = [row_index, col_index]
+      square = board.get_square(row_index, col_index)
+
+      if square.contains_piece?
+        piece = square.element
+        unless color == piece.color # It's your opponent's piece
+          moves << move
+          break
+        end
+
+        break
+      end
+
+      moves << move
     end
 
     moves
@@ -41,7 +54,20 @@ class Bishop < Piece
     until row_index == 8 || col_index == 8
       row_index += 1
       col_index += 1
-      moves << [row_index, col_index]
+      move = [row_index, col_index]
+      square = board.get_square(row_index, col_index)
+
+      if square.contains_piece?
+        piece = square.element
+        unless color == piece.color # It's your opponent's piece
+          moves << move
+          break
+        end
+
+        break
+      end
+
+      moves << move
     end
 
     moves
@@ -56,7 +82,20 @@ class Bishop < Piece
     until row_index == 1 || col_index == 8
       row_index -= 1
       col_index += 1
-      moves << [row_index, col_index]
+      move = [row_index, col_index]
+      square = board.get_square(row_index, col_index)
+
+      if square.contains_piece?
+        piece = square.element
+        unless color == piece.color # It's your opponent's piece
+          moves << move
+          break
+        end
+
+        break
+      end
+
+      moves << move
     end
 
     moves
@@ -71,7 +110,20 @@ class Bishop < Piece
     until row_index == 8 || col_index == 1
       row_index += 1
       col_index -= 1
-      moves << [row_index, col_index]
+      move = [row_index, col_index]
+      square = board.get_square(row_index, col_index)
+
+      if square.contains_piece?
+        piece = square.element
+        unless color == piece.color # It's your opponent's piece
+          moves << move
+          break
+        end
+
+        break
+      end
+
+      moves << move
     end
 
     moves

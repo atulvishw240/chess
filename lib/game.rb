@@ -19,22 +19,23 @@ class Game
   end
 
   def play
-    current_player.set_of_pieces = @sets[0]
-    opponent.set_of_pieces = @sets[1]
+    assign_sets
 
-    board.display
-    select = current_player.select_piece
-    square = board.get_square(select[0], select[1])
+    10.times do
+      board.display
+      select = current_player.select_piece
+      square = board.get_square(select[0], select[1])
 
-    piece = square.element
-    moves = piece.all_possible_moves
-    captures = piece.all_possible_captures(moves)
-    piece.display_markers_and_captures(moves, captures)
-    move = current_player.make_move(moves, captures)
+      piece = square.element
+      moves = piece.all_possible_moves
+      captures = piece.all_possible_captures(moves)
+      piece.display_markers_and_captures(moves, captures)
+      move = current_player.make_move(moves, captures)
 
-    piece.move(move)
-    setter.refresh_board
-    board.display
+      piece.move(move)
+      setter.refresh_board
+      board.display
+    end
   end
 
   def current_player
@@ -47,5 +48,10 @@ class Game
 
   def switch_players!
     @current_player_id = 1 - @current_player_id
+  end
+
+  def assign_sets
+    current_player.set_of_pieces = @sets[0]
+    opponent.set_of_pieces = @sets[1]
   end
 end
