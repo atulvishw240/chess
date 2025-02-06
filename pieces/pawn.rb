@@ -29,6 +29,6 @@ class Pawn < Piece
   end
 
   def start
-    2
+    color == BLACK_FOREGROUND ? 2 : 7
   end
 end

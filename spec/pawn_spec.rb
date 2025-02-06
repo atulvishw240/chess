@@ -6,7 +6,6 @@ describe Pawn do
   before(:each) do
     @board = Board.new
     black = "\e[30m"
-    brown = "\e[38;5;160m"
     @pawn = Pawn.new(black)
     @pawn.board = @board
   end
@@ -33,6 +32,13 @@ describe Pawn do
   describe "#start" do
     it "returns starting rank for BLACK piece" do
       expect(@pawn.start).to eq(2)
+    end
+
+    it "returns starting rank for BROWN piece" do
+      brown = "\e[38;5;160m"
+      @pawn2 = Pawn.new(brown)
+
+      expect(@pawn2.start).to eq(7)
     end
   end
 end
