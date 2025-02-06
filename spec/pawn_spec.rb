@@ -43,9 +43,14 @@ describe Pawn do
   end
 
   describe "#move_two_steps" do
-    it "moves pawn 2 steps forward, if it's at start" do
+    it "BLACK: moves pawn 2 steps forward, if it's at start; from [2, 1] to [4, 1]" do
       @pawn.position = [2, 1]
       expect(@pawn.move_two_steps).to eq([4, 1])
+    end
+
+    it "BLACK: moves pawn 2 steps forward, if it's at start; from [2, 3] to [4, 3]" do
+      @pawn.position = [2, 3]
+      expect(@pawn.move_two_steps).to eq([4, 3])
     end
   end
 end
