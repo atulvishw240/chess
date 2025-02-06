@@ -47,4 +47,8 @@ class Pawn < Piece
     move
     move
   end
+
+  def capture
+    [4, 1]
+  end
 end

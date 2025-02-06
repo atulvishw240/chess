@@ -4,13 +4,19 @@ require_relative "../lib/board"
 
 describe Pawn do # rubocop:disable Metrics/BlockLength
   before(:each) do
-    @board = Board.new
+    # Colors
     brown = "\e[38;5;160m"
     black = "\e[30m"
+
+    @board = Board.new
     @pawn = Pawn.new(black)
     @pawn.board = @board
     @pawn2 = Pawn.new(brown)
     @pawn2.board = @board
+
+    # Bishop
+    @bishop = Bishop.new(brown)
+    @bishop.board = @board
   end
 
   describe "#move" do
@@ -26,8 +32,6 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
 
     it "can't move when blocked by other piece (opponent or own)" do
       # Create and place a bishop on [4, 1] square
-      @bishop = Bishop.new("B")
-      @bishop.board = @board
       @bishop.position = [4, 1]
       square = @board.get_square(4, 1)
       square.element = @bishop
@@ -71,6 +75,18 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
     it "BROWN: doesn't move if it isn't at start" do
       @pawn2.position = [5, 3]
       expect(@pawn2.move_two_steps).to eq([5, 3])
+    end
+  end
+
+  describe "#capture" do
+    it "captures if there's an opponent piece at the diagonal" do
+      # Create and place a bishop on [4, 1] square
+      @bishop.position = [4, 1]
+      square = @board.get_square(4, 2)
+      square.element = @bishop
+
+      @pawn.position = [5, 1]
+      expect(@pawn.capture).to eq([4, 1])
     end
   end
 end
