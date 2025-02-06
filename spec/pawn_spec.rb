@@ -62,11 +62,26 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       expect(@pawn.move_two_steps).to eq([4, 3])
     end
 
+    it "BLACK: doesn't move if it isn't at start" do
+      @pawn.position = [3, 4]
+      expect(@pawn.move_two_steps).to eq([3, 4])
+    end
+
     it "BROWN: moves pawn 2 steps forward, if it's at start; from [7, 3] to [5, 3]" do
       brown = "\e[38;5;160m"
 
       @pawn2 = Pawn.new(brown)
       @pawn2.position = [7, 3]
+      @pawn2.board = @board
+
+      expect(@pawn2.move_two_steps).to eq([5, 3])
+    end
+
+    it "BROWN: doesn't move if it isn't at start" do
+      brown = "\e[38;5;160m"
+
+      @pawn2 = Pawn.new(brown)
+      @pawn2.position = [5, 3]
       @pawn2.board = @board
 
       expect(@pawn2.move_two_steps).to eq([5, 3])
