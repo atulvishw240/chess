@@ -51,7 +51,13 @@ class Pawn < Piece
   def capture
     row_index = position[0]
     col_index = position[1]
-    move = [row_index + 1, col_index + 1]
+
+    if color == BLACK_FOREGROUND
+      row_index += 1
+    else
+      row_index -= 1
+    end
+    move = [row_index, col_index + 1]
 
     square = board.get_square(move[0], move[1])
     if square.contains_piece?

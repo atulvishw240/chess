@@ -16,8 +16,10 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
     @brown_pawn.board = @board
 
     # Bishop
-    @bishop = Bishop.new(brown)
-    @bishop.board = @board
+    @brown_bishop = Bishop.new(brown)
+    @brown_bishop.board = @board
+    @black_bishop = Bishop.new(black)
+    @black_bishop.board = @board
   end
 
   describe "#move" do
@@ -32,10 +34,10 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
     end
 
     it "can't move when blocked by other piece (opponent or own)" do
-      # Create and place a bishop on [4, 1] square
-      @bishop.position = [4, 1]
+      # Create and place a brown_bishop on [4, 1] square
+      @brown_bishop.position = [4, 1]
       square = @board.get_square(4, 1)
-      square.element = @bishop
+      square.element = @brown_bishop
 
       @black_pawn.position = [3, 1]
       expect(@black_pawn.move).to eq([3, 1])
@@ -80,24 +82,34 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
   end
 
   describe "#capture" do
-    it "captures an opponent bishop (BROWN) piece at [4, 2]" do
-      # Create and place a bishop on [4, 1] square
-      @bishop.position = [4, 2]
+    it "BLACK(RIGHT): captures an opponent brown_bishop (BROWN) piece at [4, 2]" do
+      # Create and place a brown_bishop on [4, 1] square
+      @brown_bishop.position = [4, 2]
       square = @board.get_square(4, 2)
-      square.element = @bishop
+      square.element = @brown_bishop
 
       @black_pawn.position = [3, 1]
       expect(@black_pawn.capture).to eq([4, 2])
     end
 
-    it "captures an opponent bishop (BROWN) at [5, 7]" do
-      # Create and place a bishop on [4, 1] square
-      @bishop.position = [5, 7]
+    it "BLACK(RIGHT): captures an opponent brown_bishop (BROWN) at [5, 7]" do
+      # Create and place a brown_bishop on [4, 1] square
+      @brown_bishop.position = [5, 7]
       square = @board.get_square(5, 7)
-      square.element = @bishop
+      square.element = @brown_bishop
 
       @black_pawn.position = [4, 6]
       expect(@black_pawn.capture).to eq([5, 7])
+    end
+
+    it "BROWN(RIGHT): captures an opponent brown_bishop (BLACK) at [4, 2]" do
+      # Create and place a black bishop on [4, 2]
+      @black_bishop.position = [4, 2]
+      square = @board.get_square(4, 2)
+      square.element = @black_bishop
+
+      @brown_pawn.position = [5, 1]
+      expect(@brown_pawn.capture).to eq([4, 2])
     end
   end
 end
