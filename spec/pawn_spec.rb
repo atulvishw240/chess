@@ -103,6 +103,26 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       expect(@black_pawn.capture).to eq([5, 7])
     end
 
+    it "BLACK(LEFT): captures an opponent bishop (BROWN) at [4, 1]" do
+      # Create and place a brown_bishop on [4, 1] square
+      @brown_bishop.position = [4, 1]
+      square = @board.get_square(4, 1)
+      square.element = @brown_bishop
+
+      @black_pawn.position = [3, 2]
+      expect(@black_pawn.capture).to eq([4, 1])
+    end
+
+    it "BLACK(LEFT): captures an opponent bishop (BROWN) at [5, 3]" do
+      # Create and place a brown_bishop on [4, 1] square
+      @brown_bishop.position = [5, 3]
+      square = @board.get_square(5, 3)
+      square.element = @brown_bishop
+
+      @black_pawn.position = [4, 4]
+      expect(@black_pawn.capture).to eq([5, 3])
+    end
+
     it "BROWN(RIGHT): captures an opponent bishop (BLACK) at [4, 2]" do
       # Create and place a black bishop on [4, 2]
       @black_bishop.position = [4, 2]
@@ -123,24 +143,22 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       expect(@brown_pawn.capture).to eq([4, 5])
     end
 
-    it "BLACK(LEFT): captures an opponent bishop (BROWN) at [4, 1]" do
-      # Create and place a brown_bishop on [4, 1] square
-      @brown_bishop.position = [4, 1]
-      square = @board.get_square(4, 1)
-      square.element = @brown_bishop
+    it "BROWN(LEFT): captures an opponent bishop (BLACK) at [4, 5]" do
+      @black_bishop.position = [4, 5]
+      square = @board.get_square(4, 5)
+      square.element = @black_bishop
 
-      @black_pawn.position = [3, 2]
-      expect(@black_pawn.capture).to eq([4, 1])
+      @brown_pawn.position = [5, 6]
+      expect(@brown_pawn.capture).to eq([4, 5])
     end
 
-    it "BLACK(LEFT): captures an opponent bishop (BROWN) at [5, 3]" do
-      # Create and place a brown_bishop on [4, 1] square
-      @brown_bishop.position = [5, 3]
-      square = @board.get_square(5, 3)
-      square.element = @brown_bishop
+    it "BROWN(LEFT): captures an opponent bishop (BLACK) at [4, 2]" do
+      @black_bishop.position = [4, 2]
+      square = @board.get_square(4, 2)
+      square.element = @black_bishop
 
-      @black_pawn.position = [4, 4]
-      expect(@black_pawn.capture).to eq([5, 3])
+      @brown_pawn.position = [5, 3]
+      expect(@brown_pawn.capture).to eq([4, 2])
     end
   end
 end
