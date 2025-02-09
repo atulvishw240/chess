@@ -12,35 +12,36 @@ class Pawn < Piece
     super
   end
 
-  # PAWN MOVES
-  # For BLACK pawn moves : we'll have to do +1 to row_index
-  # For BROWN pawn moves: we'll have to do -1 from row_index
-  # Pawn moves straight, only if they aren't blocked by other pieces.
-  # It can move either 1 step or 2 steps depending on where it is on the board.
-  #   1. If it's at start then it can move either 2 steps or 1 step.
-  #   2. If it's at any other place then it can move only 1 step.
-
-  def move
+  def all_possible_moves
     row_index = position[0]
     col_index = position[1]
 
-    if color == BLACK_FOREGROUND
-      row_index += 1
-    else
-      row_index -= 1
-    end
-
-    move = [row_index, col_index]
-
-    square = board.get_square(move[0], move[1])
-    return position if square.contains_piece?
-
-    update_position(move)
-    move
+    moves = march_forward(row_index, col_index)
+    captures = capture(row_index, col_index)
   end
 
-  def start
-    color == BLACK_FOREGROUND ? 2 : 7
+  def march_forward(row_index, col_index)
+    if at_start?
+      two_steps(row_index, col_index)
+    else
+      one_step(row_index, col_index)
+    end
+  end
+
+  def capture(row_index, col_index)
+    row_index = forward(row_index)
+
+    moves = []
+    moves << [row_index, col_index + 1]
+    moves << [row_index, col_index - 1]
+
+    moves.filter! do |move|
+      square = board.get_square(move[0], move[1])
+      if square.contains_piece?
+        piece = square.element
+        color != piece.color
+      end
+    end
   end
 
   def at_start?
@@ -50,38 +51,39 @@ class Pawn < Piece
     false
   end
 
-  def move_two_steps
-    moves = []
-    return [] unless at_start?
-
-    moves << move
-    moves << move
+  def start
+    color == BLACK_FOREGROUND ? 2 : 7
   end
 
-  def capture
-    row_index = position[0]
-    col_index = position[1]
+  def one_step(row_index, col_index)
+    row_index = forward(row_index)
+    move = [row_index, col_index]
+    square = board.get_square(move[0], move[1])
 
-    # Move black_or_brown does the same thing
+    return [] if square.contains_piece?
+
+    move
+  end
+
+  def two_steps(row_index, col_index)
+    return [] unless at_start?
+
+    moves = []
+    2.times do
+      moves << one_step(row_index, col_index)
+      row_index = forward(row_index)
+    end
+
+    moves
+  end
+
+  def forward(row_index)
     if color == BLACK_FOREGROUND
       row_index += 1
     else
       row_index -= 1
     end
 
-    move1 = [row_index, col_index + 1]
-    move2 = [row_index, col_index - 1]
-    square1 = board.get_square(move1[0], move1[1])
-    square2 = board.get_square(move2[0], move2[1])
-
-    if square1.contains_piece?
-      piece = square1.element
-      return move1 unless color == piece.color
-    end
-
-    return unless square2.contains_piece?
-
-    piece = square2.element
-    move2 unless color == piece.color
+    row_index
   end
 end

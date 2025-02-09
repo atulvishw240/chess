@@ -26,12 +26,12 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
   describe "#move" do
     it "BLACK: moves pawn 1 step forward" do
       @black_pawn.position = [2, 1]
-      expect(@black_pawn.move).to eq([3, 1])
+      expect(@black_pawn.one_step(2, 1)).to eq([3, 1])
     end
 
     it "BROWN: moves pawn 1 step forward" do
       @brown_pawn.position = [7, 1]
-      expect(@brown_pawn.move).to eq([6, 1])
+      expect(@brown_pawn.one_step(7, 1)).to eq([6, 1])
     end
 
     it "can't move when blocked by other piece (opponent or own)" do
@@ -41,7 +41,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       square.element = @brown_bishop
 
       @black_pawn.position = [3, 1]
-      expect(@black_pawn.move).to eq([3, 1])
+      expect(@black_pawn.one_step(3, 1)).to eq([])
     end
   end
 
@@ -58,27 +58,27 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
   describe "#move_two_steps" do
     it "BLACK: moves pawn 2 steps forward, if it's at start; from [2, 1] to [4, 1]" do
       @black_pawn.position = [2, 1]
-      expect(@black_pawn.move_two_steps).to eq([[3, 1], [4, 1]])
+      expect(@black_pawn.two_steps(2, 1)).to eq([[3, 1], [4, 1]])
     end
 
     it "BLACK: moves pawn 2 steps forward, if it's at start; from [2, 3] to [4, 3]" do
       @black_pawn.position = [2, 3]
-      expect(@black_pawn.move_two_steps).to eq([[3, 3], [4, 3]])
+      expect(@black_pawn.two_steps(2, 3)).to eq([[3, 3], [4, 3]])
     end
 
     it "BLACK: doesn't move if it isn't at start" do
       @black_pawn.position = [3, 4]
-      expect(@black_pawn.move_two_steps).to eq([])
+      expect(@black_pawn.two_steps(3, 4)).to eq([])
     end
 
     it "BROWN: moves pawn 2 steps forward, if it's at start; from [7, 3] to [5, 3]" do
       @brown_pawn.position = [7, 3]
-      expect(@brown_pawn.move_two_steps).to eq([[6, 3], [5, 3]])
+      expect(@brown_pawn.two_steps(7, 3)).to eq([[6, 3], [5, 3]])
     end
 
     it "BROWN: doesn't move if it isn't at start" do
       @brown_pawn.position = [5, 3]
-      expect(@brown_pawn.move_two_steps).to eq([])
+      expect(@brown_pawn.two_steps(5, 3)).to eq([])
     end
   end
 
@@ -90,7 +90,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       square.element = @brown_bishop
 
       @black_pawn.position = [3, 1]
-      expect(@black_pawn.capture).to eq([4, 2])
+      expect(@black_pawn.capture(3, 1)).to eq([[4, 2]])
     end
 
     it "BLACK(RIGHT): captures an opponent brown_bishop (BROWN) at [5, 7]" do
@@ -100,7 +100,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       square.element = @brown_bishop
 
       @black_pawn.position = [4, 6]
-      expect(@black_pawn.capture).to eq([5, 7])
+      expect(@black_pawn.capture(4, 6)).to eq([[5, 7]])
     end
 
     it "BLACK(LEFT): captures an opponent bishop (BROWN) at [4, 1]" do
@@ -110,7 +110,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       square.element = @brown_bishop
 
       @black_pawn.position = [3, 2]
-      expect(@black_pawn.capture).to eq([4, 1])
+      expect(@black_pawn.capture(3, 2)).to eq([[4, 1]])
     end
 
     it "BLACK(LEFT): captures an opponent bishop (BROWN) at [5, 3]" do
@@ -120,7 +120,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       square.element = @brown_bishop
 
       @black_pawn.position = [4, 4]
-      expect(@black_pawn.capture).to eq([5, 3])
+      expect(@black_pawn.capture(4, 4)).to eq([[5, 3]])
     end
 
     it "BROWN(RIGHT): captures an opponent bishop (BLACK) at [4, 2]" do
@@ -130,7 +130,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       square.element = @black_bishop
 
       @brown_pawn.position = [5, 1]
-      expect(@brown_pawn.capture).to eq([4, 2])
+      expect(@brown_pawn.capture(5, 1)).to eq([[4, 2]])
     end
 
     it "BROWN(RIGHT): captures an opponent bishop (BLACK) at [4, 5]" do
@@ -140,7 +140,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       square.element = @black_bishop
 
       @brown_pawn.position = [5, 4]
-      expect(@brown_pawn.capture).to eq([4, 5])
+      expect(@brown_pawn.capture(5, 4)).to eq([[4, 5]])
     end
 
     it "BROWN(LEFT): captures an opponent bishop (BLACK) at [4, 5]" do
@@ -149,7 +149,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       square.element = @black_bishop
 
       @brown_pawn.position = [5, 6]
-      expect(@brown_pawn.capture).to eq([4, 5])
+      expect(@brown_pawn.capture(5, 6)).to eq([[4, 5]])
     end
 
     it "BROWN(LEFT): captures an opponent bishop (BLACK) at [4, 2]" do
@@ -158,7 +158,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       square.element = @black_bishop
 
       @brown_pawn.position = [5, 3]
-      expect(@brown_pawn.capture).to eq([4, 2])
+      expect(@brown_pawn.capture(5, 3)).to eq([[4, 2]])
     end
   end
 end
