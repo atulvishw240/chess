@@ -1,7 +1,8 @@
-require_relative "../lib/piece"
-require_relative "../lib/modules/mod_colorable"
-require_relative "../lib/board"
-require_relative "../pieces/bishop"
+require_relative '../lib/piece'
+require_relative '../lib/modules/mod_colorable'
+require_relative '../lib/board'
+require_relative '../pieces/bishop'
+
 # PAWN
 class Pawn < Piece
   include Colorable
@@ -57,14 +58,25 @@ class Pawn < Piece
     else
       row_index -= 1
     end
-    move = [row_index, col_index + 1]
 
-    square = board.get_square(move[0], move[1])
-    if square.contains_piece?
-      piece = square.element
-      return move unless color == piece.color
+    move1 = [row_index, col_index + 1]
+    move2 = [row_index, col_index - 1]
+    square1 = board.get_square(move1[0], move1[1])
+    square2 = board.get_square(move2[0], move2[1])
+
+    if square1.contains_piece?
+      piece = square1.element
+      return move1 unless color == piece.color
     end
 
-    move
+    if square2.contains_piece?
+      piece = square2.element
+      return move2 unless color == piece.color
+    end
+
+    # return unless square.contains_piece?
+
+    # piece = square.element
+    # move unless color == piece.color
   end
 end

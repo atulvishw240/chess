@@ -1,3 +1,4 @@
+require "pry-byebug"
 require_relative "../pieces/pawn"
 require_relative "../pieces/bishop"
 require_relative "../lib/board"
@@ -120,6 +121,16 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
 
       @brown_pawn.position = [5, 4]
       expect(@brown_pawn.capture).to eq([4, 5])
+    end
+
+    it "BLACK(LEFT): captures an opponent bishop (BROWN) at [4, 1]" do
+      # Create and place a brown_bishop on [4, 1] square
+      @brown_bishop.position = [4, 1]
+      square = @board.get_square(4, 1)
+      square.element = @brown_bishop
+
+      @black_pawn.position = [3, 2]
+      expect(@black_pawn.capture).to eq([4, 1])
     end
   end
 end
