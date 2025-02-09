@@ -1,7 +1,7 @@
-require_relative '../lib/piece'
-require_relative '../lib/modules/mod_colorable'
-require_relative '../lib/board'
-require_relative '../pieces/bishop'
+require_relative "../lib/piece"
+require_relative "../lib/modules/mod_colorable"
+require_relative "../lib/board"
+require_relative "../pieces/bishop"
 
 # PAWN
 class Pawn < Piece
@@ -23,36 +23,46 @@ class Pawn < Piece
   def move
     row_index = position[0]
     col_index = position[1]
-    move = move_black_or_brown(row_index, col_index)
+
+    if color == BLACK_FOREGROUND
+      row_index += 1
+    else
+      row_index -= 1
+    end
+
+    move = [row_index, col_index]
 
     square = board.get_square(move[0], move[1])
     return position if square.contains_piece?
 
-    self.position = move
-  end
-
-  def move_black_or_brown(row_index, col_index)
-    return [row_index + 1, col_index] if color == BLACK_FOREGROUND
-
-    [row_index - 1, col_index]
+    update_position(move)
+    move
   end
 
   def start
     color == BLACK_FOREGROUND ? 2 : 7
   end
 
-  def move_two_steps
+  def at_start?
     row_index = position[0]
-    return position unless row_index == start
+    return true if row_index == start
 
-    move
-    move
+    false
+  end
+
+  def move_two_steps
+    moves = []
+    return [] unless at_start?
+
+    moves << move
+    moves << move
   end
 
   def capture
     row_index = position[0]
     col_index = position[1]
 
+    # Move black_or_brown does the same thing
     if color == BLACK_FOREGROUND
       row_index += 1
     else
@@ -69,14 +79,9 @@ class Pawn < Piece
       return move1 unless color == piece.color
     end
 
-    if square2.contains_piece?
-      piece = square2.element
-      return move2 unless color == piece.color
-    end
+    return unless square2.contains_piece?
 
-    # return unless square.contains_piece?
-
-    # piece = square.element
-    # move unless color == piece.color
+    piece = square2.element
+    move2 unless color == piece.color
   end
 end

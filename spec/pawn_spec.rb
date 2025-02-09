@@ -58,27 +58,27 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
   describe "#move_two_steps" do
     it "BLACK: moves pawn 2 steps forward, if it's at start; from [2, 1] to [4, 1]" do
       @black_pawn.position = [2, 1]
-      expect(@black_pawn.move_two_steps).to eq([4, 1])
+      expect(@black_pawn.move_two_steps).to eq([[3, 1], [4, 1]])
     end
 
     it "BLACK: moves pawn 2 steps forward, if it's at start; from [2, 3] to [4, 3]" do
       @black_pawn.position = [2, 3]
-      expect(@black_pawn.move_two_steps).to eq([4, 3])
+      expect(@black_pawn.move_two_steps).to eq([[3, 3], [4, 3]])
     end
 
     it "BLACK: doesn't move if it isn't at start" do
       @black_pawn.position = [3, 4]
-      expect(@black_pawn.move_two_steps).to eq([3, 4])
+      expect(@black_pawn.move_two_steps).to eq([])
     end
 
     it "BROWN: moves pawn 2 steps forward, if it's at start; from [7, 3] to [5, 3]" do
       @brown_pawn.position = [7, 3]
-      expect(@brown_pawn.move_two_steps).to eq([5, 3])
+      expect(@brown_pawn.move_two_steps).to eq([[6, 3], [5, 3]])
     end
 
     it "BROWN: doesn't move if it isn't at start" do
       @brown_pawn.position = [5, 3]
-      expect(@brown_pawn.move_two_steps).to eq([5, 3])
+      expect(@brown_pawn.move_two_steps).to eq([])
     end
   end
 
