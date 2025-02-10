@@ -91,7 +91,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  describe "#capture" do
+  describe "#capture" do # rubocop:disable Metrics/BlockLength
     it "BLACK(RIGHT): captures an opponent brown_bishop (BROWN) piece at [4, 2]" do
       # Create and place a brown_bishop on [4, 1] square
       @brown_bishop.position = [4, 2]
@@ -201,7 +201,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  describe "#all_possible_moves" do
+  describe "#all_possible_moves" do # rubocop:disable Metrics/BlockLength
     it "returns all possible moves for a black pawn at [2, 1]" do
       @black_pawn.position = [2, 1]
       expect(@black_pawn.all_possible_moves).to eq([[3, 1], [4, 1]])
@@ -221,6 +221,19 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       expect(@black_pawn.all_possible_moves).to eq([[5, 2], [5, 1]])
     end
 
+    it "returns all possible moves for a black pawn at [4, 2] and capture at [5, 1] and [5, 3]" do
+      @brown_bishop.position = [5, 1]
+      square = @board.get_square(5, 1)
+      square.element = @brown_bishop
+
+      @brown_bishop2.position = [5, 3]
+      square = @board.get_square(5, 3)
+      square.element = @brown_bishop2
+
+      @black_pawn.position = [4, 2]
+      expect(@black_pawn.all_possible_moves).to eq([[5, 2], [5, 3], [5, 1]])
+    end
+
     it "returns all possible moves for a brown pawn at [7, 1]" do
       @brown_pawn.position = [7, 1]
       expect(@brown_pawn.all_possible_moves).to eq([[6, 1], [5, 1]])
@@ -238,6 +251,19 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
 
       @brown_pawn.position = [5, 2]
       expect(@brown_pawn.all_possible_moves).to eq([[4, 2], [4, 3]])
+    end
+
+    it "returns all possible moves for a brown pawn at [5, 2] and capture at [4, 3] and [4, 1]" do
+      @black_bishop.position = [4, 3]
+      square = @board.get_square(4, 3)
+      square.element = @black_bishop
+
+      @black_bishop2.position = [4, 1]
+      square = @board.get_square(4, 1)
+      square.element = @black_bishop2
+
+      @brown_pawn.position = [5, 2]
+      expect(@brown_pawn.all_possible_moves).to eq([[4, 2], [4, 3], [4, 1]])
     end
   end
 end
