@@ -200,4 +200,16 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       expect(@brown_pawn.capture(6, 2)).to eq([[5, 3], [5, 1]])
     end
   end
+
+  describe "#all_possible_moves" do
+    it "returns all possible moves for a black pawn at [2, 1]" do
+      @black_pawn.position = [2, 1]
+      expect(@black_pawn.all_possible_moves).to eq([[3, 1], [4, 1]])
+    end
+
+    it "returns all possible moves for a brown pawn at [7, 1]" do
+      @brown_pawn.position = [7, 1]
+      expect(@brown_pawn.all_possible_moves).to eq([[6, 1], [5, 1]])
+    end
+  end
 end

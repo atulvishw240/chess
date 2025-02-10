@@ -16,9 +16,9 @@ class Pawn < Piece
     row_index = position[0]
     col_index = position[1]
 
-    one = one_step(row_index, col_index)
-    two = two_steps(row_index, col_index)
+    moves = march_forward(row_index, col_index)
     captures = capture(row_index, col_index)
+    moves.concat(captures)
   end
 
   def march_forward(row_index, col_index)
