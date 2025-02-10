@@ -207,19 +207,37 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
       expect(@black_pawn.all_possible_moves).to eq([[3, 1], [4, 1]])
     end
 
-    it "returns all possible moves for a brown pawn at [7, 1]" do
-      @brown_pawn.position = [7, 1]
-      expect(@brown_pawn.all_possible_moves).to eq([[6, 1], [5, 1]])
-    end
-
     it "returns all possible moves for a black pawn at [3, 1]" do
       @black_pawn.position = [3, 1]
       expect(@black_pawn.all_possible_moves).to eq([[4, 1]])
     end
 
+    it "returns all possible moves for a black pawn at [4, 2] and capture at [5, 1]" do
+      @brown_bishop.position = [5, 1]
+      square = @board.get_square(5, 1)
+      square.element = @brown_bishop
+
+      @black_pawn.position = [4, 2]
+      expect(@black_pawn.all_possible_moves).to eq([[5, 2], [5, 1]])
+    end
+
+    it "returns all possible moves for a brown pawn at [7, 1]" do
+      @brown_pawn.position = [7, 1]
+      expect(@brown_pawn.all_possible_moves).to eq([[6, 1], [5, 1]])
+    end
+
     it "returns all possible moves for a brown pawn at [6, 1]" do
       @brown_pawn.position = [6, 1]
       expect(@brown_pawn.all_possible_moves).to eq([[5, 1]])
+    end
+
+    it "returns all possible moves for a brown pawn at [5, 2] and capture at [4, 3]" do
+      @black_bishop.position = [4, 3]
+      square = @board.get_square(4, 3)
+      square.element = @black_bishop
+
+      @brown_pawn.position = [5, 2]
+      expect(@brown_pawn.all_possible_moves).to eq([[4, 2], [4, 3]])
     end
   end
 end
