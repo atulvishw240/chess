@@ -25,7 +25,8 @@ class Pawn < Piece
     if at_start?
       two_steps(row_index, col_index)
     else
-      one_step(row_index, col_index)
+      # to get the output in the format [[1, 2], [3, 4], [5, 6]]
+      [one_step(row_index, col_index)]
     end
   end
 
