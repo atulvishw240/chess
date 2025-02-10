@@ -10,20 +10,29 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
     black = "\e[30m"
 
     @board = Board.new
+
+    # Black pawn
     @black_pawn = Pawn.new(black)
     @black_pawn.board = @board
 
+    # Brown pawn
     @brown_pawn = Pawn.new(brown)
     @brown_pawn.board = @board
 
-    # Bishop
+    # Brown bishop
     @brown_bishop = Bishop.new(brown)
     @brown_bishop.board = @board
+    @brown_bishop2 = Bishop.new(brown)
+    @brown_bishop2.board = @board
+
+    # Black bishop
     @black_bishop = Bishop.new(black)
     @black_bishop.board = @board
+    @black_bishop2 = Bishop.new(black)
+    @black_bishop2.board = @board
   end
 
-  describe "#move" do
+  describe "#one_step" do
     it "BLACK: moves pawn 1 step forward" do
       @black_pawn.position = [2, 1]
       expect(@black_pawn.one_step(2, 1)).to eq([3, 1])
@@ -55,7 +64,7 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  describe "#move_two_steps" do
+  describe "#two_steps" do
     it "BLACK: moves pawn 2 steps forward, if it's at start; from [2, 1] to [4, 1]" do
       @black_pawn.position = [2, 1]
       expect(@black_pawn.two_steps(2, 1)).to eq([[3, 1], [4, 1]])
@@ -121,6 +130,21 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
 
       @black_pawn.position = [4, 4]
       expect(@black_pawn.capture(4, 4)).to eq([[5, 3]])
+    end
+
+    it "BLACK(DOUBLE): captures opponent's bishops (BROWN) at [5, 1] and [5, 3]" do
+      # Create and place brown bishops on [5, 1] and [5, 3]
+      @brown_bishop.position = [5, 1]
+      square = @board.get_square(5, 1)
+      square.element = @brown_bishop
+
+      @brown_bishop2.position = [5, 3]
+      square = @board.get_square(5, 3)
+      square.element = @brown_bishop2
+
+      @black_pawn.position = [4, 2]
+      # binding.pry
+      expect(@black_pawn.capture(4, 2)).to eq([[5, 3], [5, 1]])
     end
 
     it "BROWN(RIGHT): captures an opponent bishop (BLACK) at [4, 2]" do
