@@ -10,10 +10,12 @@ class BoardSetter
     @sets = sets
   end
 
+  # Black
   def first
     @sets[0]
   end
 
+  # Brown
   def second
     @sets[1]
   end

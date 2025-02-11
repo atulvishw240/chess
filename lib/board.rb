@@ -48,7 +48,7 @@ class Board
   private
 
   def print_ranks(rank)
-    # rank = 9 - rank
+    rank = 9 - rank
     print DARK_YELLOW_FOREGROUND + rank.to_s + inline_space(1) + RESET_TERMINAL
   end
 

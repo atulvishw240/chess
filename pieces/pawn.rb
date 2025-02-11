@@ -1,7 +1,5 @@
 require_relative "../lib/piece"
 require_relative "../lib/modules/mod_colorable"
-require_relative "../lib/board"
-require_relative "../pieces/bishop"
 
 # PAWN
 class Pawn < Piece
