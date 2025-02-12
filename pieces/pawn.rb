@@ -16,7 +16,7 @@ class Pawn < Piece
 
     moves = march_forward(row_index, col_index)
     captures = capture(row_index, col_index)
-    moves.concat(captures)
+    moves.concat(captures).reject(&:empty?)
   end
 
   def march_forward(row_index, col_index)
