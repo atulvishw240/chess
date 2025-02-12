@@ -21,9 +21,6 @@ class BoardSetter
   end
 
   def refresh_board
-    # update_board_with_pieces(first.set[0..7])
-    # update_board_with_pieces(second.set[0..7])
-
     update_board_with_pieces(first.set)
     update_board_with_pieces(second.set)
   end
@@ -34,8 +31,6 @@ class BoardSetter
     update_pawns_start_position(first.set[8..15])
     update_pawns_start_position(second.set[8..15])
 
-    # update_board_with_pieces(first.set[0..7])
-    # update_board_with_pieces(second.set[0..7])
     update_board_with_pieces(first.set)
     update_board_with_pieces(second.set)
   end
@@ -50,6 +45,15 @@ class BoardSetter
 
     pieces.each_with_index do |piece, col_index|
       piece.position = [row_index, col_index + 1] # To offset against 1th index based Board
+    end
+  end
+
+  def update_pawns_start_position(pawns)
+    color = pawns[0].color
+    row_index = color == BLACK_FOREGROUND ? 2 : 7
+
+    pawns.each_with_index do |pawn, col_index|
+      pawn.position = [row_index, col_index + 1]
     end
   end
 
