@@ -23,16 +23,27 @@ class Game
 
     loop do
       board.display
+
+      # Player selects a piece
       select = current_player.select_piece
       square = board.get_square(select[0], select[1])
       piece = square.element
 
+      # Player makes a move
       moves = piece.all_possible_moves
       captures = piece.all_possible_captures(moves)
       piece.display_markers_and_captures(moves, captures)
       move = current_player.make_move(moves, captures)
 
-      piece.move(move)
+      # Move the piece or capture opponent's pieces with it
+      if captures.include?(move)
+        piece.move(move)
+        opponent.set_of_pieces.delete_piece_at(move)
+      else
+        piece.move(move)
+      end
+
+      # piece.move(move)
       setter.refresh_board
       board.display
       switch_players!

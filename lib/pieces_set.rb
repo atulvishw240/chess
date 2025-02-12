@@ -35,12 +35,9 @@ class SetOfPieces
     possible_selections
   end
 
-  def delete_piece_at(row_index, col_index)
+  def delete_piece_at(coordinates)
     set.each do |piece|
-      row = piece.row
-      col = piece.col
-
-      set.delete(piece) if row_index == row && col_index == col
+      set.delete(piece) if piece.position == coordinates
     end
   end
 
