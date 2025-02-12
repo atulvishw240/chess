@@ -21,9 +21,6 @@ class BoardSetter
   end
 
   def refresh_board
-    # update_board_with_pieces(first.set[0..7])
-    # update_board_with_pieces(second.set[0..7])
-
     update_board_with_pieces(first.set)
     update_board_with_pieces(second.set)
   end
@@ -34,8 +31,6 @@ class BoardSetter
     update_pawns_start_position(first.set[8..15])
     update_pawns_start_position(second.set[8..15])
 
-    # update_board_with_pieces(first.set[0..7])
-    # update_board_with_pieces(second.set[0..7])
     update_board_with_pieces(first.set)
     update_board_with_pieces(second.set)
   end

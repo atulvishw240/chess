@@ -14,12 +14,13 @@ class Game
     @sets = sets
     @current_player_id = 0
     @setter = BoardSetter.new(board, sets)
-
-    @setter.setup_board
   end
 
   def play
-    assign_sets
+    setter.setup_board
+
+    opponent.set_of_pieces = @sets[0] # black
+    current_player.set_of_pieces = @sets[1] # brown
 
     loop do
       board.display
@@ -48,11 +49,6 @@ class Game
       board.display
       switch_players!
     end
-  end
-
-  def assign_sets
-    current_player.set_of_pieces = @sets[0] # black
-    opponent.set_of_pieces = @sets[1] # brown
   end
 
   def current_player
