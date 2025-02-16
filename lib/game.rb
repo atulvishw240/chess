@@ -1,26 +1,23 @@
 require_relative "board"
 require_relative "modules/mod_colorable"
-require_relative "board_setter"
 
 # GAME
 class Game
   include Colorable
 
-  attr_accessor :current_player_id, :board, :current_player_set, :setter
+  attr_accessor :current_player_id, :board
 
-  def initialize(board, players, sets)
+  def initialize(board, players)
     @board = board
     @players = players
-    @sets = sets
     @current_player_id = 0
-    @setter = BoardSetter.new(board, sets)
   end
 
   def play
-    setter.setup_board
+    board.setup
 
-    opponent.set_of_pieces = @sets[0] # black
-    current_player.set_of_pieces = @sets[1] # brown
+    opponent.set_of_pieces = board.black # black
+    current_player.set_of_pieces = board.brown # brown
 
     loop do
       board.display
@@ -44,8 +41,6 @@ class Game
         piece.move(move)
       end
 
-      # piece.move(move)
-      setter.refresh_board
       board.display
       switch_players!
     end

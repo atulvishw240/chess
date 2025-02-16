@@ -12,9 +12,7 @@ players = [player1, player2]
 
 black = SetOfPieces.new(BLACK_FOREGROUND)
 brown = SetOfPieces.new(BROWN_FOREGROUND)
-sets = [black, brown]
-
-board = Board.new
-game = Game.new(board, players, sets)
+board = Board.new(black, brown)
+game = Game.new(board, players)
 
 game.play

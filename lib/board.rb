@@ -7,11 +7,13 @@ class Board
   include Utils
   include Colorable
 
-  attr_accessor :board
+  attr_accessor :board, :black, :brown
 
-  def initialize
+  def initialize(black_set, brown_set)
     # Ignore 0 based index for simplicity
     @board = Array.new(9) { Array.new(9) { Square.new } }
+    @black = black_set
+    @brown = brown_set
   end
 
   def display
@@ -44,6 +46,16 @@ class Board
     board[row_index][col_index]
   end
 
+  def setup
+    update_pieces_start_position(black.set[0..7])
+    update_pieces_start_position(brown.set[0..7])
+    update_pawns_start_position(black.set[8..15])
+    update_pawns_start_position(brown.set[8..15])
+
+    update_board_with_pieces(black.set)
+    update_board_with_pieces(brown.set)
+  end
+
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
   private
 
@@ -70,5 +82,33 @@ class Board
   def print_files
     files = "a  b  c  d  e  f  g  h"
     puts DARK_YELLOW_FOREGROUND + inline_space(3) + files + RESET_TERMINAL
+  end
+
+  def update_pieces_start_position(pieces)
+    color = pieces[0].color
+    row_index = color == BLACK_FOREGROUND ? 1 : 8
+
+    pieces.each_with_index do |piece, col_index|
+      piece.position = [row_index, col_index + 1] # To offset against 1th index based Board
+    end
+  end
+
+  def update_pawns_start_position(pawns)
+    color = pawns[0].color
+    row_index = color == BLACK_FOREGROUND ? 2 : 7
+
+    pawns.each_with_index do |pawn, col_index|
+      pawn.position = [row_index, col_index + 1]
+    end
+  end
+
+  def update_board_with_pieces(pieces)
+    pieces.each do |piece|
+      row_index = piece.position[0]
+      col_index = piece.position[1]
+      piece.board = self
+
+      update(row_index, col_index, piece)
+    end
   end
 end
