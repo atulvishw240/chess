@@ -7,9 +7,9 @@ class Game
 
   attr_accessor :current_player_id, :board
 
-  def initialize(board, players)
+  def initialize(board, player1, player2)
     @board = board
-    @players = players
+    @players = [player1, player2]
     @current_player_id = 0
   end
 
