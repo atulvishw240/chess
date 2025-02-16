@@ -41,6 +41,7 @@ class Game
         piece.move(move)
       end
 
+      board.refresh
       board.display
       switch_players!
     end

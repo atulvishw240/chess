@@ -34,9 +34,6 @@ class Board
     print_files
   end
 
-  # Takes arguments : file => "a"
-  #                   rank => 3
-  #                   update_with => marker or piece
   def update(row_index, col_index, update_with)
     square = get_square(row_index, col_index)
     square.element = update_with
@@ -52,6 +49,10 @@ class Board
     update_pawns_start_position(black.set[8..15])
     update_pawns_start_position(brown.set[8..15])
 
+    refresh
+  end
+
+  def refresh
     update_board_with_pieces(black.set)
     update_board_with_pieces(brown.set)
   end
@@ -90,6 +91,7 @@ class Board
 
     pieces.each_with_index do |piece, col_index|
       piece.position = [row_index, col_index + 1] # To offset against 1th index based Board
+      piece.board = self
     end
   end
 
@@ -99,6 +101,7 @@ class Board
 
     pawns.each_with_index do |pawn, col_index|
       pawn.position = [row_index, col_index + 1]
+      pawn.board = self
     end
   end
 
@@ -106,7 +109,7 @@ class Board
     pieces.each do |piece|
       row_index = piece.position[0]
       col_index = piece.position[1]
-      piece.board = self
+      # piece.board = self
 
       update(row_index, col_index, piece)
     end
