@@ -22,10 +22,7 @@ class Game
     loop do
       board.display
 
-      # Player selects a piece
-      select = current_player.select_piece
-      square = board.get_square(select[0], select[1])
-      piece = square.element
+      piece = current_player.select_piece
 
       # Player makes a move
       moves = piece.all_possible_moves

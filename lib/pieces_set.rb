@@ -41,6 +41,12 @@ class SetOfPieces
     end
   end
 
+  def piece_at(coordinates)
+    set.each do |piece|
+      return piece if piece.position == coordinates
+    end
+  end
+
   private
 
   def create_pawns(color)

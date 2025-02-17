@@ -11,12 +11,12 @@ class Player
   end
 
   def select_piece
-    options = options_for_selection
+    options = set_of_pieces.all_possible_selections
     puts "Enter the coordinates of a piece in the format [e4 i.e. file followed by rank & without space]: "
     input = gets.chomp.chars
     coordinates = convert_to_indices(input) if valid_coordinates?(input)
 
-    return coordinates if options.include?(coordinates)
+    return set_of_pieces.piece_at(coordinates) if options.include?(coordinates)
 
     display_error_message
     select_piece
@@ -35,10 +35,6 @@ class Player
 
   #----------------------------------------ALL PRIVATE METHODS ARE BELOW-------------------------------------------
   private
-
-  def options_for_selection
-    set_of_pieces.all_possible_selections
-  end
 
   def valid_coordinates?(coordinates)
     return false unless coordinates.length == 2
