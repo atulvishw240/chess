@@ -1,10 +1,12 @@
 require_relative "../pieces/bishop"
 require_relative "../lib/board"
-require_relative "../lib/modules/mod_colorable"
+require_relative "../lib/pieces_set"
 
 describe Bishop do
   before(:each) do
-    @board = Board.new
+    @black = SetOfPieces.new("\e[30m")
+    @brown = SetOfPieces.new("\e[38;5;160m")
+    @board = Board.new(@black, @brown)
     @bishop = Bishop.new("Bishop")
     @bishop.board = @board
   end

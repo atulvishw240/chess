@@ -9,7 +9,9 @@ describe Pawn do # rubocop:disable Metrics/BlockLength
     brown = "\e[38;5;160m"
     black = "\e[30m"
 
-    @board = Board.new
+    @black = SetOfPieces.new("\e[30m")
+    @brown = SetOfPieces.new("\e[38;5;160m")
+    @board = Board.new(@black, @brown)
 
     # Black pawn
     @black_pawn = Pawn.new(black)
