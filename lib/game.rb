@@ -14,7 +14,7 @@ class Game
   end
 
   def play
-    board.setup
+    assign_pieces_set_to_players
 
     loop do
       board.display
@@ -28,12 +28,8 @@ class Game
       move = current_player.make_move(moves, captures)
 
       # Move the piece or capture opponent's pieces with it
-      if captures.include?(move)
-        piece.move(move)
-        opponent.set_of_pieces.delete_piece_at(move)
-      else
-        piece.move(move)
-      end
+      opponent.set_of_pieces.delete_piece_at(move) if captures.include?(move)
+      piece.move(move)
 
       board.refresh
       board.display
@@ -42,6 +38,7 @@ class Game
   end
 
   def assign_pieces_set_to_players
+    board.setup
     opponent.set_of_pieces = board.black # black
     current_player.set_of_pieces = board.brown # brown
   end
