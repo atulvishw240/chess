@@ -16,9 +16,6 @@ class Game
   def play
     board.setup
 
-    opponent.set_of_pieces = board.black # black
-    current_player.set_of_pieces = board.brown # brown
-
     loop do
       board.display
 
@@ -42,6 +39,11 @@ class Game
       board.display
       switch_players!
     end
+  end
+
+  def assign_pieces_set_to_players
+    opponent.set_of_pieces = board.black # black
+    current_player.set_of_pieces = board.brown # brown
   end
 
   def current_player
