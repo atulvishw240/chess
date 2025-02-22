@@ -22,18 +22,23 @@ class Piece
     update_position(coordinates)
   end
 
-  def all_possible_captures(moves)
-    moves.select do |move|
-      capture?(move)
-    end
-  end
+  def possible_actions
+    moves = all_possible_moves
 
-  def display_markers_and_captures(moves, captures)
-    display_markers(moves)
-    display_captures(captures)
+    # Update board with markers and captures
+    moves.each do |move|
+      update_marker_and_capture(move)
+    end
+
     board.display
 
-    clear_markers_and_captures(moves, captures)
+    # Clean markers and captures
+    moves.each do |move|
+      clean_marker_and_capture(move)
+    end
+
+    # Return possible moves for 'Piece'
+    moves
   end
 
   def to_s
@@ -47,64 +52,21 @@ class Piece
     self.position = position
   end
 
-  def capture?(move)
-    row_index = move[0]
-    col_index = move[1]
-    square = board.get_square(row_index, col_index)
-
+  def update_marker_and_capture(move)
+    square = board.get_square(move[0], move[1])
     if square.contains_piece?
-      piece = square.element
-      true unless piece.color == color
-    else
-      false
-    end
-  end
-
-  def display_markers(moves)
-    moves.each do |move|
-      row_index = move[0]
-      col_index = move[1]
-
-      # Don't display markers over potential captures
-      square = board.get_square(row_index, col_index)
-      next if square.contains_piece?
-
-      board.update(row_index, col_index, MARKER)
-    end
-  end
-
-  def display_captures(captures)
-    captures.each do |capture|
-      row_index = capture[0]
-      col_index = capture[1]
-
-      square = board.get_square(row_index, col_index)
       square.color = PURPLE_BACKGROUND
+    else
+      board.update(move[0], move[1], MARKER)
     end
   end
 
-  def clear_markers_and_captures(moves, captures)
-    clean_markers(moves)
-    clean_captures(captures)
-  end
-
-  def clean_markers(markers)
-    markers.each do |marker|
-      row_index = marker[0]
-      col_index = marker[1]
-
-      square = board.get_square(row_index, col_index)
-      square.element = " "
-    end
-  end
-
-  def clean_captures(captures)
-    captures.each do |capture|
-      row_index = capture[0]
-      col_index = capture[1]
-
-      square = board.get_square(row_index, col_index)
+  def clean_marker_and_capture(move)
+    square = board.get_square(move[0], move[1])
+    if square.contains_piece?
       square.color = nil
+    else
+      board.update(move[0], move[1], " ")
     end
   end
 end

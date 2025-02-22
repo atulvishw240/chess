@@ -20,15 +20,10 @@ class Game
       board.display
 
       piece = current_player.select_piece
-
-      # Player makes a move
-      moves = piece.all_possible_moves
-      captures = piece.all_possible_captures(moves)
-      piece.display_markers_and_captures(moves, captures)
-      move = current_player.make_move(moves, captures)
-
+      moves = piece.possible_actions
+      move = current_player.make_move(moves)
       # Move the piece or capture opponent's pieces with it
-      opponent.set_of_pieces.delete_piece_at(move) if captures.include?(move)
+      # opponent.set_of_pieces.delete_piece_at(move) if captures.include?(move)
       piece.move(move)
 
       board.refresh

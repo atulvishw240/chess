@@ -22,12 +22,12 @@ class Player
     select_piece
   end
 
-  def make_move(moves, captures)
+  def make_move(moves)
     puts "Enter the coordinates, where you would like your piece to move [Like d6]: "
     input = gets.chomp.chars
     move = convert_to_indices(input) if valid_coordinates?(input)
 
-    return move if valid_move?(move, moves, captures)
+    return move if valid_move?(move, moves)
 
     display_error_message
     make_move(moves, captures)
@@ -45,8 +45,8 @@ class Player
     true if file.between?("a", "h") && rank.between?(1, 8)
   end
 
-  def valid_move?(move, moves, captures)
-    moves.include?(move) || captures.include?(move)
+  def valid_move?(move, moves)
+    moves.include?(move)
   end
 
   def display_error_message
