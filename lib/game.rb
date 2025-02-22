@@ -22,9 +22,7 @@ class Game
       piece = current_player.select_piece
       moves = piece.possible_actions
       move = current_player.make_move(moves)
-      # Move the piece or capture opponent's pieces with it
-      # opponent.set_of_pieces.delete_piece_at(move) if captures.include?(move)
-      piece.move(move)
+      move_handler(move, piece)
 
       board.refresh
       board.display
@@ -36,6 +34,17 @@ class Game
     board.setup
     opponent.set_of_pieces = board.black # black
     current_player.set_of_pieces = board.brown # brown
+  end
+
+  def move_handler(move, piece)
+    square = board.get_square(move[0], move[1])
+
+    if square.contains_piece?
+      opp_piece = square.element
+      opponent.set_of_pieces.delete_piece(opp_piece)
+    end
+
+    piece.move(move)
   end
 
   def current_player
